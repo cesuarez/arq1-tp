@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,7 @@ class EventController extends Controller {
 
     // POST "/events"
     //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq", "proposed_requirements": "paty,ensalada,chorizo"}
-    public function store(Request $request) {
+    public function store(EventRequest $request) {
         $event = Event::create($request->all());
         return response($event, 200);
     }
@@ -30,7 +31,7 @@ class EventController extends Controller {
     }
 
     // PUT "/events/:id"
-    public function update(Request $request, $event) {
+    public function update(EventRequest $request, $event) {
         $event->fill($request->all());
         $event->save();
         return response($event, 200);
