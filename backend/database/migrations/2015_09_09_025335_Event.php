@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class Event extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
@@ -17,17 +12,13 @@ class Event extends Migration
             $table->string('name');
             $table->datetime('date');
             $table->enum('privacy', ['private', 'public']);
-            $table->string('location');
-            $table->text('description');
-            $table->text('proposed_requirements');
+            $table->string('location')->nullable();
+            $table->text('description')->nullable();
+            $table->text('proposed_requirements')->nullable();
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('events');
