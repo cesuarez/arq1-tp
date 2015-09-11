@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" ng-app="elmApp">
+<head>
+  <meta charset="utf-8">
+  <title>Elm example</title>
+  <link rel="shortcut icon" type="image/png" href="/app/assets/favicon.png"/>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="app/css/app.css">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img src="app/assets/elm-logo.svg" style="width: 24px;">
+          </a>
+          <a class="navbar-brand" href="#">
+            <img src="app/assets/angular-logo.svg" style="width: 24px;">
+          </a>
+          <a class="navbar-brand" href="#">
+            <img src="app/assets/bootstrap-logo.svg" style="width: 24px;">
+          </a>
+          <p class="navbar-text">Elm-Angular-Bootstrap example</p>
+        </div>
+      </div>
+    </nav>
+
+    <div class="col-md-2">
+      <div ng-include="'app/partials/menu.html'"></div>
+    </div>
+    <div class="col-md-10">
+      <div ui-view class="container slide"></div>
+    </div>
+
+  <!-- dependencies -->
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-loader/angular-loader.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- endbower -->
+
+  <!-- elm compiled file -->
+  <script type="text/javascript" src="elm.js"></script>
+
+  <!-- angular -->
+  <script src="app/angular/app.js"></script>
+  <!-- config -->
+  <script src="app/angular/config/routes.js"></script> 
+  <!-- controllers -->
+  <script src="app/angular/controllers/home.js"></script>
+  <!-- services -->
+  <script src="app/angular/services/elm.js"></script>
+  <!-- directives -->
+  <script src="app/angular/directives/elm-counter.js"></script>
+  <script src="app/angular/directives/elm-counters.js"></script>
+  <script src="app/angular/directives/elm-text.js"></script>
+
+  <!-- for livereload -->
+  <script src="//localhost:35729/livereload.js"></script>
+</div>
+
+</body>
+</html>

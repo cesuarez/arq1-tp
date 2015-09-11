@@ -1,0 +1,4 @@
+frontend/elm-stuff/*
+frontend/elm.js
+frontend/bower_components/*
+frontend/node_modules/*
