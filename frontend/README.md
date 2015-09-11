@@ -1,6 +1,6 @@
-# elm-example
+# Frontend Angular-Bootstrap-Elm
 
-Ejemplo de aplicación utilizando Elm (en SO basado en Debian de 32-bits no funciona)
+Nota: en SO basado en Debian de 32-bits no funciona.
 
 ### Setup
 
