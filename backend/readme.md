@@ -1,4 +1,28 @@
-## Laravel PHP Framework
+# Backend Laravel-MySQL
+
+Backend con Laravel 5.1 junto con MySQL.
+
+
+## Requerimientos
+
+* PHP   5.5.9 (o mayor)
+* [Composer](https://getcomposer.org/)
+
+
+## Instalación
+
+* Descargar el proyecto
+* Ejecutar `composer install` para descargarse las dependencias
+
+
+## Ejecución
+
+* Ejecutar `PHP -S Localhost:8888 -t public` para levantar la aplicación con PHP
+
+Y listo, ya tenemos el backend listo para hacerle pedidos REST
+
+
+# About Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
