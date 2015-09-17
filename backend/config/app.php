@@ -145,6 +145,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        * External Libraries Providers
+        */
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
+
     ],
 
     /*
