@@ -31,12 +31,8 @@ DB_PASSWORD=
 ```
 
 * Renombrar el archivo a `.env` y agregar los datos faltantes con respecto a la base de datos local MySQL.
-* Ejecutar el comando `php artisan key:generate`. Esto genera una `APP_KEY` y la coloca automáticamente en el archivo `.env`, sin tener que tocar nada.
-
-
-### Migración de tablas
-
 * Una vez que tengamos nuestra configuración de MySQL, ejecutamos el comando `php artisan migrate` para generar las tablas automáticamente.
+* Ejecutar el comando `php artisan key:generate`. Esto genera una `APP_KEY` y la coloca automáticamente en el archivo `.env`, sin tener que tocar nada.
 
 
 ## Ejecución
