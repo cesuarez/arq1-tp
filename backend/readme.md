@@ -15,12 +15,36 @@ Backend con Laravel 5.1 junto con MySQL.
 * Ejecutar `composer install` para descargarse las dependencias
 
 
+## Configuración
+
+* Vamos a encontrar un archivo llamado `.env.example` que se ve así:
+
+```
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=
+
+DB_HOST=localhost
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+* Renombrar el archivo a `.env` y agregar los datos faltantes con respecto a la base de datos local MySQL.
+* Ejecutar el comando `php artisan key:generate`. Esto genera una `APP_KEY` y la coloca automáticamente en el archivo .env, sin tener que tocar nada.
+
+
+### Migración de tablas
+
+* Una vez que tengamos nuestra configuración de MySQL, ejecutamos el comando `php artisan migrate` para generar las tablas automáticamente.
+
+
 ## Ejecución
 
 * Ejecutar `PHP -S Localhost:8888 -t public` para levantar la aplicación con PHP
+* Ya podemos acceder al Backend y utilizar todos sus servicios REST
 
-Y listo, ya tenemos el backend listo para hacerle pedidos REST
-
+---
 
 # About Laravel PHP Framework
 
