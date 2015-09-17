@@ -5,8 +5,9 @@ Backend con Laravel 5.1 junto con MySQL.
 
 ## Requerimientos
 
-* PHP   5.5.9 (o mayor)
+* PHP  5.5.9 (o mayor)
 * [Composer](https://getcomposer.org/)
+* MySQL
 
 
 ## Instalación
