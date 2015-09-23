@@ -1,13 +1,13 @@
-# Backend Laravel-MySQL
+# Backend Laravel-MongoDB
 
-Backend con Laravel 5.1 junto con MySQL.
+Backend con Laravel 5.1 junto con MongoDB.
 
 
 ## Requerimientos
 
 * PHP  5.5.9 (o mayor)
 * [Composer](https://getcomposer.org/)
-* MySQL
+* MongoDB
 
 
 ## Instalación
@@ -31,8 +31,8 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-* Renombrar el archivo a `.env` y agregar los datos faltantes con respecto a la base de datos local MySQL.
-* Una vez que tengamos nuestra configuración de MySQL, ejecutamos el comando `php artisan migrate` para generar las tablas automáticamente.
+* Renombrar el archivo a `.env` y agregar los datos faltantes con respecto a la base de datos local MongoMongoDB.
+* Una vez que tengamos nuestra configuración de MongoDB, ejecutamos el comando `php artisan migrate` para generar las tablas automáticamente.
 * Ejecutar el comando `php artisan key:generate`. Esto genera una `APP_KEY` y la coloca automáticamente en el archivo `.env`, sin tener que tocar nada.
 
 
