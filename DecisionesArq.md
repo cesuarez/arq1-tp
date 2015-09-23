@@ -2,9 +2,9 @@
 
 ## Frontend
 - _Lenguaje_: Javascript
-- _Framework_: Angular
+- _Framework_: Angular, ELM
 - _Scaffolding_: Yeoman
-- _Descartados_: ELM, Backbone
+- _Descartados_: Ember, Backbone
 
 #### CSS
 - Bootstrap
@@ -13,7 +13,7 @@
 ## Backend
 - _Lenguaje_: PHP
 - _Framework_:  Laravel
-- _Descartado_: Groovy, Java, Python, Scala
+- _Descartado_: Groovy, Java, Python, Scala (Play)
 
 #### Base de datos
 - MySQL
