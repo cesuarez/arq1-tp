@@ -12,12 +12,16 @@ angular.module('elmApp').config(function($stateProvider, $urlRouterProvider) {
       controller: 'HomeCtrl',
       templateUrl: 'app/partials/main.html'
     })
-    .state('contador', {
-      url: '/contador',
-      templateUrl: 'app/partials/contador.html'
+    // .state('contadores', {
+    //   url: '/contadores',
+    //   templateUrl: 'app/partials/contadores.html'
+    // })
+    .state('eventos', {
+      url: '/eventos',
+      templateUrl: 'app/partials/eventos.html'
     })
-    .state('contadores', {
-      url: '/contadores',
-      templateUrl: 'app/partials/contadores.html'
+    .state('estampitas', {
+      url: '/estampitas',
+      templateUrl: 'app/partials/estampitas.html'
     });
 });
