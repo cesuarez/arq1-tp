@@ -4,14 +4,12 @@ Nota: en SO basado en Debian de 32-bits no funciona.
 
 ### Setup
 
-npm install -g elm
-
-npm install
-
-elm package install
+1. `npm install -g elm`
+2. `npm install`
+3. `elm package install`
 
 ### Explore Elm
-elm reactor
+`elm reactor`
 
 ### Compile and Run
-grunt
+`grunt`
