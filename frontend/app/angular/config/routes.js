@@ -10,18 +10,18 @@ angular.module('elmApp').config(function($stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/',
       controller: 'HomeCtrl',
-      templateUrl: 'app/partials/main.html'
+      templateUrl: 'partials/main.html'
     })
     // .state('contadores', {
     //   url: '/contadores',
-    //   templateUrl: 'app/partials/contadores.html'
+    //   templateUrl: 'partials/contadores.html'
     // })
     .state('eventos', {
       url: '/eventos',
-      templateUrl: 'app/partials/eventos.html'
+      templateUrl: 'partials/eventos.html'
     })
     .state('estampitas', {
       url: '/estampitas',
-      templateUrl: 'app/partials/estampitas.html'
+      templateUrl: 'partials/estampitas.html'
     });
 });

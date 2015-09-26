@@ -4,6 +4,10 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     elmFiles: ['app/elm/*.elm'],
+    angularFiles: ['app/angular/**/*.js'],
+    htmlPartialFiles: ['app/partials/*.html'],
+    indexFile: ['index.html'],
+    elmCompiledFile: ['dist/elm.js'],
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       files: ['Gruntfile.js', 'app/angular/**/*.js'],
@@ -17,19 +21,19 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       html: {
-        files: ['index.html', 'app/partials/*.html'],
+        files: ['<%= indexFile %>', '<%= htmlPartialFiles %>'],
         tasks: [],
       },
       js: {
-        files: ['<%= jshint.files %>'],
-        tasks: ['jshint'],        
+        files: ['<%= angularFiles %>'],
+        tasks: ['jshint', 'concat:dist'],        
         options: {
           spawn: false,
         },
       },
       elm: {
         files: ['<%= elmFiles %>'],
-        tasks: ['elm'],        
+        tasks: ['elm', 'concat:dist'],        
       },
       options: {
         livereload: true,
@@ -38,7 +42,7 @@ module.exports = function(grunt) {
     elm: {
       compile: {
         files: {
-          'elm.js': ['<%= elmFiles %>']
+          'dist/elm.js': ['<%= elmFiles %>']
         }
       },
     },
@@ -46,26 +50,36 @@ module.exports = function(grunt) {
       task: {
         src: [
           'index.html',
-        ],
-        options: {
-          // See wiredep's configuration documentation for the options
-          // you may pass:
-
-          // https://github.com/taptapship/wiredep#configuration
-        }
+        ]
       }
     },
-    ngsrc: {
-        target: {
-            src: ['app/angular/**/*.js'],
-            // TODO: FIXME
-            dest: ['tmp/index.html']
-        }
+    clean: {
+      build: ['dist'],
+    },
+    concat: {
+      dist: {
+        // the files to concatenate
+        src: ['<%= elmCompiledFile %>', '<%= angularFiles %>'],
+        // the location of the resulting JS file
+        dest: 'dist/<%= pkg.name %>.js'
+      }
+    },
+    copy: {
+      main: {
+        files: [
+          // includes files within path and its sub-directories
+          {expand: true, cwd: 'app/', src: ['assets/**'], dest: 'dist/'},
+          {expand: true, cwd: 'app/', src: ['partials/**'], dest: 'dist/'},
+          {expand: true, cwd: 'app/', src: ['css/**'], dest: 'dist/'},
+          {expand: true, src: ['bower_components/**'], dest: 'dist/'},
+          {expand: true, src: ['index.html'], dest: 'dist/'},
+        ],
+      },
     },
     'http-server': {
         dev: {
             // the server root directory
-            root: './',
+            root: './dist/',
             port: 8080,
             host: '0.0.0.0',
             showDir : false,
@@ -80,9 +94,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-wiredep');
-
-  // TODO: hacer andar la inclusion automatica copiando el template de index a una carpeta dist
-  // grunt.loadNpmTasks('grunt-ngsrc');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // TODO: hacer andar la conversion de anotaciones para DI
   // grunt.loadNpmTasks('grunt-ng-annotate');
@@ -90,5 +104,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-elm');
   grunt.loadNpmTasks('grunt-http-server');
 
-  grunt.registerTask('default', ['jshint', 'elm', 'wiredep', 'http-server', 'watch']);
+  grunt.registerTask('build', ['clean:build', 'jshint', 'elm', 'wiredep', 'concat:dist', 'copy:main']);
+  grunt.registerTask('default', ['build', 'http-server', 'watch']);
+  
 };

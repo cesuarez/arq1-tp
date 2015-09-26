@@ -1,7 +1,7 @@
 {
-  "name": "elm-example",
+  "name": "elm-angular-app",
   "version": "1.0.0",
-  "description": "Ejemplo de aplicacion utilizando Elm",
+  "description": "Frontend elm angular app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,27 +12,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sawady/elm-example.git"
+    "url": "git+https://github.com/cesuarez/arq1-tp.git"
   },
   "keywords": [
     "elm",
-    "example"
+    "angular"
   ],
   "author": "FSawady",
   "license": "GPL-3.0",
   "devDependencies": {
     "bower": "^1.5.2",
     "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-elm": "^1.3.0",
     "grunt-http-server": "^1.10.0",
     "grunt-ng-annotate": "^1.0.1",
-    "grunt-ngsrc": "^0.2.0",
     "grunt-wiredep": "^2.0.0"
   },
   "bugs": {
-    "url": "https://github.com/sawady/elm-example/issues"
+    "url": "https://github.com/cesuarez/arq1-tp/issues"
   },
   "homepage": "https://github.com/sawady/elm-example#readme",
   "dependencies": {
