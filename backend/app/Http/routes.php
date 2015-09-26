@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return File::get(public_path().'/app.html');
 });
 
 

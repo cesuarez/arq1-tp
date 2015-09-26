@@ -9,7 +9,8 @@ module.exports = function(grunt) {
     cssFiles: ['app/css/*.css'],
     assetsFiles: ['app/assets/*'],
     indexFile: ['index.html'],
-    elmCompiledFile: ['dist/elm.js'],
+    elmCompiledFile: ['dist/js/elm.js'],
+    backendPublicPath: '../backend/public',
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       files: ['Gruntfile.js', 'app/angular/**/*.js'],
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
     elm: {
       compile: {
         files: {
-          'dist/elm.js': ['<%= elmFiles %>']
+          'dist/js/elm.js': ['<%= elmFiles %>']
         }
       },
     },
@@ -60,14 +61,22 @@ module.exports = function(grunt) {
       }
     },
     clean: {
+      options: { force: true },
       build: ['dist'],
+      backend: [
+        '<%= backendPublicPath %>/assets', 
+        '<%= backendPublicPath %>/partials', 
+        '<%= backendPublicPath %>/css', 
+        '<%= backendPublicPath %>/js',
+        '<%= backendPublicPath %>/app.html'
+      ],
     },
     concat: {
       dist: {
         // the files to concatenate
         src: ['<%= elmCompiledFile %>', '<%= angularFiles %>'],
         // the location of the resulting JS file
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
     copy: {
@@ -80,6 +89,19 @@ module.exports = function(grunt) {
           {expand: true, src: ['index.html'], dest: 'dist/'},
         ],
       },
+      backend: {
+        files: [
+          {expand: true, cwd: 'dist/', src: ['assets/**'], dest: '<%= backendPublicPath %>'},
+          {expand: true, cwd: 'dist/', src: ['partials/**'], dest: '<%= backendPublicPath %>'},
+          {expand: true, cwd: 'dist/', src: ['css/**'], dest: '<%= backendPublicPath %>'},
+          {expand: true, cwd: 'dist/', src: ['js/**'], dest: '<%= backendPublicPath %>'},
+          {expand: true, cwd: 'dist/', src: ['index.html'], dest: '<%= backendPublicPath %>', 
+            rename: function(dest, src) {
+              return dest + '/app.html';
+            }
+          },
+        ]
+      }
     },
     useminPrepare: {
       html: 'index.html',
@@ -109,6 +131,11 @@ module.exports = function(grunt) {
             // run in parallel with other tasks
             runInBackground: true,
         }
+    },
+    shell: {
+      phpServer: {
+        command: 'php -S0.0.0.0:8080 -t <%= backendPublicPath %>'
+      }
     }
   });
 
@@ -125,9 +152,11 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-elm');
   grunt.loadNpmTasks('grunt-http-server');
-  grunt.loadNpmTasks('grunt-http-server');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'elm', 'concat:dist', 'copy:main', 'usemin', 'concat:generated']);
-  grunt.registerTask('default', ['build', 'http-server', 'watch']);
+  grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
+  grunt.registerTask('serve:php', ['build', 'clean:backend', 'copy:backend', 'shell:phpServer']);
+  grunt.registerTask('default', ['serve:js']);
   
 };
