@@ -6,6 +6,8 @@ module.exports = function(grunt) {
     elmFiles: ['app/elm/*.elm'],
     angularFiles: ['app/angular/**/*.js'],
     htmlPartialFiles: ['app/partials/*.html'],
+    cssFiles: ['app/css/*.css'],
+    assetsFiles: ['app/assets/*'],
     indexFile: ['index.html'],
     elmCompiledFile: ['dist/elm.js'],
     pkg: grunt.file.readJSON('package.json'),
@@ -18,11 +20,15 @@ module.exports = function(grunt) {
     watch: {
       bower: {
         files: ['bower_components/*'],
-        tasks: ['wiredep']
+        tasks: ['wiredep', 'useminPrepare', 'concat:generated']
       },
-      html: {
-        files: ['<%= indexFile %>', '<%= htmlPartialFiles %>'],
-        tasks: [],
+      resources: {
+        files: ['<%= cssFiles %>', '<%= htmlPartialFiles %>', '<%= assetsFiles %>'],
+        tasks: ['copy:main', 'usemin'],
+      },
+      htmlIndex: {
+        files: ['<%= indexFile %>'],
+        tasks: ['wiredep', 'useminPrepare', 'copy:main', 'usemin', 'concat:generated'],
       },
       js: {
         files: ['<%= angularFiles %>'],
@@ -71,10 +77,25 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'app/', src: ['assets/**'], dest: 'dist/'},
           {expand: true, cwd: 'app/', src: ['partials/**'], dest: 'dist/'},
           {expand: true, cwd: 'app/', src: ['css/**'], dest: 'dist/'},
-          {expand: true, src: ['bower_components/**'], dest: 'dist/'},
           {expand: true, src: ['index.html'], dest: 'dist/'},
         ],
       },
+    },
+    useminPrepare: {
+      html: 'index.html',
+      options: {
+        dest: 'dist',
+        flow: {
+          steps: {
+            js: ['concat'],
+            css: ['concat']
+          },
+          post: {}
+        }
+      }
+    },
+    usemin: {
+        html: ['dist/index.html']
     },
     'http-server': {
         dev: {
@@ -97,14 +118,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-usemin');
 
   // TODO: hacer andar la conversion de anotaciones para DI
   // grunt.loadNpmTasks('grunt-ng-annotate');
 
   grunt.loadNpmTasks('grunt-elm');
   grunt.loadNpmTasks('grunt-http-server');
+  grunt.loadNpmTasks('grunt-http-server');
 
-  grunt.registerTask('build', ['clean:build', 'jshint', 'elm', 'wiredep', 'concat:dist', 'copy:main']);
+  grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'elm', 'concat:dist', 'copy:main', 'usemin', 'concat:generated']);
   grunt.registerTask('default', ['build', 'http-server', 'watch']);
   
 };
