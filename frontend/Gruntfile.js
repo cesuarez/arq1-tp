@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     assetsFiles: ['app/assets/*'],
     indexFile: ['index.html'],
     elmCompiledFile: ['dist/js/elm.js'],
-    backendPublicPath: '../backend/public',
+    backendPublicPath: '../public',
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       files: ['Gruntfile.js', 'app/angular/**/*.js'],

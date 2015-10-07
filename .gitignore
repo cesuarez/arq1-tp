@@ -2,9 +2,9 @@ frontend/elm-stuff/*
 frontend/dist/*
 frontend/bower_components/*
 frontend/node_modules/*
-backend/public/app.html
-backend/public/assets/
-backend/public/css/
-backend/public/js/
-backend/public/partials/
+public/app.html
+public/assets/
+public/css/
+public/js/
+public/partials/
 
