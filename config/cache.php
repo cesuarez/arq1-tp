@@ -11,13 +11,6 @@ return [
 	| using this caching library. This connection is used when another is
 	| not explicitly specified when executing a given caching function.
 	|
-	| OpenShift Notes:
-	|   APC:             http://docs.openshift.org/origin-m4/oo_cartridge_guide.html#environment-variables-9
-	|   Memcached:       https://hub.openshift.com/addons/33-memcached
-	|   Memcached Cloud: https://hub.openshift.com/addons/12-memcachedcloud
-	|   Redis:           https://hub.openshift.com/addons/34-redis
-	|   Redis Cloud:     https://hub.openshift.com/addons/17-rediscloud
-	|
 	*/
 
 	'default' => env('CACHE_DRIVER', 'file'),

@@ -30,6 +30,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		return response()->json(["cambio" => "true"]);
 		return view('welcome');
 	}
 

@@ -42,16 +42,13 @@ return [
 	| so make sure you have the driver for your particular database of
 	| choice installed on your machine before you begin development.
 	|
-	| OpenShift Notes:
-	|   MySQL:      https://developers.openshift.com/en/databases-mysql.html
-	|   PostgreSQL: https://developers.openshift.com/en/databases-postgresql.html
 	*/
 
 	'connections' => [
 
 		'sqlite' => [
 			'driver'   => 'sqlite',
-			'database' => storage_path().'/database.sqlite3',
+			'database' => storage_path().'/database.sqlite',
 			'prefix'   => '',
 		],
 
@@ -59,9 +56,9 @@ return [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', env('OPENSHIFT_MYSQL_DB_HOST', 'localhost')),
 			'port'      => env('DB_PORT', env('OPENSHIFT_MYSQL_DB_PORT', 3306)),
-			'database'  => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'forge')),
-			'username'  => env('DB_USERNAME', env('OPENSHIFT_MYSQL_DB_USERNAME', 'forge')),
-			'password'  => env('DB_PASSWORD', env('OPENSHIFT_MYSQL_DB_PASSWORD', '')),
+			'database'  => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'arqsoftone')),
+			'username'  => env('DB_USERNAME', env('OPENSHIFT_MYSQL_DB_USERNAME', 'root')),
+			'password'  => env('DB_PASSWORD', env('OPENSHIFT_MYSQL_DB_PASSWORD', 'root')),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -70,15 +67,23 @@ return [
 
 		'pgsql' => [
 			'driver'   => 'pgsql',
-			'host'     => env('DB_HOST', env('OPENSHIFT_POSTGRESQL_DB_HOST', 'localhost')),
-			'port'     => env('DB_PORT', env('OPENSHIFT_POSTGRESQL_DB_PORT', 5432)),
-			'database' => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'forge')),
-			'username' => env('DB_USERNAME', env('OPENSHIFT_POSTGRESQL_DB_USERNAME', 'forge')),
-			'password' => env('DB_PASSWORD', env('OPENSHIFT_POSTGRESQL_DB_PASSWORD', '')),
+			'host'     => env('DB_HOST', 'localhost'),
+			'database' => env('DB_DATABASE', 'forge'),
+			'username' => env('DB_USERNAME', 'forge'),
+			'password' => env('DB_PASSWORD', ''),
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
-		]
+		],
+
+		'sqlsrv' => [
+			'driver'   => 'sqlsrv',
+			'host'     => env('DB_HOST', 'localhost'),
+			'database' => env('DB_DATABASE', 'forge'),
+			'username' => env('DB_USERNAME', 'forge'),
+			'password' => env('DB_PASSWORD', ''),
+			'prefix'   => '',
+		],
 
 	],
 
@@ -103,10 +108,6 @@ return [
 	| Redis is an open source, fast, and advanced key-value store that also
 	| provides a richer set of commands than a typical key-value systems
 	| such as APC or Memcached. Laravel makes it easy to dig right in.
-	|
-	| OpenShift Notes: 
-	|   Redis:       https://hub.openshift.com/addons/34-redis
-	|   Redis Cloud: https://hub.openshift.com/addons/17-rediscloud
 	|
 	*/
 
