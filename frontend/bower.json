@@ -1,14 +1,13 @@
 {
-  "name": "elm-example",
+  "name": "angular-app",
   "version": "1.0.0",
-  "homepage": "https://github.com/sawady/elm-example",
+  "homepage": "https://https://github.com/cesuarez/arq1-tp",
   "authors": [
     "Sawady <sawady.faso@gmail.com>"
   ],
-  "description": "elm examples",
+  "description": "angular-app",
   "keywords": [
-    "elm",
-    "example"
+    "angular"
   ],
   "license": "MIT",
   "ignore": [

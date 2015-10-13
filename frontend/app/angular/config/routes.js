@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('elmApp').config(function($stateProvider, $urlRouterProvider) {
+angular.module('angularApp').config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
   $urlRouterProvider.otherwise('/');
@@ -11,17 +11,5 @@ angular.module('elmApp').config(function($stateProvider, $urlRouterProvider) {
       url: '/',
       controller: 'HomeCtrl',
       templateUrl: 'partials/main.html'
-    })
-    // .state('contadores', {
-    //   url: '/contadores',
-    //   templateUrl: 'partials/contadores.html'
-    // })
-    .state('eventos', {
-      url: '/eventos',
-      templateUrl: 'partials/eventos.html'
-    })
-    .state('estampitas', {
-      url: '/estampitas',
-      templateUrl: 'partials/estampitas.html'
     });
 });

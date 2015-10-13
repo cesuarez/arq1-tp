@@ -1,15 +1,15 @@
-# Frontend Angular-Bootstrap-Elm
+# Frontend Angular-Bootstrap
 
 Nota: en SO basado en Debian de 32-bits no funciona.
 
 ### Setup
 
-1. `npm install -g elm`
-2. `npm install`
-3. `elm package install`
+1. `npm install`
+2. `elm package install`
 
-### Explore Elm
-`elm reactor`
+### Compile and Run for development
+`grunt serve:js` for js development http-server
 
-### Compile and Run
-`grunt`
+or
+
+`grunt serve:php` for test with php backend

@@ -1,5 +1,9 @@
 'use strict';
 
-angular.module('elmApp').controller('HomeCtrl', function($scope, Elm) {
+angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
+    
+    Event.query(function(data) {
+        $scope.events = data;
+    });
 
 });

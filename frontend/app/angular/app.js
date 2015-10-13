@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('elmApp', [
+angular.module('angularApp', [
   'ngRoute', 'ui.router', 'ngAnimate', 'ngResource'
 ]);

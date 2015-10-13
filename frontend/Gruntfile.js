@@ -3,13 +3,11 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    elmFiles: ['app/elm/*.elm'],
     angularFiles: ['app/angular/**/*.js'],
     htmlPartialFiles: ['app/partials/*.html'],
     cssFiles: ['app/css/*.css'],
     assetsFiles: ['app/assets/*'],
     indexFile: ['index.html'],
-    elmCompiledFile: ['dist/js/elm.js'],
     backendPublicPath: '../public',
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
@@ -38,19 +36,8 @@ module.exports = function(grunt) {
           spawn: false,
         },
       },
-      elm: {
-        files: ['<%= elmFiles %>'],
-        tasks: ['elm', 'concat:dist'],        
-      },
       options: {
         livereload: true,
-      },
-    },
-    elm: {
-      compile: {
-        files: {
-          'dist/js/elm.js': ['<%= elmFiles %>']
-        }
       },
     },
     wiredep: {
@@ -74,7 +61,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         // the files to concatenate
-        src: ['<%= elmCompiledFile %>', '<%= angularFiles %>'],
+        src: ['<%= angularFiles %>'],
         // the location of the resulting JS file
         dest: 'dist/js/<%= pkg.name %>.js'
       }
@@ -150,11 +137,10 @@ module.exports = function(grunt) {
   // TODO: hacer andar la conversion de anotaciones para DI
   // grunt.loadNpmTasks('grunt-ng-annotate');
 
-  grunt.loadNpmTasks('grunt-elm');
   grunt.loadNpmTasks('grunt-http-server');
   grunt.loadNpmTasks('grunt-shell');
 
-  grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'elm', 'concat:dist', 'copy:main', 'usemin', 'concat:generated']);
+  grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated']);
   grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
   grunt.registerTask('serve:php', ['build', 'clean:backend', 'copy:backend', 'shell:phpServer']);
   grunt.registerTask('default', ['serve:js']);
