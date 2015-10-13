@@ -7,9 +7,55 @@
   animation: fadeIn 1s;
 }
 
-.estampitas-container {
-  width:100%;
-  height:300px;
-  border-radius: 6px;
-  background-color: #eee;
+.new-event.ng-enter {
+  animation: bounceIn 1s;
+}
+
+.new-event.ng-leave {
+  animation: bounceOut 1s;
+}
+
+.thumbnail {
+
+}
+
+.thumbnail-img {
+  width:300px; 
+  height:200px;
+}
+
+.clickeable {
+  cursor: pointer;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.input-style-1 input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+}
+
+.input-style-1 input[type="text"]:focus,
+.input-style-1 input[type="text"].focus {
+  border-bottom: solid 2px #969696;
+}
+
+.btn-no-border {
+  border: 0px solid transparent !important;
 }

@@ -63,6 +63,7 @@ module.exports = function(grunt) {
       main: {
         files: [
           // includes files within path and its sub-directories
+          {expand: true, cwd: 'app/', src: ['fonts/**'], dest: 'dist/'},
           {expand: true, cwd: 'app/', src: ['assets/**'], dest: 'dist/'},
           {expand: true, cwd: 'app/', src: ['partials/**'], dest: 'dist/'},
           {expand: true, cwd: 'app/', src: ['css/**'], dest: 'dist/'},
@@ -71,6 +72,7 @@ module.exports = function(grunt) {
       },
       backend: {
         files: [
+          {expand: true, cwd: 'dist/', src: ['fonts/**'], dest: '<%= backendPublicPath %>'},
           {expand: true, cwd: 'dist/', src: ['assets/**'], dest: '<%= backendPublicPath %>'},
           {expand: true, cwd: 'dist/', src: ['partials/**'], dest: '<%= backendPublicPath %>'},
           {expand: true, cwd: 'dist/', src: ['css/**'], dest: '<%= backendPublicPath %>'},

@@ -1,0 +1,41 @@
+<div class="col-sm-6 col-md-4">
+    <form name="form">
+    <div class="thumbnail">
+       <img class="thumbnail-img clickeable" src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
+       </img>
+       <div class="caption input-style-1">
+            <input type="text" ng-model="event.name" placeholder="title">
+            <input type="text" ng-model="event.description" placeholder="description">
+            <div class="col-md-12" style="padding: 0px">
+               <div class="input-group col-md-6" style="float: left !important">
+                   <input type="text" class="form-control" 
+                    uib-datepicker-popup="{{ format }}" ng-model="event.date" 
+                    is-open="status.opened"
+                    min-date="minDate" 
+                    ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-no-border"
+                                ng-click="open($event)">´
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <uib-timepicker ng-model="event.time" show-meridian="false">
+                    </uib-timepicker>
+                </div>
+            </div>
+            <p>
+                <div class="btn-group">
+                    <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'public'" uncheckable>Public</label>
+                    <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'private'" uncheckable>Private</label>
+                </div>
+            </p>
+            <p class="text-right">
+                <button type="submit" class="btn btn btn-success" ng-click="save()">Save</button>
+                <button type="button" class="btn btn btn-danger"  ng-click="cancel()">Cancel</button>
+            </p>
+       </div>
+    </div> 
+    </form>
+</div>

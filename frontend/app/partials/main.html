@@ -1,26 +1,15 @@
-<div class="col-12">
-
-<div class="page-header">
-  <h1>Eventos públicos</h1>
-</div>
-
-<div class="row">
-  <div ng-repeat="event in events">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-       <img src="http://www.elchacalparrilla.com/images/carta/CHORIPAN.jpg" style="width:300px; height: 200px">
-       </img>
-       <div class="caption">
-         <h3>
-           {{ event.name }}
-         </h3>
-         <p>
-           {{ event.date | date:'dd/MM/yyyy hh:mm' }}
-         </p>
-       </div>
-    </div> 
+<div class="col-md-12">
+  <div class="page-header">
+    <h1>
+      Public Events
+      <button type="button" class="btn btn-info" ng-click="newEvent()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </h1>
   </div>
+  
+  <div class="row">
+    <public-events-form class="new-event" ng-if="event"></public-events-form>
+    <public-events-list events="events"></public-events-list>
   </div>
-</div>
-
 </div>
