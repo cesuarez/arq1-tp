@@ -3,7 +3,7 @@
 ### TP de Arquitectura de Software 1
 
 - Backend Laravel-MySQL
-- Frontend Elm-Angular-Bootstrap
+- Frontend Angular-Bootstrap
 
 ---
 
