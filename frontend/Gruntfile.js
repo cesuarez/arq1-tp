@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = function(grunt) {
+  
+  // LOAD ALL grunt tasks
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     angularFiles: ['app/angular/**/*.js'],
@@ -17,27 +20,17 @@ module.exports = function(grunt) {
       },
     },
     watch: {
-      bower: {
-        files: ['bower_components/*'],
-        tasks: ['wiredep', 'useminPrepare', 'concat:generated']
-      },
-      resources: {
-        files: ['<%= cssFiles %>', '<%= htmlPartialFiles %>', '<%= assetsFiles %>'],
-        tasks: ['copy:main', 'usemin'],
-      },
-      htmlIndex: {
-        files: ['<%= indexFile %>'],
-        tasks: ['wiredep', 'useminPrepare', 'copy:main', 'usemin', 'concat:generated'],
-      },
-      js: {
-        files: ['<%= angularFiles %>'],
-        tasks: ['jshint', 'concat:dist'],        
-        options: {
-          spawn: false,
-        },
-      },
+      files: [
+        'bower_components/*', 
+        '<%= cssFiles %>', 
+        '<%= htmlPartialFiles %>', 
+        '<%= assetsFiles %>', 
+        '<%= indexFile %>', 
+        '<%= angularFiles %>'
+      ],
+      tasks: ['build'],
       options: {
-        livereload: true,
+        livereload: true
       },
     },
     wiredep: {
@@ -123,26 +116,32 @@ module.exports = function(grunt) {
       phpServer: {
         command: 'php -S0.0.0.0:8080 -t <%= backendPublicPath %>'
       }
+    },
+    concurrent: {
+        serve: ['watch', 'shell:phpServer'],
+        options: {
+            logConcurrentOutput: true
+        }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-wiredep');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-usemin');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-watch');
+  // grunt.loadNpmTasks('grunt-wiredep');
+  // grunt.loadNpmTasks('grunt-contrib-concat');
+  // grunt.loadNpmTasks('grunt-contrib-copy');
+  // grunt.loadNpmTasks('grunt-contrib-clean');
+  // grunt.loadNpmTasks('grunt-usemin');
 
   // TODO: hacer andar la conversion de anotaciones para DI
   // grunt.loadNpmTasks('grunt-ng-annotate');
 
-  grunt.loadNpmTasks('grunt-http-server');
-  grunt.loadNpmTasks('grunt-shell');
+  // grunt.loadNpmTasks('grunt-http-server');
+  // grunt.loadNpmTasks('grunt-shell');
 
-  grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated']);
+  grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated', 'clean:backend', 'copy:backend']);
   grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
-  grunt.registerTask('serve:php', ['build', 'clean:backend', 'copy:backend', 'shell:phpServer']);
-  grunt.registerTask('default', ['serve:js']);
+  grunt.registerTask('serve:php', ['build', 'concurrent:serve']);
+  grunt.registerTask('default', ['serve:php']);
   
 };
