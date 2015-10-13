@@ -15,6 +15,10 @@
   animation: bounceOut 1s;
 }
 
+.thumbnail-upload.ng-enter, .thumbnail-upload.ng-enter-active {
+  animation: zoomIn 1s;
+}
+
 .thumbnail {
 
 }
@@ -59,3 +63,12 @@ input[type="text"]:focus {
 .btn-no-border {
   border: 0px solid transparent !important;
 }
+
+#direct_upload { padding: 20px 20px; margin: 20px 0;
+    border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+
+#direct_upload h1 { margin: 0 0 15px 0; }
+
+#direct_upload { border: 4px dashed #ccc; }
+#direct_upload.dragover { border-color: #0c0; }
+#direct_upload.dragover-err { border-color: #c00; }

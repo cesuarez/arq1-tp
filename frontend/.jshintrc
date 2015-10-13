@@ -10,7 +10,8 @@
     "afterEach": false,
     "module": false,
     "inject": false,
-    "require": false
+    "require": false,
+    "$": false
   },
   "unused": false
 }

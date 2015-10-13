@@ -1,8 +1,24 @@
 <div class="col-sm-6 col-md-4">
     <form name="form">
     <div class="thumbnail">
-       <img class="thumbnail-img clickeable" src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
-       </img>
+        <div ng-controller="PhotoUploadCtrl">
+            <div id="direct_upload" 
+                ngf-drop="keepFile($file)"
+                ngf-pattern="'image/*'"
+                accept="image/*" ngf-max-size="10MB" ngf-min-height="100"
+                ngf-resize="{width: 300, height: 200}"
+                ngf-drag-over-class="dragOverClass($event)"
+                ng-model="draggedFiles">
+                <div ngf-select="keepFile($file)" title="upload" resetOnClick="true"
+                     accept="image/*" ngf-max-size="10MB" ngf-min-height="100"
+                     ngf-resize="{width: 300, height: 200}">
+                    <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable" ngf-thumbnail="file">
+                    <img ng-if="file === undefined" class="thumbnail-img clickeable"
+                         src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
+
+                </div>
+            </div>
+        </div>
        <div class="caption input-style-1">
             <input type="text" ng-model="event.name" placeholder="title">
             <input type="text" ng-model="event.description" placeholder="description">

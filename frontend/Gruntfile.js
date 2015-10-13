@@ -53,6 +53,9 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
+        options: {
+          separator: ';',
+        },
         // the files to concatenate
         src: ['<%= angularFiles %>'],
         // the location of the resulting JS file
@@ -126,20 +129,6 @@ module.exports = function(grunt) {
         }
     }
   });
-
-  // grunt.loadNpmTasks('grunt-contrib-jshint');
-  // grunt.loadNpmTasks('grunt-contrib-watch');
-  // grunt.loadNpmTasks('grunt-wiredep');
-  // grunt.loadNpmTasks('grunt-contrib-concat');
-  // grunt.loadNpmTasks('grunt-contrib-copy');
-  // grunt.loadNpmTasks('grunt-contrib-clean');
-  // grunt.loadNpmTasks('grunt-usemin');
-
-  // TODO: hacer andar la conversion de anotaciones para DI
-  // grunt.loadNpmTasks('grunt-ng-annotate');
-
-  // grunt.loadNpmTasks('grunt-http-server');
-  // grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated', 'clean:backend', 'copy:backend']);
   grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
