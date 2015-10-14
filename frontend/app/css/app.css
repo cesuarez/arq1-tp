@@ -20,7 +20,7 @@
 }
 
 .thumbnail {
-
+  border-radius: 15px 50px;
 }
 
 .thumbnail-img {
@@ -64,8 +64,13 @@ input[type="text"]:focus {
   border: 0px solid transparent !important;
 }
 
-#direct_upload { padding: 20px 20px; margin: 20px 0;
-    border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+#direct_upload { 
+  padding: 20px 20px; 
+  margin: 20px 0;
+  border-top: 1px solid #ccc; 
+  border-bottom: 1px solid #ccc;
+  border-radius: 15px 50px;
+}
 
 #direct_upload h1 { margin: 0 0 15px 0; }
 

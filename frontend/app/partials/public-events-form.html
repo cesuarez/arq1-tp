@@ -5,23 +5,22 @@
             <div id="direct_upload" 
                 ngf-drop="keepFile($file)"
                 ngf-pattern="'image/*'"
-                accept="image/*" ngf-max-size="10MB" ngf-min-height="100"
+                accept="image/*" ngf-max-size="10MB"
                 ngf-resize="{width: 300, height: 200}"
                 ngf-drag-over-class="dragOverClass($event)"
-                ng-model="draggedFiles">
+                ng-model="file">
                 <div ngf-select="keepFile($file)" title="upload" resetOnClick="true"
-                     accept="image/*" ngf-max-size="10MB" ngf-min-height="100"
+                     accept="image/*" ngf-max-size="10MB"
                      ngf-resize="{width: 300, height: 200}">
                     <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable" ngf-thumbnail="file">
                     <img ng-if="file === undefined" class="thumbnail-img clickeable"
                          src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
-
                 </div>
             </div>
         </div>
        <div class="caption input-style-1">
-            <input type="text" ng-model="event.name" placeholder="title">
-            <input type="text" ng-model="event.description" placeholder="description">
+            <input type="text" ng-model="event.name" placeholder="title" ng-required="true">
+            <input type="text" ng-model="event.description" placeholder="description" ng-required="true">
             <div class="col-md-12" style="padding: 0px">
                <div class="input-group col-md-6" style="float: left !important">
                    <input type="text" class="form-control" 
@@ -37,7 +36,7 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <uib-timepicker ng-model="event.time" show-meridian="false">
+                    <uib-timepicker ng-model="event.date" show-meridian="false" ng-required="true">
                     </uib-timepicker>
                 </div>
             </div>
@@ -48,7 +47,7 @@
                 </div>
             </p>
             <p class="text-right">
-                <button type="submit" class="btn btn btn-success" ng-click="save()">Save</button>
+                <button type="submit" class="btn btn btn-success" ng-disabled="form.$invalid" ng-click="save()">Save</button>
                 <button type="button" class="btn btn btn-danger"  ng-click="cancel()">Cancel</button>
             </p>
        </div>

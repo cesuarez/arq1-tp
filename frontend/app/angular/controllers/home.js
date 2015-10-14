@@ -18,9 +18,14 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
     };
 
     $scope.save = function() {
-        $scope.event.$save(function(data) {
-            $scope.events.push(data);
-            $scope.event = undefined;
+        $scope.$broadcast('upload-file');
+        $scope.$on('upload-finished', function(evt, data) {
+            console.log(data);
+            $scope.event.img = data.public_id;
+            $scope.event.$save(function(data) {
+                $scope.events.push(data);
+                $scope.event = undefined;
+            });
         });
     };
 
