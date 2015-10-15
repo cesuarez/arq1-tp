@@ -2,7 +2,7 @@
 <html lang="en" ng-app="angularApp">
 <head>
   <meta charset="utf-8">
-  <title>DELTO MATE eventos</title>
+  <title>CRISA Events</title>
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
   
   <!-- build:css css/vendor.css -->
@@ -19,20 +19,19 @@
 <body>
 <div>
   
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
-            <img src="assets/logo.png" style="height: 100%;">
+            CRISA Events
           </a>
-          <div style="width:100%; height:100%; position:absolute">
-          </div>
         </div>
       </div>
     </nav>
     
-    <div ui-view class="container slide"></div>
-
+    <div class="container">
+      <div ui-view></div>
+    </div>
   <!-- dependencies -->
   <!-- build:js js/vendor.js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
