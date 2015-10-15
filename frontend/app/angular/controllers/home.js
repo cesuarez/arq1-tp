@@ -16,17 +16,23 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
             privacy: 'public'
         });
     };
+    
+    $scope.saveEvent = function() {
+        $scope.event.$save(function(data) {
+            $scope.events.push(data);
+            $scope.event = undefined;
+        });
+    };
 
     $scope.save = function() {
-        $scope.$broadcast('upload-file');
         $scope.$on('upload-finished', function(evt, data) {
-            console.log(data);
             $scope.event.img = data.public_id;
-            $scope.event.$save(function(data) {
-                $scope.events.push(data);
-                $scope.event = undefined;
-            });
+            $scope.saveEvent();
         });
+        $scope.$on('upload-failed', function(evt, data) {
+            $scope.saveEvent();
+        });
+        $scope.$broadcast('upload-file');
     };
 
     $scope.cancel = function() {
