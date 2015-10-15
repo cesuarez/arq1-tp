@@ -28,6 +28,7 @@ angular.module('angularApp').controller('PhotoUploadCtrl', function($scope, Uplo
           $scope.result = data;
         }).error(function (data, status, headers, config) {
           $scope.result = data;
+          $scope.$emit('upload-failed');
         });
     };
 
@@ -49,9 +50,13 @@ angular.module('angularApp').controller('PhotoUploadCtrl', function($scope, Uplo
     };
     
     $scope.$on('upload-file', function() {
-      $scope.uploadFile().then(function() {
-        $scope.$emit('upload-finished', $scope.result);
-      });
+      if($scope.file) {
+        $scope.uploadFile().then(function() {
+          $scope.$emit('upload-finished', $scope.result);
+        });
+      } else {
+          $scope.$emit('upload-failed');
+      }
     });
     
 });
