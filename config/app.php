@@ -145,6 +145,12 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+		/*
+		*	External Service Providers
+		*/
+
+		'Jenssegers\Rollbar\RollbarServiceProvider',
+
 	],
 
 	/*

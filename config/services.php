@@ -34,4 +34,9 @@ return [
 		'secret' => '',
 	],
 
+	'rollbar' => [
+	    'access_token' => '225b854c742b4a318e7e28fcef39fad0',
+	    'level' => 'debug'
+	],
+
 ];
