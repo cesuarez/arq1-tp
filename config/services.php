@@ -39,4 +39,10 @@ return [
 	    'level' => 'debug'
 	],
 
+	'facebook' => [
+	    'client_id' => '',
+	    'client_secret' => '',
+	    'redirect' => '',
+	],
+
 ];

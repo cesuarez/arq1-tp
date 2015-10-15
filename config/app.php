@@ -150,6 +150,7 @@ return [
 		*/
 
 		'Jenssegers\Rollbar\RollbarServiceProvider',
+		'Laravel\Socialite\SocialiteServiceProvider',
 
 	],
 
@@ -199,6 +200,12 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+		
+		/*
+		*	External Aliases
+		*/
+
+		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 	],
 
 ];
