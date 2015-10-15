@@ -14,7 +14,7 @@ class EventController extends Controller {
 
     // GET "/events" 
     public function index() {
-        $events = Event::all();
+        $events = Event::orderBy('created_at', 'desc')->get();
         return response($events, 200);
     }
 

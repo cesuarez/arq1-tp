@@ -19,7 +19,7 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
     
     $scope.saveEvent = function() {
         $scope.event.$save(function(data) {
-            $scope.events.push(data);
+            $scope.getEvents();
             $scope.event = undefined;
         });
     };

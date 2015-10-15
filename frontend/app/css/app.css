@@ -1,6 +1,11 @@
-.navbar-brand {
-  padding: 0 !important;
-  padding-right: 15px !important;
+body {
+  background-image: url("http://www.techychennai.com/wp-content/uploads/2014/02/dark-black-website-background.jpg");
+}
+
+body { padding-top: 70px; }
+
+h1 {
+  color: lightgrey;
 }
 
 .container.ng-enter {
@@ -21,6 +26,7 @@
 
 .thumbnail {
   border-radius: 15px 50px;
+  box-shadow: 2px 2px 27px;
 }
 
 .thumbnail-img {
