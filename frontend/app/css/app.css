@@ -4,7 +4,7 @@ body {
 
 body { padding-top: 70px; }
 
-h1 {
+h1, h4 {
   color: lightgrey;
 }
 
@@ -83,3 +83,33 @@ input[type="text"]:focus {
 #direct_upload { border: 4px dashed #ccc; }
 #direct_upload.dragover { border-color: #0c0; }
 #direct_upload.dragover-err { border-color: #c00; }
+
+.page-header {
+  position: relative;
+}
+
+.page-header-links {
+  position: absolute;
+  float: right !important;
+  right: 0;
+  bottom: 0;
+}
+
+.page-header-links a {
+	color: lightgrey;
+	font-size: large;
+	text-shadow: none;
+}
+
+.page-header-links a::before {
+	color: #fff;
+	content: attr(data-hover);
+	position: absolute;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.page-header-links a:hover::before,
+.page-header-links a:focus::before {
+	transform: scale(0.9);
+	opacity: 0;
+}

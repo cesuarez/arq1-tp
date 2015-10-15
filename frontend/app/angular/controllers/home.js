@@ -2,13 +2,17 @@
 
 angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
     
-    $scope.getEvents = function() {
-        Event.query(function(data) {
+    Event.count(function(data) {
+        $scope.eventCount = data[0];
+    });
+    
+    $scope.mostRecent = function() {
+        Event.mostRecent(function(data) {
             $scope.events = data;
         });
     };
     
-    $scope.getEvents();
+    $scope.mostRecent();
     
     $scope.newEvent = function() {
         $scope.event = new Event({ 
@@ -19,7 +23,7 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
     
     $scope.saveEvent = function() {
         $scope.event.$save(function(data) {
-            $scope.getEvents();
+            $scope.mostRecent();
             $scope.event = undefined;
         });
     };
