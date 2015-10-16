@@ -2,13 +2,12 @@
 
 angular.module('angularApp').controller('HomeCtrl', function($scope, Event) {
     
-    Event.count(function(data) {
-        $scope.eventCount = data[0];
-    });
-    
     $scope.mostRecent = function() {
         Event.mostRecent(function(data) {
             $scope.events = data;
+        });
+        Event.count(function(data) {
+            $scope.eventCount = data[0];
         });
     };
     

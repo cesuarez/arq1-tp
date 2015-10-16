@@ -40,9 +40,9 @@ return [
 	],
 
 	'facebook' => [
-	    'client_id' => '',
-	    'client_secret' => '',
-	    'redirect' => '',
+	    'client_id' => '957870447589241',
+	    'client_secret' => '579b5a70d9e56b5b44fe8f2d4be9814d',
+	    'redirect' => 'https://elm-sawady.c9.io',
 	],
 
 ];
