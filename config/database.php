@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => env('DB_DRIVER', 'mysql'),
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,11 +54,11 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', env('OPENSHIFT_MYSQL_DB_HOST', 'localhost')),
-			'port'      => env('DB_PORT', env('OPENSHIFT_MYSQL_DB_PORT', 3306)),
-			'database'  => env('DB_DATABASE', env('OPENSHIFT_APP_NAME', 'arqsoftone')),
-			'username'  => env('DB_USERNAME', env('OPENSHIFT_MYSQL_DB_USERNAME', 'root')),
-			'password'  => env('DB_PASSWORD', env('OPENSHIFT_MYSQL_DB_PASSWORD', 'root')),
+			'host'      => getenv('OPENSHIFT_MYSQL_DB_HOST') ?: getenv('DB_HOST'),
+			'port'      => getenv('OPENSHIFT_MYSQL_DB_PORT') ?: getenv('DB_PORT'),
+			'database'  => getenv('OPENSHIFT_APP_NAME') ?: getenv('DB_DATABASE'),
+			'username'  => getenv('OPENSHIFT_MYSQL_DB_USERNAME') ?: getenv('DB_USERNAME'),
+			'password'  => getenv('OPENSHIFT_MYSQL_DB_PASSWORD') ?: getenv('DB_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
