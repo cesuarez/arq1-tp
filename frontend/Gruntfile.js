@@ -136,6 +136,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated', 'clean:backend', 'copy:backend']);
   grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
   grunt.registerTask('serve:php', ['build', 'concurrent:serve']);
+  grunt.registerTask('predeploy', ['build', 'shell:openshift']);
   grunt.registerTask('default', ['serve:php']);
   
 };
