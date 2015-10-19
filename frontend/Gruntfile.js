@@ -120,7 +120,10 @@ module.exports = function(grunt) {
     shell: {
       phpServer: {
         command: 'php -S0.0.0.0:8080 -t <%= backendPublicPath %>'
-      }
+      },
+      openshift: {
+        command: 'cp -f ../.gitignore-openshift ../.gitignore'
+      },
     },
     concurrent: {
         serve: ['watch', 'shell:phpServer'],
