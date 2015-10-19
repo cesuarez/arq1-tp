@@ -120,7 +120,10 @@ module.exports = function(grunt) {
     shell: {
       phpServer: {
         command: 'php -S0.0.0.0:8080 -t <%= backendPublicPath %>'
-      }
+      },
+      openshift: {
+        command: 'cp -f ../.gitignore-openshift ../.gitignore'
+      },
     },
     concurrent: {
         serve: ['watch', 'shell:phpServer'],
@@ -133,6 +136,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['clean:build', 'wiredep', 'useminPrepare', 'jshint', 'concat:dist', 'copy:main', 'usemin', 'concat:generated', 'clean:backend', 'copy:backend']);
   grunt.registerTask('serve:js', ['build', 'http-server', 'watch']);
   grunt.registerTask('serve:php', ['build', 'concurrent:serve']);
+  grunt.registerTask('predeploy', ['build', 'shell:openshift']);
   grunt.registerTask('default', ['serve:php']);
   
 };
