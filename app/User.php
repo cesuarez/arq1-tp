@@ -1,5 +1,7 @@
 <?php namespace App;
 
+use Log;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -22,13 +24,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['name', 'email', 'avatar'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = ['remember_token'];
+
+
+	public static function findByUserOrCreate($userData){
+		Log::info(print_r($userData, true));
+		return self::firstOrCreate([
+			'name' => $userData->user["first_name"],
+            'email' => $userData->email,
+            'avatar' => $userData->avatar
+		]);
+	}
 
 }
+

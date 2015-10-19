@@ -18,16 +18,23 @@
 </head>
 <body>
 <div>
-  
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">
-            CRISA Events
-          </a>
+    <div ng-controller="NavCtrl as vm">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a style="height:100%;" class="navbar-brand" href="#">
+              CRISA Events
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a ng-if="!isLoggedIn()" href="login"><button class="btn btn-primary">Login with Facebook</button></a>
+                <a ng-if="isLoggedIn()" href="#">{{username}}</a>
+            </li>
+          </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
     
     <div class="container">
       <div ui-view></div>

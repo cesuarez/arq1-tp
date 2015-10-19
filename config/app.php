@@ -205,7 +205,7 @@ return [
 		*	External Aliases
 		*/
 
-		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+		'Socialite' => 'Laravel\Socialite\Facades\Socialite',
 	],
 
 ];

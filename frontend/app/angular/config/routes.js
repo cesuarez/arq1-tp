@@ -8,7 +8,7 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider)
   // Now set up the states
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '/:user',
       controller: 'HomeCtrl',
       templateUrl: 'partials/main.html'
     });
