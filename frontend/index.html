@@ -18,7 +18,7 @@
 </head>
 <body>
 <div>
-    <div ng-controller="NavCtrl as vm">
+    <div ng-controller="NavCtrl">
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -29,7 +29,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
                 <a ng-if="!isLoggedIn()" href="login"><button class="btn btn-primary">Login with Facebook</button></a>
-                <a ng-if="isLoggedIn()" href="#">{{username}}</a>
+                <a ng-if="isLoggedIn()" ng-click="logout()" ng-bind="username() + ' - logout'" href=""></a>
             </li>
           </ul>
         </div>
@@ -70,6 +70,8 @@
   <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
 
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+
+  <script src="bower_components/satellizer/satellizer.js"></script>
   <!-- endbuild -->
 
   <!-- concatenated file -->

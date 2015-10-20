@@ -1,18 +1,39 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Log;
 
-use Auth;
-use Illuminate\Contracts\Auth\Guard;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Request as SelfRequest;
+use App\Http\Controllers\Controller;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\User;
 
-use Illuminate\Http\Request;
-
 class AuthController extends Controller {
 
-	public function login(Guard $auth, Request $request){
+	public function __construct(){
+        $this->middleware('jwt.auth', ['except' => ['login', 'auth']]);
+    }
+
+	public function user(){
+		try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'user_not_found'], 404);
+            }
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['error' => 'token_expired'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['error' => 'token_invalid'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['error' => 'token_absent'], $e->getStatusCode());
+        }
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
+	}
+
+	public function login(Request $request){
 		if (! $request->has('code')) return $this->getAuthorizationFirst();
 
 		/*User {#189 ▼
@@ -35,11 +56,36 @@ class AuthController extends Controller {
 		$userData = \Socialite::with('facebook')->user();
 
 		$user = User::findByUserOrCreate($userData);
+		$randomPass = str_random(16);
+		$user->password = \Hash::make($randomPass);
+		$user->save();
+		\Session::put('email', $user->email);
+		\Session::put('password', $randomPass);
 
-		$auth->login($user, true);
+		return redirect('/#/creating-token');
+	}
 
-		//response()->json(['logged' => Auth::check()]);
-		return redirect('/#/' . $user->name);
+	public function auth(){
+		$credentials = [
+			'email' => \Session::get('email'),
+			'password' => \Session::get('password'),
+		];
+
+		Log::info(print_r($credentials, true));
+
+		try {
+            // verify the credentials and create a token for the user
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['invalid_credentials' => 'The given credentials are invalid'], 401);
+            }
+        } catch (JWTException $e) {
+            // something went wrong
+            return response()->json(['could_not_create_token' => 'The server is failling to authenticate, try again later'], 500);
+        }
+
+        // if no errors are encountered we can return a JWT
+        return response()->json(compact('token'));
+
 	}
 
 	private function getAuthorizationFirst(){

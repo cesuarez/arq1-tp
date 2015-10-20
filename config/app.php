@@ -151,6 +151,7 @@ return [
 
 		'Jenssegers\Rollbar\RollbarServiceProvider',
 		'Laravel\Socialite\SocialiteServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
 
 	],
 
@@ -206,6 +207,9 @@ return [
 		*/
 
 		'Socialite' => 'Laravel\Socialite\Facades\Socialite',
+		'JWTAuth'   => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+
 	],
 
 ];

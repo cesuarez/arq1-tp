@@ -9,6 +9,7 @@ angular.module('angularApp', [
   'angular-loading-bar',
   'ngFileUpload',
   'cloudinary',
+  'satellizer'
 ]);
 
 $.cloudinary.config().cloud_name = 'sawady';
