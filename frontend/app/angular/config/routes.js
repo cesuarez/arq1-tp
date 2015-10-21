@@ -16,8 +16,8 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider,
       controller: 'HomeCtrl',
       templateUrl: 'partials/main.html'
     })
-    .state('creating-token', {
-      url: '/creating-token',
-      controller: 'CreatingTokenCtrl'
+    .state('login', {
+      url: '/login/:jwt',
+      controller: 'LoginCtrl'
     });
 });

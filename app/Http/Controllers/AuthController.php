@@ -54,38 +54,41 @@ class AuthController extends Controller {
 		  +"avatar_original": "https://graph.facebook.com/v2.5/10206132994178603/picture?width=1920"
 		}*/
 		$userData = \Socialite::with('facebook')->user();
-
 		$user = User::findByUserOrCreate($userData);
-		$randomPass = str_random(16);
-		$user->password = \Hash::make($randomPass);
+		$user->password = \Hash::make('');
 		$user->save();
-		\Session::put('email', $user->email);
-		\Session::put('password', $randomPass);
 
-		return redirect('/#/creating-token');
+		$token = $this->createJWT($user->email);
+		if ($token == 'invalid_credentials' || $token == 'could_not_create_token'){
+			$url = '/#/' . $token;
+		} else {
+			$url = '/#/login/' . $token;
+		}
+
+		return redirect($url);
 	}
 
-	public function auth(){
+	private function createJWT($email){
 		$credentials = [
-			'email' => \Session::get('email'),
-			'password' => \Session::get('password'),
+			'email' => $email,
+			'password' => '',
 		];
 
-		Log::info(print_r($credentials, true));
-
 		try {
-            // verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['invalid_credentials' => 'The given credentials are invalid'], 401);
+            	return 'invalid_credentials';
             }
         } catch (JWTException $e) {
-            // something went wrong
-            return response()->json(['could_not_create_token' => 'The server is failling to authenticate, try again later'], 500);
+            return 'could_not_create_token';
         }
 
         // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        $compactedToken = compact('token')['token'];
+        Log::info(print_r("#################", true));
+        Log::info(print_r($compactedToken, true));
+        Log::info(print_r("#################", true));
 
+        return $compactedToken;
 	}
 
 	private function getAuthorizationFirst(){
