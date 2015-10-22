@@ -82,12 +82,7 @@ class AuthController extends Controller {
             return 'could_not_create_token';
         }
 
-        // if no errors are encountered we can return a JWT
         $compactedToken = compact('token')['token'];
-        Log::info(print_r("#################", true));
-        Log::info(print_r($compactedToken, true));
-        Log::info(print_r("#################", true));
-
         return $compactedToken;
 	}
 
