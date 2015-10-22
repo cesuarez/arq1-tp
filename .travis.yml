@@ -22,7 +22,7 @@ branches:
 deploy:
   provider: openshift
   user: cris.eze.sua@gmail.com
-  password: crazytrain
+  password: unq-tps
   domain: pdstp
   skip_cleanup: true
   app:
