@@ -1,5 +1,7 @@
 # Arq1-tp
 
+[![Build Status](https://travis-ci.org/cesuarez/arq1-tp.svg?branch=master)](https://travis-ci.org/cesuarez/arq1-tp)
+
 ### TP de Arquitectura de Software 1
 
 - Backend Laravel-MySQL
