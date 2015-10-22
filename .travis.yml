@@ -1,0 +1,32 @@
+language: php
+php:
+  - 5.4
+
+
+before_script:
+  - cd frontend
+  - npm install
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - bower install
+  - grunt predeploy
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
+branches:
+  only:
+    - master 
+
+deploy:
+  provider: openshift
+  user: cris.eze.sua@gmail.com
+  password: crazytrain
+  domain: pdstp
+  skip_cleanup: true
+  app:
+    master: events
+
+# Customize when the notification emails are sent.
+notifications:
+    on_success: never
+    on_failure: always
