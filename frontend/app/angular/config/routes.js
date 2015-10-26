@@ -6,7 +6,7 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider,
   $authProvider.loginUrl = '/auth';
 
   // Satellizer @FIX - Laravel espera el header en minuscula
-  $authProvider.authHeader = 'authorization';
+  //$authProvider.authHeader = 'authorization';
 
   $urlRouterProvider.otherwise('/');
 
