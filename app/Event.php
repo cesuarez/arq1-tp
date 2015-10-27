@@ -12,7 +12,20 @@ class Event extends Model {
     // Cannot be accessed
     protected $hidden = ['created_at', 'updated_at'];
     
-    public function scopeMostRecent($query) {
-        return $query->orderBy('created_at', 'desc')->take(6)->get();
+    public function comments() {
+        return $this->hasMany('App\Comment');
     }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function scopeMostRecent($query) {
+        return $query->where('privacy', '=', 'public')->orderBy('created_at', 'desc');
+    }
+    
+    public function scopeByUser($query, $id) {
+        return $query->where('user_id', '=', $id)->orderBy('created_at', 'desc');
+    }
+    
 }

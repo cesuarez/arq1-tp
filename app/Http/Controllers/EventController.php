@@ -14,19 +14,19 @@ class EventController extends Controller {
 
     // GET "/events" 
     public function index() {
-        $events = Event::paginate(10);
+        $events = Event::paginate(6);
         return response($events, 200);
     }
 
     // GET "/events/mostRecent" 
     public function mostRecent() {
-        $events = Event::mostRecent();
+        $events = Event::mostRecent()->paginate(6);
         return response($events, 200);
     }
     
-    // GET "/events/count" 
-    public function count() {
-        $events = Event::all()->count();
+    // GET "/events/byUser" 
+    public function byUser($id) {
+        $events = Event::byUser($id)->paginate(6);
         return response($events, 200);
     }
 

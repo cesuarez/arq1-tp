@@ -12,7 +12,7 @@ Route::post('auth', 'AuthController@auth');
 
 // /events API
 Route::get('events/mostRecent', 'EventController@mostRecent');
-Route::get('events/count', 'EventController@count');
+Route::get('events/byUser/{id}', 'EventController@byUser');
 Route::resource('events', 'EventController');
 Route::model('events', 'App\Event');
 

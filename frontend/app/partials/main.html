@@ -1,17 +1,36 @@
-<div class="page-header">
-  <div class="page-header-links">
-    <a href="#">View all the {{ eventCount }} events</a>
+<div ng-controller="EventsUserCtrl" ng-if="authUser">
+  <div class="page-header">
+    <div class="page-header-links">
+      <a href="#">View all the {{ events.count }} events</a>
+    </div>
+    <h1>
+      User events
+      <button type="button" class="btn btn-primary" ng-click="newEvent()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </h1>
   </div>
-
-  <h1>
-    Most Recent Events
-    <button type="button" class="btn btn-primary" ng-click="newEvent()">
-      <i class="glyphicon glyphicon-plus"></i>
-    </button>
-  </h1>
+  <div class="row">
+      <events-fast-form class="new-event" ng-if="event"></events-fast-form>
+      <div ng-repeat="event in events.list">
+          <event-thumbnail event="event"></event-thumbnail>
+      </div>
+  </div>
 </div>
 
-<div class="row">
-  <public-events-form class="new-event" ng-if="event"></public-events-form>
-  <public-events-list events="events"></public-events-list>
+
+<div ng-controller="EventsMostRecentCtrl">
+  <div class="page-header">
+    <div class="page-header-links">
+      <a href="#">View all the {{ events.count }} events</a>
+    </div>
+    <h1>
+      Most recent events
+    </h1>
+  </div>
+  <div class="row">
+      <div ng-repeat="event in events.list">
+          <event-thumbnail event="event"></event-thumbnail>
+      </div>
+  </div>
 </div>

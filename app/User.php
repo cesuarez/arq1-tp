@@ -33,6 +33,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['remember_token', 'password'];
 
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
+    
+    public function events() {
+        return $this->hasMany('App\Events');
+    }
 
 	public static function findByUserOrCreate($userData){
 		return self::firstOrCreate([

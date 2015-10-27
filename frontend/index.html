@@ -18,24 +18,7 @@
 </head>
 <body>
 <div>
-    <div ng-controller="NavCtrl">
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a style="height:100%;" class="navbar-brand" href="#">
-              CRISA Events
-            </a>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a ng-if="!isLoggedIn()" href="login"><button class="btn btn-primary">Login with Facebook</button></a>
-                <a ng-if="isLoggedIn()" ng-click="logout()" ng-bind="username() + ' - logout'" href=""></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    
+    <navbar></navbar>
     <div class="container">
       <div ui-view></div>
     </div>

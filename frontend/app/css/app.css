@@ -8,6 +8,10 @@ h1, h4 {
   color: lightgrey;
 }
 
+.nav .avatar {
+  height: 50px;
+}
+
 .container.ng-enter {
   animation: fadeIn 1s;
 }

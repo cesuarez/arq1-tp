@@ -1,11 +1,8 @@
-<div ng-repeat="event in events">
-  <div class="col-sm-6 col-md-4">
+<div class="col-sm-6 col-md-4">
     <div href="#" class="thumbnail text-center">
-
         <h3>
             {{ event.name }}
         </h3>
-        
         <div ng-if="event.img">
             <cl-image public-id="{{ event.img }}">
               <cl-transformation height="200" width="300" crop="fill"/>
@@ -14,18 +11,16 @@
         <div ng-if="!event.img">
             <img class="thumbnail-img" src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
         </div>
-
-       <div class="caption">
-         <p>
-           {{ event.description }}
-         </p>
-         <p>
-            <i class="glyphicon glyphicon-calendar"></i> {{ event.date | date:'short' }}
-         </p>
-         <p>
-           <span class="label label-primary">{{ event.privacy }}</span>
-         </p>
-       </div>
+        <div class="caption">
+            <p>
+                {{ event.description }}
+            </p>
+            <p>
+                <i class="glyphicon glyphicon-calendar"></i> {{ event.date | date:'short' }}
+            </p>
+            <p>
+                <span class="label label-primary">{{ event.privacy }}</span>
+            </p>
+        </div>
     </div> 
-  </div>
 </div>
