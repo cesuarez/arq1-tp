@@ -3,7 +3,6 @@
 angular.module('angularApp').controller('LoginCtrl', 
 	function($scope, $location, AuthService, $window, $stateParams) {
     
-    console.log($stateParams);
 	$window.localStorage.setItem('satellizer_token', $stateParams.jwt);
     AuthService.getAuthUser().then(function(response) {
         var user = JSON.stringify(response.data.user);
