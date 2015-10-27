@@ -1,5 +1,5 @@
 <div class="col-sm-6 col-md-4">
-    <div href="#" class="thumbnail text-center">
+    <a ui-sref="event({ id: event.id })" class="thumbnail text-center">
         <h3>
             {{ event.name }}
         </h3>
@@ -22,5 +22,5 @@
                 <span class="label label-primary">{{ event.privacy }}</span>
             </p>
         </div>
-    </div> 
+    </a> 
 </div>

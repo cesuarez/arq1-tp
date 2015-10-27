@@ -19,5 +19,18 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider,
     .state('login', {
       url: '/login/:jwt',
       controller: 'LoginCtrl'
+    })
+    .state('event', {
+      url: '/event/:id',
+      controller: 'EventDetailsCtrl',
+      templateUrl: 'partials/event-details.html',
+      resolve: {
+        event: function($stateParams, Event) {
+          return Event.get({ id: $stateParams.id });
+        },
+        comments: function($stateParams, Event) {
+          return Event.comments({ id: $stateParams.id });
+        }
+      }
     });
 });

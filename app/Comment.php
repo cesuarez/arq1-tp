@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model {
     
@@ -12,6 +13,10 @@ class Comment extends Model {
     protected $guarded = ['id'];
 
     // Cannot be accessed
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['deleted_at'];
+    
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 
 }

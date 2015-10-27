@@ -1,11 +1,47 @@
 body {
-  background-image: url("http://www.techychennai.com/wp-content/uploads/2014/02/dark-black-website-background.jpg");
+  background-image: url("http://i.stack.imgur.com/jGlzr.png");
 }
 
-body { padding-top: 70px; }
+body { 
+  padding-top: 70px; 
+  color: aliceblue;
+}
 
-h1, h4 {
-  color: lightgrey;
+footer {
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    border-top: aliceblue;
+    border-top-style: double;
+}
+
+h1 > small {
+  color: aliceblue;
+}
+
+h1, h3, h4 {
+  color: azure;
+}
+
+.logout.ng-enter {
+  animation: wobble 1s;
+}
+
+p {
+  color: azure;
+}
+
+.navbar-inverse {
+  background-color: rgba(27, 7, 7, 0.32);
+  border-color: #8C8C8C;
+}
+
+.navbar-inverse .navbar-brand {
+    color: azure;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: lightgrey;
 }
 
 .nav .avatar {
@@ -13,7 +49,7 @@ h1, h4 {
 }
 
 .container.ng-enter {
-  animation: fadeIn 1s;
+  animation: bounceInDown 1s;
 }
 
 .new-event.ng-enter {
@@ -31,9 +67,10 @@ h1, h4 {
 .thumbnail {
   border-radius: 15px 50px;
   box-shadow: 2px 2px 27px;
+  background-color: rgba(27, 7, 7, 0.32);
 }
 
-.thumbnail-img {
+.thumbnail img {
   width:300px;
   height:200px;
   max-width: 100%;
@@ -49,7 +86,7 @@ input[type="text"] {
   margin-bottom: 10px;
   width: 100%;
   font-family: sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   appearance: none;
   box-shadow: none;
   border-radius: none;
@@ -71,8 +108,11 @@ input[type="text"]:focus {
   border-bottom: solid 2px #969696;
 }
 
+/*calendar*/
 .btn-no-border {
   border: 0px solid transparent !important;
+  margin-left: -46px !important;
+  background: rgba(240, 248, 255, 0);
 }
 
 #direct_upload { 
@@ -100,8 +140,22 @@ input[type="text"]:focus {
   bottom: 0;
 }
 
+a {
+  color: #7A7B8C;
+}
+
+a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
+    border-color: #CACACA;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #2D2D2D;
+  text-decoration: none;
+}
+
 .page-header-links a {
-	color: lightgrey;
+	color: azure;
 	font-size: large;
 	text-shadow: none;
 }
@@ -117,4 +171,42 @@ input[type="text"]:focus {
 .page-header-links a:focus::before {
 	transform: scale(0.9);
 	opacity: 0;
+}
+
+.comment.ng-enter {
+  animation: shake 1s;
+}
+
+.media {
+  border-bottom-style: groove;
+  background: rgba(80, 80, 80, 0.52);
+  padding-bottom: 5px;
+  border-color: aliceblue;
+}
+
+.media-body textarea {
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 90%;
+}
+
+.media-heading {
+    margin-top: 4px;
+}
+
+.media ::-webkit-input-placeholder {
+   color: aliceblue;
+}
+
+.media :-moz-placeholder { /* Firefox 18- */
+   color: aliceblue;  
+}
+
+.media ::-moz-placeholder {  /* Firefox 19+ */
+   color: aliceblue;  
+}
+
+.media :-ms-input-placeholder {  
+   color: aliceblue;  
 }

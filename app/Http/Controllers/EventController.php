@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Event;
+use App\Comment;
 
 class EventController extends Controller {
 
@@ -28,6 +30,19 @@ class EventController extends Controller {
     public function byUser($id) {
         $events = Event::byUser($id)->paginate(6);
         return response($events, 200);
+    }
+
+    // GET "/events/comments/{id}" 
+    public function comments($id) {
+        $comments = Event::find($id)->comments()->with('user')->paginate(10);
+        return response($comments, 200);
+    }
+
+    // POST "/events/comment" 
+    public function addComment(CommentRequest $request) {
+        $comment = Comment::create($request->all());
+        $comments = Event::find($comment->event_id)->comments()->with('user')->paginate(10);
+        return response($comments, 200);
     }
 
     // POST "/events"

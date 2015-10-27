@@ -18,10 +18,36 @@
 </head>
 <body>
 <div>
-    <navbar></navbar>
-    <div class="container">
-      <div ui-view></div>
+    <div ng-controller="NavCtrl">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a style="height:100%;" class="navbar-brand" ui-sref="home">
+              CRISA Events
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-if="authUser">
+                <img class="avatar" ng-src="{{ authUser.avatar }}">
+            </li>
+            <li ng-if="authUser">
+                <a ng-click="logout()" ng-bind="authUser.name + ' - logout'" href=""></a>
+            </li>
+            <li class="logout" ng-if="!authUser">
+                <a style="padding-bottom:0px; padding-top:0px" href="login">Login with <img class="avatar" src="https://cdn0.iconfinder.com/data/icons/yooicons_set01_socialbookmarks/512/social_facebook_box_blue.png">
+                </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
+
+    <div class="container">
+      <div ui-view class="container"></div>
+    </div>
+    <footer>
+      <p>Created by: Cristian Suarez and Federico Sawady</p>
+    </footer>
   <!-- dependencies -->
   <!-- build:js js/vendor.js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>

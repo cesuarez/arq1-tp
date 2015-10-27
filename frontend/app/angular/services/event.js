@@ -7,6 +7,13 @@ angular.module('angularApp').factory('Event', function($resource) {
     },
     mostRecent: {
       url: '/events/mostRecent',
+    },
+    comments: {
+      url: '/events/comments/:id',
+    },
+    comment: {
+      method: 'POST',
+      url: '/events/comment'
     }
   });
 });
