@@ -22,5 +22,20 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Eve
             $scope.newComment();
         });
     };
+    
+    $scope.moreComments = function() {
+        if($scope.comments.next_page_url) {
+            Event.comments({ 
+                id: $scope.event.id, 
+                page: $scope.comments.current_page + 1 
+            }, function(data) {
+                var comments = $scope.comments.data;
+                var newComments = data;
+                newComments.data = comments.concat(newComments.data);
+                $scope.comments = newComments;
+                $scope.comments.hasMore = data.current_page !== data.last_page;
+            });
+        }
+    };
 
 });
