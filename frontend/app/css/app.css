@@ -15,7 +15,7 @@ footer {
     border-top-style: double;
 }
 
-h1 > small {
+h1 > small, h4 > small {
   color: aliceblue;
 }
 
@@ -64,6 +64,10 @@ p {
 
 .new-event.ng-leave {
   animation: bounceOut 1s;
+}
+
+.user-events-list.ng-leave {
+  animation: bounceOutLeft 1s;
 }
 
 .thumbnail-upload.ng-enter, .thumbnail-upload.ng-enter-active {
@@ -200,6 +204,12 @@ a:hover, a:focus {
 .media-heading {
     margin-top: 4px;
 }
+
+.media-heading .date {
+  margin-left: 4px;
+  font-style: oblique;
+}
+
 
 .media ::-webkit-input-placeholder {
    color: aliceblue;

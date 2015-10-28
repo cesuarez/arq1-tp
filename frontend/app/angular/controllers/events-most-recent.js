@@ -5,5 +5,13 @@ angular.module('angularApp').controller('EventsMostRecentCtrl', function($scope,
     $scope.events = EventsDashboard.mostRecent;
 
     EventsDashboard.getMostRecentEvents();
+    
+    $scope.next = function() {
+        
+    };
+    
+    $scope.prev = function() {
+        
+    };
 
 });

@@ -6,6 +6,14 @@ angular.module('angularApp').controller('EventsUserCtrl', function($scope, Event
 
     EventsDashboard.getUserEvents();
 
+    $scope.next = function() {
+        
+    };
+    
+    $scope.prev = function() {
+        
+    };
+
     $scope.newEvent = function() {
         $scope.event = new Event({ 
             date: new Date(),
