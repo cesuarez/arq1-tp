@@ -41,19 +41,6 @@
 </div>
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
-        <div class="row comment" ng-repeat="comment in comments.data">
-            <div class="media">
-              <div class="media-left">
-                <a href="#">
-                  <img class="media-object avatar" ng-src="{{ comment.user.avatar }}">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">{{ comment.user.name }}</h4>
-                {{ comment.comment }}
-              </div>
-            </div>
-        </div>
         <div class="row">
             <div class="media">
               <div class="media-left">
@@ -65,10 +52,24 @@
                 <h4 class="media-heading">{{ authUser.name }}</h4>
                 <textarea rows="4" cols="50" ng-model="comment.comment" placeholder="insert your comment here...">
                 </textarea>
-                <button type="button" class="btn btn-primary" ng-click="sendComment()">
+                <button type="button" class="btn btn-primary" ng-click="sendComment()"
+                        ng-disabled="!comment.comment">
                     <i class="glyphicon glyphicon-share-alt"></i>
                     Send
                 </button>
+              </div>
+            </div>
+        </div>
+        <div class="row comment" ng-repeat="comment in comments.data">
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object avatar" ng-src="{{ comment.user.avatar }}">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">{{ comment.user.name }}</h4>
+                {{ comment.comment }}
               </div>
             </div>
         </div>
