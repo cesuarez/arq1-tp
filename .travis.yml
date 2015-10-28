@@ -25,7 +25,7 @@ deploy:
   domain: pdstp
   skip_cleanup: true
   app:
-    master: events
+    master: eventss
 
 # Customize when the notification emails are sent.
 notifications:
