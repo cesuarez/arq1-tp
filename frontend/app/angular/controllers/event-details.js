@@ -33,7 +33,6 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Eve
                 var newComments = data;
                 newComments.data = comments.concat(newComments.data);
                 $scope.comments = newComments;
-                $scope.comments.hasMore = data.current_page !== data.last_page;
             });
         }
     };

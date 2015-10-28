@@ -32,5 +32,15 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider,
           return Event.comments({ id: $stateParams.id });
         }
       }
+    })
+    .state('events', {
+      url: '/events',
+      controller: 'EventsPublicDashboardCtrl',
+      templateUrl: 'partials/events-public-dashboard.html',
+    })
+    .state('user', {
+      url: '/user/:id',
+      controller: 'UserDashboardCtrl',
+      templateUrl: 'partials/user-dashboard.html',
     });
 });

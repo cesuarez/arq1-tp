@@ -28,7 +28,7 @@
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li ng-if="authUser">
-                <img class="avatar" ng-src="{{ authUser.avatar }}">
+                <img ui-sref="user({ id: authUser.id })" class="avatar clickeable" ng-src="{{ authUser.avatar }}">
             </li>
             <li ng-if="authUser">
                 <a ng-click="logout()" ng-bind="authUser.name + ' - logout'" href=""></a>

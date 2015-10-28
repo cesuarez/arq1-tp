@@ -1,19 +1,41 @@
 'use strict';
 
-angular.module('angularApp').controller('EventsUserCtrl', function($scope, Event, EventsDashboard) {
+angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $stateParams, Event, User) {
+    
+    $scope.getUser = function() {
+        $scope.user = User.get({ id: $stateParams.id });
+    };
 
-    $scope.events = EventsDashboard.userEvents;
+    $scope.getUserEvents = function() {
+        return Event.byUser({ 
+            userId: $stateParams.id
+        }, function(data) {
+            $scope.events = data;
+        });
+    };
 
-    EventsDashboard.getUserEvents();
-
-    $scope.next = function() {
-        
+    $scope.init = function() {
+        $scope.getUser();
+        $scope.getUserEvents();
     };
     
-    $scope.prev = function() {
-        
-    };
+    $scope.init();
 
+    $scope.showMore = function() {
+        if($scope.events.next_page_url) {
+            Event.byUser({ 
+                userId: $stateParams.id, 
+                page: $scope.events.current_page + 1 
+            }, function(data) {
+                var events = $scope.events.data;
+                var newEvents = data;
+                newEvents.data = events.concat(newEvents.data);
+                $scope.events = newEvents;
+            });
+        }
+    };
+    
+    // TODO: este codigo se repite tambien en HOME
     $scope.newEvent = function() {
         $scope.event = new Event({ 
             date: new Date(),
@@ -26,7 +48,7 @@ angular.module('angularApp').controller('EventsUserCtrl', function($scope, Event
         var event = $scope.event;
         $scope.event = undefined;
         event.$save(function(data) {
-            EventsDashboard.refreshEvents();
+            $scope.refreshEvents();
         }, function() {
             $scope.event = event;
         });

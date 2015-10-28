@@ -44,7 +44,7 @@
         <div class="row">
             <div class="media">
               <div class="media-left">
-                <a href="#">
+                <a ui-sref="user({ id: authUser.id })">
                   <img class="media-object avatar" ng-src="{{ authUser.avatar }}">
                 </a>
               </div>
@@ -63,7 +63,7 @@
         <div class="row comment" ng-repeat="comment in comments.data">
             <div class="media">
               <div class="media-left">
-                <a href="#">
+                <a ui-sref="user({ id: comment.user.id })">
                   <img class="media-object avatar" ng-src="{{ comment.user.avatar }}">
                 </a>
               </div>

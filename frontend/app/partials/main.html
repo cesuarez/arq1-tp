@@ -1,10 +1,10 @@
-<div class="user-events-list" ng-controller="EventsUserCtrl" ng-if="authUser">
+<div class="user-events-list" ng-if="authUser">
   <div class="page-header">
     <div class="page-header-links">
-      <a href="#">View all the {{ events.count }} events</a>
+      <a ui-sref="user({ id: authUser.id })">View all the {{ userEvents.total }} events</a>
     </div>
     <h1>
-      User events
+      Your lastest events
       <button type="button" class="btn btn-primary" ng-click="newEvent()">
         <i class="glyphicon glyphicon-plus"></i>
       </button>
@@ -12,23 +12,23 @@
   </div>
   <div class="row">
       <events-fast-form class="new-event" ng-if="event"></events-fast-form>
-      <div ng-repeat="event in events.list">
+      <div ng-repeat="event in userEvents.data">
           <event-thumbnail event="event"></event-thumbnail>
       </div>
   </div>
 </div>
 
-<div ng-controller="EventsMostRecentCtrl">
+<div class="events-most-recent">
   <div class="page-header">
     <div class="page-header-links">
-      <a href="#">View all the {{ events.count }} events</a>
+      <a ui-sref="events">View all the {{ mostRecent.total }} events</a>
     </div>
     <h1>
       Most recent public events
     </h1>
   </div>
   <div class="row">
-      <div ng-repeat="event in events.list">
+      <div ng-repeat="event in mostRecent.data">
           <event-thumbnail event="event"></event-thumbnail>
       </div>
   </div>

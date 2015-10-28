@@ -70,6 +70,10 @@ p {
   animation: bounceOutLeft 1s;
 }
 
+.event-thumbnail-repeat.ng-enter {
+  animation: bounceInUp 1s;
+}
+
 .thumbnail-upload.ng-enter, .thumbnail-upload.ng-enter-active {
   animation: zoomIn 1s;
 }
@@ -209,7 +213,6 @@ a:hover, a:focus {
   margin-left: 4px;
   font-style: oblique;
 }
-
 
 .media ::-webkit-input-placeholder {
    color: aliceblue;
