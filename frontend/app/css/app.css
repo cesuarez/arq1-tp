@@ -46,6 +46,12 @@ p {
 
 .nav .avatar {
   height: 50px;
+  width: 50px;
+}
+
+.media .avatar {
+  height: 100px;
+  width: 100px;
 }
 
 .container.ng-enter {

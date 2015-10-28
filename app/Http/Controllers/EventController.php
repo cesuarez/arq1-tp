@@ -34,14 +34,22 @@ class EventController extends Controller {
 
     // GET "/events/comments/{id}" 
     public function comments($id) {
-        $comments = Event::find($id)->comments()->with('user')->paginate(10);
+        $comments = Event::find($id)
+            ->comments()
+            ->orderBy('created_at', 'desc')
+            ->with('user')
+            ->paginate(5);
         return response($comments, 200);
     }
 
     // POST "/events/comment" 
     public function addComment(CommentRequest $request) {
         $comment = Comment::create($request->all());
-        $comments = Event::find($comment->event_id)->comments()->with('user')->paginate(10);
+        $comments = Event::find($comment->event_id)
+            ->comments()
+            ->orderBy('created_at', 'desc')
+            ->with('user')
+            ->paginate(5);
         return response($comments, 200);
     }
 

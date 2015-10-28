@@ -3,10 +3,8 @@
         <h3>
             {{ event.name }}
         </h3>
-        <div ng-if="event.img">
-            <cl-image public-id="{{ event.img }}">
-              <cl-transformation height="200" width="300" crop="fill"/>
-            </cl-image>
+        <div class="img-thumbnail-container" ng-if="event.img">
+            <cl-image public-id="{{ event.img }}"></cl-image>
         </div>
         <div ng-if="!event.img">
             <img class="thumbnail-img" src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
