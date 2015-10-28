@@ -216,3 +216,8 @@ a:hover, a:focus {
 .media :-ms-input-placeholder {  
    color: aliceblue;  
 }
+
+.img-detail img {
+  height: 200px;
+  width: 300px;
+}

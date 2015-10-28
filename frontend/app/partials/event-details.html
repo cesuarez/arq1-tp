@@ -5,10 +5,10 @@
 </div>
 <div class="row">
     <div class="col-md-6 text-center">
-        <div ng-if="event.img">
+        <div class="img-detail" ng-if="event.img">
             <cl-image public-id="{{ event.img }}"></cl-image>
         </div>
-        <div ng-if="!event.img">
+        <div class="img-detail" ng-if="!event.img">
             <img src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
         </div>
     </div>
@@ -72,6 +72,9 @@
                 {{ comment.comment }}
               </div>
             </div>
+        </div>
+        <div class="row text-center comment" ng-if="comments.next_page_url">
+          <h1 class="clickeable" ng-click="moreComments()"><i class="glyphicon glyphicon-chevron-down"></i></h1>
         </div>
     </div>
 </div>
