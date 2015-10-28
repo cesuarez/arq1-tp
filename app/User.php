@@ -38,10 +38,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 	public static function findByUserOrCreate($userData){
+		$avatarUrl = strtok($userData->avatar, '?');
+		$avatarUrl = $avatarUrl . '?width=100&height=100';
 		return self::firstOrCreate([
 			'name' => $userData->user["first_name"],
             'email' => $userData->email,
-            'avatar' => $userData->avatar
+            'avatar' => $avatarUrl
 		]);
 	}
 
