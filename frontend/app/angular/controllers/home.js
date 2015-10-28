@@ -3,11 +3,13 @@
 angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService, Event) {
 
     $scope.getUserEvents = function() {
-        return Event.byUser({ 
-            userId: AuthService.getAuthUser().id
-        }, function(data) {
-            $scope.userEvents = data;
-        });
+        if (AuthService.getAuthUser()){
+            return Event.byUser({ 
+                userId: AuthService.getAuthUser().id
+            }, function(data) {
+                $scope.userEvents = data;
+            });
+        }
     };
 
     $scope.getMostRecentEvents = function() {
