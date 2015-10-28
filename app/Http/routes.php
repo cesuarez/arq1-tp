@@ -18,6 +18,10 @@ Route::post('events/comment', 'EventController@addComment');
 Route::resource('events', 'EventController');
 Route::model('events', 'App\Event');
 
+// /users API
+Route::resource('users', 'UserController');
+Route::model('users', 'App\User');
+
 // Secured Controllers
 //Route::group(['middleware' => 'jwt.auth'], function() {
 	// Secured Controllers
