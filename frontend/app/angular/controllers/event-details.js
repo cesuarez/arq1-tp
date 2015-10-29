@@ -10,7 +10,10 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Eve
         };
     };
 
-    event.$promise.then($scope.newComment);
+    if($scope.authUser) {
+        event.$promise.then($scope.newComment);
+    }
+    
     
     $scope.event = event;
     

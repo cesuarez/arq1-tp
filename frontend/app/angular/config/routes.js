@@ -1,13 +1,31 @@
 'use strict';
 
-angular.module('angularApp').config(function($stateProvider, $urlRouterProvider, $authProvider) {
+angular.module('angularApp')
+.config(function($stateProvider, $urlRouterProvider, $authProvider, $provide, $httpProvider) {
   
   // Satellizer configuration that specifies which API
   $authProvider.loginUrl = '/auth';
-
   // Satellizer @FIX - Laravel espera el header en minuscula
-  //$authProvider.authHeader = 'authorization';
+  $authProvider.authHeader = 'authorization';
 
+  function redirectWhenLoggedOut($q, $location, $window) {
+      return {
+          responseError: function(rejection) {
+              //var $state = $injector.get('$state');
+              if(rejection.status === 403 || rejection.status === 401) {
+                $location.path('/');
+              }
+              return $q.reject(rejection);
+          }
+      };
+  }
+
+  // Setup for the $httpInterceptor
+  $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
+
+  // Push the new factory onto the $http interceptor array
+  $httpProvider.interceptors.push('redirectWhenLoggedOut');
+  
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
@@ -44,3 +62,4 @@ angular.module('angularApp').config(function($stateProvider, $urlRouterProvider,
       templateUrl: 'partials/user-dashboard.html',
     });
 });
+

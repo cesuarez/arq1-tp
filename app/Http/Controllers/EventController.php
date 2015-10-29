@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\EventShowRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,7 +13,15 @@ use App\Http\Controllers\Controller;
 use App\Event;
 use App\Comment;
 
+use JWTAuth;
+
 class EventController extends Controller {
+
+	public function __construct() {
+        $this->middleware('jwt.auth', ['only' => 
+            ['addComment', 'store', 'destroy']
+        ]);
+    }
 
     // GET "/events" 
     public function index() {
@@ -61,7 +70,7 @@ class EventController extends Controller {
     }
 
     // GET "/events/:id"
-    public function show($event) {
+    public function show(EventShowRequest $request, $event) {
         return response($event, 200);
     }
 
