@@ -29,6 +29,7 @@ class AuthController extends Controller {
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
             return response()->json(['error' => 'token_absent'], $e->getStatusCode());
         }
+        
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
 	}
