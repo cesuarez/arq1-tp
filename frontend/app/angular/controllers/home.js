@@ -1,6 +1,10 @@
 'use strict';
 
-angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService, Event) {
+angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService, Event, uiGmapGoogleMapApi) {
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+    });
 
     $scope.getUserEvents = function() {
         if (AuthService.getAuthUser()){

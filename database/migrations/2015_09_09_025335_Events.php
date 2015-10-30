@@ -14,6 +14,11 @@ class Events extends Migration
             $table->string('img');
             $table->enum('privacy', ['private', 'public']);
             $table->string('location')->nullable();
+            
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('weather')->nullable();
+            
             $table->text('description')->nullable();
             $table->text('proposed_requirements')->nullable();
             $table->timestamps();

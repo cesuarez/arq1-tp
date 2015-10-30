@@ -15,6 +15,8 @@ use App\Comment;
 
 use JWTAuth;
 
+use Forecast\Forecast;
+
 class EventController extends Controller {
 
 	public function __construct() {
@@ -66,6 +68,9 @@ class EventController extends Controller {
     //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq", "proposed_requirements": "paty,ensalada,chorizo"}
     public function store(EventRequest $request) {
         $event = Event::create($request->all());
+        $forecast = new Forecast('c9bd9b2923a321eb17d2ca382e952203');
+        $event->weather = $forecast->get($event->latitude, $event->longitude)->currently->summary;
+        $event->save();
         return response($event, 200);
     }
 
@@ -85,5 +90,10 @@ class EventController extends Controller {
     public function destroy($event) {
         $event->delete();
         return response(Event::all(), 200);
+    }
+    
+    public function weather($id) {
+        $event = Event::find($id);
+        return response()->json($event->weather, 200);
     }
 }

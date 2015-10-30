@@ -15,6 +15,7 @@ Route::get('events/comments/{id}', 'EventController@comments');
 Route::get('events/mostRecent', 'EventController@mostRecent');
 Route::get('events/byUser/{id}', 'EventController@byUser');
 Route::post('events/comment', 'EventController@addComment');
+Route::get('events/weather/{id}', 'EventController@weather');
 Route::resource('events', 'EventController');
 Route::model('events', 'App\Event');
 

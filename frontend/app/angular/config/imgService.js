@@ -5,7 +5,7 @@ angular.module('angularApp').config(function($httpProvider) {
       return {
        request: function(config) {
            if(config.url.indexOf('cloudinary') !== -1) {
-                delete config.headers.Authorization;
+                delete config.headers.authorization;
            }
            return config;
         }

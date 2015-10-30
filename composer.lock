@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2dafc09315f85f95383cc6aa77e217e",
+    "hash": "7dac5a25dfe34adc3ef10c4d8eb64a30",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -221,6 +221,48 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "guhelski/forecast-php",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guhelski/forecast-php.git",
+                "reference": "f68f85ba6cf93e100e8194e9f05daa64ad146352"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guhelski/forecast-php/zipball/f68f85ba6cf93e100e8194e9f05daa64ad146352",
+                "reference": "f68f85ba6cf93e100e8194e9f05daa64ad146352",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Uhelski",
+                    "email": "guilherme@uhelski.org",
+                    "homepage": "http://uhelski.org"
+                }
+            ],
+            "description": "Drop dead simple Forecast.io API v2 wrapper in PHP",
+            "keywords": [
+                "forecast",
+                "forecast.io",
+                "weather"
+            ],
+            "time": "2015-07-23 17:47:53"
         },
         {
             "name": "guzzle/guzzle",
@@ -979,16 +1021,16 @@
         },
         {
             "name": "league/oauth1-client",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth1-client.git",
-                "reference": "4d4edd9b6014f882e319231a9b3351e3a1dfdc81"
+                "reference": "cef3ceda13c78f89c323e4d5e6301c0eb7cea422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/4d4edd9b6014f882e319231a9b3351e3a1dfdc81",
-                "reference": "4d4edd9b6014f882e319231a9b3351e3a1dfdc81",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/cef3ceda13c78f89c323e4d5e6301c0eb7cea422",
+                "reference": "cef3ceda13c78f89c323e4d5e6301c0eb7cea422",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1080,7 @@
                 "tumblr",
                 "twitter"
             ],
-            "time": "2015-08-22 09:49:14"
+            "time": "2015-10-23 04:02:07"
         },
         {
             "name": "monolog/monolog",
@@ -1777,16 +1819,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/87a5db5ea887763fa3a31a5471b512ff1596d9b8",
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1839,6 @@
                 "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
-                "symfony/phpunit-bridge": "~2.7",
                 "symfony/stopwatch": "~2.3"
             },
             "suggest": {
@@ -1831,27 +1872,24 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-22 13:49:29"
+            "time": "2015-10-11 09:39:48"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "a17f8a17c20e8614c15b8e116e2f4bcde102cfab"
+                "reference": "56fd6df73be859323ff97418d97edc1d756df6df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a17f8a17c20e8614c15b8e116e2f4bcde102cfab",
-                "reference": "a17f8a17c20e8614c15b8e116e2f4bcde102cfab",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/56fd6df73be859323ff97418d97edc1d756df6df",
+                "reference": "56fd6df73be859323ff97418d97edc1d756df6df",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1880,7 +1918,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-09 17:42:36"
+            "time": "2015-10-18 20:23:18"
         },
         {
             "name": "symfony/finder",
@@ -2993,16 +3031,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.15",
+            "version": "4.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b"
+                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
-                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/625f8c345606ed0f3a141dfb88f4116f0e22978e",
+                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e",
                 "shasum": ""
             },
             "require": {
@@ -3061,7 +3099,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-22 09:05:37"
+            "time": "2015-10-23 06:48:33"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3492,23 +3530,20 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770"
+                "reference": "eca9019c88fbe250164affd107bc8057771f3f4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/eca9019c88fbe250164affd107bc8057771f3f4d",
+                "reference": "eca9019c88fbe250164affd107bc8057771f3f4d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -3537,7 +3572,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 14:14:09"
+            "time": "2015-10-11 09:39:48"
         }
     ],
     "aliases": [],

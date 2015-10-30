@@ -9,7 +9,8 @@ angular.module('angularApp', [
   'angular-loading-bar',
   'ngFileUpload',
   'cloudinary',
-  'satellizer'
+  'satellizer',
+  'uiGmapgoogle-maps'
 ]);
 
 $.cloudinary.config().cloud_name = 'sawady';
