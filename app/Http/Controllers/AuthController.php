@@ -20,14 +20,14 @@ class AuthController extends Controller {
 	public function user(){
 		try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['error' => 'user_not_found'], 404);
+                return response()->json(['user_not_found' => 'The user does not exist'], 404);
             }
         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['error' => 'token_expired'], $e->getStatusCode());
+            return response()->json(['token_expired' => 'The received token is not longer valid'], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['error' => 'token_invalid'], $e->getStatusCode());
+            return response()->json(['token_invalid' => 'The token received is not valid'], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['error' => 'token_absent'], $e->getStatusCode());
+            return response()->json(['token_absent' => 'The token is missing in the request'], $e->getStatusCode());
         }
         
         // the token is valid and we have found the user via the sub claim
