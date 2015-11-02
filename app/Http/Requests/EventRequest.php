@@ -6,13 +6,11 @@ use App\Http\Requests\Request;
 
 class EventRequest extends Request
 {
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
-    public function rules()
-    {
+    public function rules() {
         return [
             "name" => "required",
             "privacy" => "required|in:public,private",

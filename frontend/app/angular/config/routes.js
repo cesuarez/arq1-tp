@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('angularApp')
+
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         //    key: 'your api key',
@@ -8,21 +9,23 @@ angular.module('angularApp')
         libraries: 'weather,geometry,visualization'
     });
 })
-.config(function($stateProvider, $urlRouterProvider, $authProvider, $provide, $httpProvider) {
-  
-  // Satellizer configuration that specifies which API
+
+.config(function($authProvider) {
   $authProvider.loginUrl = '/auth';
   // Satellizer @FIX - Laravel espera el header en minuscula
   $authProvider.authHeader = 'authorization';
+})
 
-  function redirectWhenLoggedOut($q, $location, $window) {
+.config(function($stateProvider, $urlRouterProvider, $provide, $httpProvider) {
+
+  function redirectWhenLoggedOut($location, $q, $injector) {
       return {
-          responseError: function(rejection) {
+          responseError: function(response) {
               //var $state = $injector.get('$state');
-              if(rejection.status === 403 || rejection.status === 401) {
-                $location.path('/');
+              if(response.status === 403 || response.status === 401) {
+                  $injector.get('$state').transitionTo('home');
               }
-              return $q.reject(rejection);
+              return $q.reject(response);
           }
       };
   }
