@@ -28,10 +28,12 @@
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li ng-if="authUser">
-                <img ui-sref="user({ id: authUser.id })" class="avatar clickeable" ng-src="{{ authUser.avatar }}">
+                <a style="padding-bottom:0px; padding-top:0px" ui-sref="user({ id: authUser.id })" href="">
+                  <img class="avatar clickeable" ng-src="{{ authUser.avatar }}"> {{authUser.name}} 
+                </a>
             </li>
             <li ng-if="authUser">
-                <a ng-click="logout()" ng-bind="authUser.name + ' - logout'" href=""></a>
+                <a ng-click="logout()" href="">Logout</a>
             </li>
             <li class="logout" ng-if="!authUser">
                 <a style="padding-bottom:0px; padding-top:0px" href="login">Login with <img class="avatar" src="assets/facebook-icon.png">
