@@ -1,5 +1,5 @@
 body {
-  background-image: url("http://i.stack.imgur.com/jGlzr.png");
+  background-image: url("../assets/background.png");
 }
 
 body { 
@@ -234,4 +234,8 @@ a:hover, a:focus {
 .img-detail img {
   height: 200px;
   width: 300px;
+}
+
+img {
+  background:url('../assets/loading 3.gif') no-repeat center;
 }

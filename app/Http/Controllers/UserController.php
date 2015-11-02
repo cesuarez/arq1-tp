@@ -30,7 +30,7 @@ class UserController extends Controller {
         return response($user, 200);
 	}
 
-	// DELETE "/events/:id"
+	// DELETE "/users/:id"
 	public function destroy($user)
 	{
         $user->delete();
