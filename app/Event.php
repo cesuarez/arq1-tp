@@ -20,6 +20,14 @@ class Event extends Model {
         return $this->belongsTo('App\User');
     }
 
+    public static function findComments($eventId) {
+        return self::find($eventId)
+            ->comments()
+            ->orderBy('created_at', 'desc')
+            ->with('user')
+            ->paginate(5);
+    }
+
     public function scopeMostRecent($query) {
         return $query->where('privacy', '=', 'public')->orderBy('created_at', 'desc');
     }
