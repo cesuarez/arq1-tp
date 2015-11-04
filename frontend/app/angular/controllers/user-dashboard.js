@@ -1,7 +1,39 @@
 'use strict';
 
-angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $stateParams, Event, User) {
+angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $stateParams, Event, User, uiGmapGoogleMapApi) {
     
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { 
+            center: {
+                latitude: -34.6250478,
+                longitude: -58.48684
+            },
+            zoom: 9,
+            markers: [],
+            events: {
+                click: function (map, eventName, originalEventArgs) {
+                    var e = originalEventArgs[0];
+                    var lat = e.latLng.lat();
+                    var lon = e.latLng.lng();
+                    var marker = {
+                        id: Date.now(),
+                        coords: {
+                            latitude: lat,
+                            longitude: lon
+                        }
+                    };
+                    if ($scope.event) {
+                        $scope.event.latitude = lat;
+                        $scope.event.longitude = lon;
+                    }
+                    $scope.map.markers.pop(); 
+                    $scope.map.markers.push(marker);
+                    $scope.$apply();
+                }
+            }
+        };
+    });
+
     $scope.getUser = function() {
         $scope.user = User.get({ id: $stateParams.id });
     };
@@ -40,7 +72,8 @@ angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $s
         $scope.event = new Event({ 
             date: new Date(),
             privacy: 'public',
-            user_id: $scope.authUser.id
+            user_id: $scope.authUser.id,
+            location: "TODO"
         });
     };
 

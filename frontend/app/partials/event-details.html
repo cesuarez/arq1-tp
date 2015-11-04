@@ -14,19 +14,21 @@
     </div>
     <div class="col-md-6 text-center">
         <h4>
-            <i class="glyphicon glyphicon-calendar"></i> {{ event.date | date:'short' }}
+            <i class="glyphicon glyphicon-calendar"></i>
+            <span>Date:</span>
+            <span>{{ event.date | date:'short' }}</span>
         </h4>
         <h4>
-            Location: {{ event.location }}
+            <i class="glyphicon glyphicon-map-marker"></i>
+            <span>Location:</span>
+            <span>{{ event.location }}</span>
+        </h4>
+        <h4 ng-if="event.weather">
+            <span>Weather:</span>
+            <span>{{ event.weather }}</span>
         </h4>
         <h4>
-            Weather: {{ event.weather }}
-        </h4>
-        <h4>
-            Requirements: {{ event.proposed_requirements }}
-        </h4>
-        <h4>
-            {{ event.description }}
+            <span>{{ event.description }}</span>
         </h4>
         <h4>
           <span class="label label-primary">{{ event.privacy }}</span>

@@ -3,7 +3,35 @@
 angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService, Event, uiGmapGoogleMapApi) {
 
     uiGmapGoogleMapApi.then(function(maps) {
-        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+        $scope.map = { 
+            center: {
+                latitude: -34.6250478,
+                longitude: -58.48684
+            },
+            zoom: 5,
+            markers: [],
+            events: {
+                click: function (map, eventName, originalEventArgs) {
+                    var e = originalEventArgs[0];
+                    var lat = e.latLng.lat();
+                    var lon = e.latLng.lng();
+                    var marker = {
+                        id: Date.now(),
+                        coords: {
+                            latitude: lat,
+                            longitude: lon
+                        }
+                    };
+                    if ($scope.event) {
+                        $scope.event.latitude = lat;
+                        $scope.event.longitude = lon;
+                    }
+                    $scope.map.markers.pop(); 
+                    $scope.map.markers.push(marker);
+                    $scope.$apply();
+                }
+            }
+        };
     });
 
     $scope.getUserEvents = function() {
@@ -29,11 +57,13 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService
     
     $scope.refreshEvents();
 
+    // TODO este codigo tambien se repite en user-dashboard
     $scope.newEvent = function() {
         $scope.event = new Event({ 
             date: new Date(),
             privacy: 'public',
-            user_id: $scope.authUser.id
+            user_id: $scope.authUser.id,
+            location: "TODO"
         });
     };
 
