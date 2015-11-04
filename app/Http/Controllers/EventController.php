@@ -55,7 +55,7 @@ class EventController extends Controller {
     }
 
     // POST "/events"
-    //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq", "proposed_requirements": "paty,ensalada,chorizo"}
+    //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq"}
     public function store(EventRequest $request) {
         $event = Event::create($request->all());
         $forecast = new Forecast('c9bd9b2923a321eb17d2ca382e952203');

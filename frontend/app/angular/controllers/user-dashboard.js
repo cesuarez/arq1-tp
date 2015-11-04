@@ -8,7 +8,7 @@ angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $s
                 latitude: -34.6250478,
                 longitude: -58.48684
             },
-            zoom: 9,
+            zoom: 5,
             markers: [],
             events: {
                 click: function (map, eventName, originalEventArgs) {

@@ -20,7 +20,6 @@ class Events extends Migration
             $table->string('weather')->nullable();
             
             $table->text('description')->nullable();
-            $table->text('proposed_requirements')->nullable();
             $table->timestamps();
 
 			$table->integer('user_id')->unsigned();

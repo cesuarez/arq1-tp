@@ -1,6 +1,23 @@
 'use strict';
 
-angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Event, event, comments) {
+angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Event, event, comments, uiGmapGoogleMapApi) {
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { 
+            center: {
+                latitude: event.latitude,
+                longitude: event.longitude
+            },
+            zoom: 8,
+            markers: [{
+                id: Date.now(),
+                coords: {
+                    latitude: event.latitude,
+                    longitude: event.longitude
+                }
+            }]
+        };
+    });
 
     $scope.newComment = function() {
         $scope.comment = {

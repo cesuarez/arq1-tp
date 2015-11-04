@@ -13,15 +13,23 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
+            <!-- 
+            <i class="glyphicon glyphicon-map-marker"></i>
+            <span>Location:</span>
+            <span>{{ event.location }}</span>
+            -->
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
             <span>Date:</span>
             <span>{{ event.date | date:'short' }}</span>
-        </h4>
-        <h4>
-            <i class="glyphicon glyphicon-map-marker"></i>
-            <span>Location:</span>
-            <span>{{ event.location }}</span>
         </h4>
         <h4 ng-if="event.weather">
             <span>Weather:</span>

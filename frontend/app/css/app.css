@@ -241,4 +241,6 @@ a:hover, a:focus {
   background:url('../assets/loading-3.gif') no-repeat center;
 }
 
-.angular-google-map-container { height: 250px; }
+.angular-google-map-container {
+  height: 300px;
+}
