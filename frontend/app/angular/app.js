@@ -10,7 +10,8 @@ angular.module('angularApp', [
   'ngFileUpload',
   'cloudinary',
   'satellizer',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'angular-skycons'
 ]);
 
 $.cloudinary.config().cloud_name = 'sawady';

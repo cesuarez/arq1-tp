@@ -45,4 +45,8 @@ return [
 	    'redirect' => getenv('OPENSHIFT_FACEBOOK_REDIRECT') ?: getenv('FACEBOOK_REDIRECT')
 	], 
 
+	'forecast' => [
+		'app_key' => getenv('FORECAST_KEY')
+	]
+
 ];

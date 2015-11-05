@@ -77,6 +77,10 @@ angular.module('angularApp').controller('UserDashboardCtrl', function($scope, $s
         });
     };
 
+    $scope.refreshEvents = function() {
+        $scope.getUserEvents();
+    };
+
     $scope.saveEvent = function() {
         var event = $scope.event;
         $scope.event = undefined;

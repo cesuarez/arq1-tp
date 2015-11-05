@@ -33,6 +33,13 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Eve
     
     
     $scope.event = event;
+
+    // WEATHER ICON
+    $scope.weather = {
+        icon: event.weather,
+        size: 30,
+        animated: true
+    };
     
     $scope.comments = comments;
     

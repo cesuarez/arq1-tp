@@ -18,11 +18,15 @@ angular.module('angularApp')
 
 .config(function($stateProvider, $urlRouterProvider, $provide, $httpProvider) {
 
-  function redirectWhenLoggedOut($location, $q, $injector) {
+  function redirectWhenLoggedOut($location, $q, $injector, $window) {
       return {
           responseError: function(response) {
               //var $state = $injector.get('$state');
-              if(response.status === 403 || response.status === 401) {
+              if(response.status === 403) {
+                  $injector.get('$state').transitionTo('home');
+              }
+              if (response.status === 401){
+                  $window.localStorage.clear();
                   $injector.get('$state').transitionTo('home');
               }
               return $q.reject(response);

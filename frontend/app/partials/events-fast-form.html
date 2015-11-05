@@ -23,7 +23,7 @@
             <input type="text" ng-model="event.description" placeholder="description" ng-required="true">
             <input style="display:none" type="text" ng-model="event.latitude" placeholder="location" ng-required="true">
             <input style="display:none" type="text" ng-model="event.longitude" placeholder="location" ng-required="true">
-            <h4>Location:</h4>
+            <h4>Mark Event Location:</h4>
             <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
                 <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
                 </ui-gmap-marker>

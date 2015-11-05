@@ -13,11 +13,6 @@
         </div>
     </div>
     <div class="col-md-6 text-center">
-            <!-- 
-            <i class="glyphicon glyphicon-map-marker"></i>
-            <span>Location:</span>
-            <span>{{ event.location }}</span>
-            -->
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
@@ -33,7 +28,10 @@
         </h4>
         <h4 ng-if="event.weather">
             <span>Weather:</span>
-            <span>{{ event.weather }}</span>
+            <span style="margin-top:20px" >
+                <skycon icon="weather.icon" size="weather.size" animated="weather.animated" ></skycon>
+            </span>
+            <span>({{ event.weather }})</span>
         </h4>
         <h4>
             <span>{{ event.description }}</span>
