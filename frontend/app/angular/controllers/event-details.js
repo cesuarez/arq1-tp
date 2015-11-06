@@ -2,7 +2,14 @@
 
 angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Event, event, comments, uiGmapGoogleMapApi) {
 
+    $scope.event = event;
+
+    if($scope.authUser) {
+        event.$promise.then($scope.newComment);
+    }
+
     uiGmapGoogleMapApi.then(function(maps) {
+        console.log("EVENT en Map:", event);
         $scope.map = { 
             center: {
                 latitude: event.latitude,
@@ -27,18 +34,13 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Eve
         };
     };
 
-    if($scope.authUser) {
-        event.$promise.then($scope.newComment);
-    }
-    
-    
-    $scope.event = event;
-
     // WEATHER ICON
     $scope.weather = {
         icon: event.weather,
-        size: 30,
-        animated: true
+        size: 50,
+        animated: true,
+        color: "black",
+        cleanDetail: event.weather.replace(/-/g ,' ')
     };
     
     $scope.comments = comments;
