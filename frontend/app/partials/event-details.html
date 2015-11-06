@@ -26,15 +26,15 @@
             <span>Date:</span>
             <span>{{ event.date | date:'short' }}</span>
         </h4>
-        <h4 ng-if="event.weather">
+        <h4 style="margin-bottom:0" ng-if="event.weather">
             <span>
                 <skycon icon="weather.icon" size="weather.size"
                         animated="weather.animated" color="weather.color">
                 </skycon>
             </span>
         </h4>
-        <h4>
-            <span>{{ weather.cleanDetail }}</span>
+        <h4 style="margin-top:0">
+            <span style="color:black">{{ weather.cleanDetail }}</span>
         </h4>
         <h4>
             <span>{{ event.description }}</span>

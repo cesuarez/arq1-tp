@@ -236,7 +236,8 @@ a:hover, a:focus {
   width: 300px;
 }
 
-.thumbnail-img,
+/*id="newImage" onLoad="if(document.getElementById('newImage').value!=''){document.getElementById('newImage').style.backgroundImage='none';}"*/
+.img-thumbnail-container img,
 .avatar {
   background:url('../assets/loading-3.gif') no-repeat center;
 }
