@@ -54,6 +54,12 @@ class EventController extends Controller {
         return response(Event::findComments($comment->event_id), 200);
     }
 
+    // GET "events/weather/{id}" 
+    public function weather($id) {
+        $event = Event::find($id);
+        return response()->json($event->weather, 200);
+    }
+
     // POST "/events"
     //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq"}
     public function store(EventRequest $request) {
@@ -82,10 +88,5 @@ class EventController extends Controller {
     public function destroy($event) {
         $event->delete();
         return response(Event::all(), 200);
-    }
-    
-    public function weather($id) {
-        $event = Event::find($id);
-        return response()->json($event->weather, 200);
     }
 }

@@ -10,7 +10,7 @@ class Events extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('date');
+            $table->date('date');
             $table->string('img');
             $table->enum('privacy', ['private', 'public']);
             $table->string('location')->nullable();
