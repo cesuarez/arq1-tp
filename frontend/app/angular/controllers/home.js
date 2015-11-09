@@ -62,14 +62,14 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService
         $scope.event = new Event({ 
             date: new Date(),
             privacy: 'public',
-            user_id: $scope.authUser.id,
-            location: "TODO"
+            user_id: $scope.authUser.id
         });
     };
 
     $scope.saveEvent = function() {
         var event = $scope.event;
         $scope.event = undefined;
+        $scope.map.markers = [];
         event.$save(function(data) {
             $scope.refreshEvents();
         }, function() {

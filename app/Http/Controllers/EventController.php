@@ -60,15 +60,26 @@ class EventController extends Controller {
         return response()->json($event->weather, 200);
     }
 
+    // GET "events/assist/{id}" 
+    public function assist($id, Request $request){
+        $event = Event::find($id);
+        $event->setAssistance($request->input('assistance'));
+        $event->save();
+
+        return response()->json($event->participants, 200);
+    }
+
     // POST "/events"
-    //{ "name": "choripateada", "description": "Choripateada despedida Fidel", "privacy": "public", "date": "2012-04-23T18:25:43.511Z", "location": "unq"}
     public function store(EventRequest $request) {
-        $event = new Event($request->all());
+        $userId = $request->input('user_id');
+        $event = new Event($request->except(['user_id']));
 
         $forecastKey = \Config::get('services.forecast')['app_key'];
         $forecast = new Forecast($forecastKey);
         $event->weather = $forecast->get($event->latitude, $event->longitude)->currently->icon;
         $event->save();
+
+        $event->users()->attach($userId, ['assistance' => true, 'owner' => true]);
         return response($event, 200);
     }
 

@@ -34,7 +34,7 @@ class UserController extends Controller {
 	public function destroy($user)
 	{
         $user->delete();
-        return response(Event::all(), 200);
+        return response(User::all(), 200);
 	}
 
 }

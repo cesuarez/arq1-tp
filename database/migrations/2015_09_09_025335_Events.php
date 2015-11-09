@@ -10,20 +10,16 @@ class Events extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('description')->nullable();
             $table->date('date');
             $table->string('img');
             $table->enum('privacy', ['private', 'public']);
-            $table->string('location')->nullable();
             
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('weather')->nullable();
             
-            $table->text('description')->nullable();
             $table->timestamps();
-
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
         });
     }
 

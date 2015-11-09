@@ -6,11 +6,13 @@ class EventShowRequest extends Request {
 
 	public function authorize() {
         $event = $this->route('events');
-        
+
 		try {
         	if($event->privacy == "private") {
-	            if (!$user = \JWTAuth::parseToken()->authenticate()) {
-	            	return $event->user_id == $user->id;
+	            if ($user = \JWTAuth::parseToken()->authenticate()) {
+	            	return $event->privateVisibleforUser($user->id);
+	            } else {
+        			return false;
 	            }
     	   	}
         } catch (\Exception $e) {

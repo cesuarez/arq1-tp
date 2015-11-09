@@ -11,16 +11,6 @@
         <div class="img-detail" ng-if="!event.img">
             <img src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
         </div>
-    </div>
-    <div class="col-md-6 text-center">
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-                    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
-                    </ui-gmap-marker>
-                </ui-gmap-google-map>
-            </div>
-        </div>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
             <span>Date:</span>
@@ -42,6 +32,17 @@
         <h4>
           <span class="label label-primary">{{ event.privacy }}</span>
         </h4>
+    </div>
+    <div class="col-md-6 text-center">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+        
     </div>
 </div>
 
