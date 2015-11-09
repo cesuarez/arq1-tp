@@ -3,6 +3,7 @@
 angular.module('angularApp').controller('EventDetailsCtrl', function($scope, Event, event, comments, uiGmapGoogleMapApi) {
 
     event.$promise.then(function(){
+        
         $scope.event = event;
     
         if($scope.authUser) {
