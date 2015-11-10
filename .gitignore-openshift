@@ -1,3 +1,4 @@
+frontend/
 vendor/
 node_modules/
 .env

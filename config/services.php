@@ -46,7 +46,7 @@ return [
 	], 
 
 	'forecast' => [
-		'app_key' => getenv('FORECAST_KEY')
+		'app_key' => getenv('OPENSHIFT_FORECAST_KEY') ?: getenv('FORECAST_KEY')
 	]
 
 ];
