@@ -60,15 +60,7 @@ angular.module('angularApp')
     .state('event', {
       url: '/event/:id',
       controller: 'EventDetailsCtrl',
-      templateUrl: 'partials/event-details.html',
-      resolve: {
-        event: function($stateParams, Event) {
-          return Event.get({ id: $stateParams.id });
-        },
-        comments: function($stateParams, Event) {
-          return Event.comments({ id: $stateParams.id });
-        }
-      }
+      templateUrl: 'partials/event-details.html'
     })
     .state('events', {
       url: '/events',
