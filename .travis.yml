@@ -22,7 +22,7 @@ after_success:
   - git config user.email "cris.eze.sua@gmail.com"
   - git config user.name "Cristian"
   - git add -f -A
-  - git commit -m "deploy openshift"
+  - git commit -m "deploy openshift" &> /dev/null
   - git checkout $TRAVIS_BRANCH
 
 deploy:
