@@ -19,6 +19,8 @@ branches:
     - master 
 
 before_deploy:
+  - git config user.email "cris.eze.sua@gmail.com"
+  - git config user.name "Cristian"
   - git add -A
   - git commit -m "deploy openshift"
 
