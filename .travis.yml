@@ -15,15 +15,15 @@ after_success:
   - npm install -g bower
   - bower install
   - grunt predeploy
-  - cat .gitignore
+  - cat ../.gitignore
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - cd ..
   - git config user.email "cris.eze.sua@gmail.com"
   - git config user.name "Cristian"
   - git add -f -A
-  - git commit -m "deploy openshift" &> /dev/null
   - git checkout $TRAVIS_BRANCH
+  - git commit -m "deploy openshift" &> /dev/null
 
 deploy:
   provider: openshift
