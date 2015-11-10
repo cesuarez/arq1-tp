@@ -4,8 +4,6 @@ node_js:
 
 before_script:
   - cd frontend
-  - git add -A
-  - commit -m "deploy openshift"
   - npm install
   - npm install -g grunt-cli
   - npm install -g bower
@@ -19,6 +17,10 @@ script: "cd .."
 branches:
   only:
     - master 
+
+before_deploy:
+  - git add -A
+  - git commit -m "deploy openshift"
 
 deploy:
   provider: openshift
