@@ -2,7 +2,13 @@ language: node_js
 node_js:
   - "0.12"
 
-before_script:
+script: ls
+
+branches:
+  only:
+    - master 
+
+before_deploy:
   - cd frontend
   - npm install
   - npm install -g grunt-cli
@@ -11,18 +17,11 @@ before_script:
   - grunt predeploy
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-
-script: "cd .."
-
-branches:
-  only:
-    - master 
-
-before_deploy:
-  - git config user.email "cris.eze.sua@gmail.com"
-  - git config user.name "Cristian"
-  - git add -A
-  - git commit -m "deploy openshift"
+  - cd ..
+  #- git config user.email "cris.eze.sua@gmail.com"
+  #- git config user.name "Cristian"
+  #- git add -f .
+  #- git commit -m "deploy openshift"
 
 deploy:
   provider: openshift
