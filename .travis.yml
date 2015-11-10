@@ -18,10 +18,11 @@ before_deploy:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - cd ..
-  #- git config user.email "cris.eze.sua@gmail.com"
-  #- git config user.name "Cristian"
-  #- git add -f .
-  #- git commit -m "deploy openshift"
+  - git config user.email "cris.eze.sua@gmail.com"
+  - git config user.name "Cristian"
+  - git add -f -A
+  - git commit -m "deploy openshift"
+  - git checkout $TRAVIS_BRANCH
 
 deploy:
   provider: openshift
