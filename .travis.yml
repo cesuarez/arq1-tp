@@ -19,6 +19,7 @@ after_success:
   - "sh -e /etc/init.d/xvfb start"
   - cd ..
   - rm -rf frontend
+  - ls
   - git config user.email "cris.eze.sua@gmail.com"
   - git config user.name "Cristian"
   - git add -f -A &> /dev/null
