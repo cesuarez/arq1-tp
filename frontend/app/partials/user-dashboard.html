@@ -1,13 +1,13 @@
 <div class="page-header">
   <h1>
     {{ user.name }} <small>({{ events.total }} events)</small>
-    <button type="button" class="btn btn-primary" ng-click="newEvent()">
+    <button type="button" class="btn btn-primary" ng-click="openCreateEvent()">
       <i class="glyphicon glyphicon-plus"></i>
     </button>
   </h1>
 </div>
 <div class="row">
-    <events-fast-form class="new-event" ng-if="event"></events-fast-form>
+    <events-fast-form></events-fast-form>
     <div class="event-thumbnail-repeat" ng-repeat="event in events.data">
         <event-thumbnail event="event"></event-thumbnail>
     </div>
