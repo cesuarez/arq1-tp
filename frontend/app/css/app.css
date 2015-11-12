@@ -15,7 +15,7 @@ footer {
     border-top-style: double;
 }
 
-h1 > small, h4 > small {
+h1 small, h4 small {
   color: aliceblue;
 }
 

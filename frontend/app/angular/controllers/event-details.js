@@ -6,10 +6,6 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
     $scope.event.$promise.then(function(data) {
         $scope.event = data;
 
-        if($scope.authUser) {
-            $scope.newComment();
-        }
-
         // WEATHER ICON
         var eventWeather =  $scope.event.weather.replace(/-/g ,' ');
         eventWeather = eventWeather.charAt(0).toUpperCase() + eventWeather.slice(1);

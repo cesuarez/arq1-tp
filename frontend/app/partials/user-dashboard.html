@@ -1,17 +1,2 @@
-<div class="page-header">
-  <h1>
-    {{ user.name }} <small>({{ events.total }} events)</small>
-    <button type="button" class="btn btn-primary" ng-click="openCreateEvent()">
-      <i class="glyphicon glyphicon-plus"></i>
-    </button>
-  </h1>
-</div>
-<div class="row">
-    <events-fast-form></events-fast-form>
-    <div class="event-thumbnail-repeat" ng-repeat="event in events.data">
-        <event-thumbnail event="event"></event-thumbnail>
-    </div>
-</div>
-<div class="row text-center comment" ng-if="events.next_page_url">
-  <h1 class="clickeable" ng-click="showMore()"><i class="glyphicon glyphicon-chevron-down"></i></h1>
-</div>
+<events-panel config="configUserEvents">
+</events-panel>

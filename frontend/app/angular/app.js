@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('angularApp', [
+  'ngSanitize',
   'ngRoute', 
   'ui.router', 
   'ngAnimate', 
@@ -11,7 +12,7 @@ angular.module('angularApp', [
   'cloudinary',
   'satellizer',
   'uiGmapgoogle-maps',
-  'angular-skycons'
+  'angular-skycons',
 ]);
 
 $.cloudinary.config().cloud_name = 'sawady';

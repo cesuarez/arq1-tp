@@ -2,31 +2,27 @@
 
 angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService, Event) {
 
-    $scope.getUserEvents = function() {
-        if (AuthService.getAuthUser()){
-            return Event.byUser({ 
-                userId: AuthService.getAuthUser().id
-            }, function(data) {
-                $scope.userEvents = data;
-            });
-        }
-    };
+    if($scope.authUser) {
+        $scope.configUserEvents = {
+            title: '"Your lastest events"',
+            getFrom: Event.byUser,
+            getParams: { 
+                userId: $scope.authUser.id
+            },
+            redirectTo: 'user({ id: ' + $scope.authUser.id + '  })',
+            search: true,
+            create: true,
+            scroll: false
+    	};
+    }
 
-    $scope.getMostRecentEvents = function() {
-        return Event.mostRecent(function(data) {
-            $scope.mostRecent = data;
-        });
-    };
-    
-    $scope.refreshEvents = function() {
-        $scope.getUserEvents();
-        $scope.getMostRecentEvents();
-    };
-    
-    $scope.refreshEvents();
-    
-    $scope.openCreateEvent = function() {
-        $scope.$broadcast('open-create-event');
-    };
+    $scope.configMostRecentEvents = {
+        title: '"Most recent public events"',
+        getFrom: Event.mostRecent,
+        redirectTo: 'events',
+        search: true,
+        create: false,
+        scroll: true
+	};
 
 });

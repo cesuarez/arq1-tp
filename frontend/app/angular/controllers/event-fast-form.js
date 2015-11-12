@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('angularApp').controller('EventFastFormCtrl', function($scope, Event, uiGmapGoogleMapApi) {
+angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $rootScope, Event, uiGmapGoogleMapApi) {
 
     $scope.newEvent = function() {
         $scope.event = new Event({ 
             date: new Date(),
             privacy: 'public',
-            user_id: $scope.authUser.id
+            user_id: $rootScope.authUser.id
         });
     };
 
@@ -19,7 +19,7 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, Ev
         $scope.event = undefined;
         $scope.map.markers = [];
         event.$save(function(data) {
-            $scope.refreshEvents();
+            $rootScope.$broadcast('refresh-events');
         }, function() {
             $scope.event = event;
         });

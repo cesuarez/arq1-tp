@@ -6,9 +6,13 @@ angular.module('angularApp').controller('CommentsCtrl', function($scope, $stateP
         $scope.comment = {
             comment: '',
             user_id: $scope.authUser.id,
-            event_id: $scope.event.id
+            event_id: $stateParams.id
         };
     };
+
+    if($scope.authUser) {
+        $scope.newComment();
+    }
 
     $scope.comments = Event.comments({ id: $stateParams.id });
     

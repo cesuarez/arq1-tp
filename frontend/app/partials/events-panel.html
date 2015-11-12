@@ -1,0 +1,21 @@
+<div class="page-header">
+    <div class="page-header-links" ng-if="config.redirectTo && events.$resolved">
+      <a ui-sref="{{ config.redirectTo }}">View all the {{ events.total }} events</a>
+    </div>
+    <h1>
+      <span ng-bind-html="$eval(config.title)"></span>
+      <button type="button" class="btn btn-primary" ng-click="openCreateEvent()" 
+              ng-if="config.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </h1>
+</div>
+<div class="row">
+  <events-fast-form ng-if="config.create"></events-fast-form>
+  <div ng-repeat="event in events.data">
+      <event-thumbnail event="event"></event-thumbnail>
+  </div>
+</div>
+<div class="row text-center comment" ng-if="config.scroll && events.next_page_url">
+  <h1 class="clickeable" ng-click="showMore()"><i class="glyphicon glyphicon-chevron-down"></i></h1>
+</div>

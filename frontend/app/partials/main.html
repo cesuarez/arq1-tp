@@ -1,35 +1,5 @@
-<div class="user-events-list" ng-if="authUser">
-  <div class="page-header">
-    <div class="page-header-links">
-      <a ui-sref="user({ id: authUser.id })">View all the {{ userEvents.total }} events</a>
-    </div>
-    <h1>
-      Your lastest events
-      <button type="button" class="btn btn-primary" ng-click="openCreateEvent()">
-        <i class="glyphicon glyphicon-plus"></i>
-      </button>
-    </h1>
-  </div>
-  <div class="row">
-      <events-fast-form></events-fast-form>
-      <div ng-repeat="event in userEvents.data">
-          <event-thumbnail event="event"></event-thumbnail>
-      </div>
-  </div>
-</div>
+<events-panel class="user-events-list" ng-if="authUser" config="configUserEvents">
+</events-panel>
 
-<div class="events-most-recent">
-  <div class="page-header">
-    <div class="page-header-links">
-      <a ui-sref="events">View all the {{ mostRecent.total }} events</a>
-    </div>
-    <h1>
-      Most recent public events
-    </h1>
-  </div>
-  <div class="row">
-      <div ng-repeat="event in mostRecent.data">
-          <event-thumbnail event="event"></event-thumbnail>
-      </div>
-  </div>
-</div>
+<events-panel config="configMostRecentEvents">
+</events-panel>
