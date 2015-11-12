@@ -46,50 +46,52 @@
     </div>
 </div>
 
-<div class="page-header" ng-controller="CommentsCtrl">
-    <h1 ng-if="comments.total === 0">
-      No comments yet
-    </h1>
-    <h1 ng-if="comments.total > 0">
-      Comments <small>({{ comments.total}} in total)</small>
-    </h1>
-</div>
-<div class="row">
-    <div class="col-md-offset-2 col-md-8">
-        <div class="row" ng-if="authUser">
-            <div class="media">
-              <div class="media-left">
-                <a ui-sref="user({ id: authUser.id })">
-                  <img class="media-object avatar" ng-src="{{ authUser.avatar }}">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">{{ authUser.name }}</h4>
-                <textarea rows="4" cols="50" ng-model="comment.comment" placeholder="insert your comment here...">
-                </textarea>
-                <button type="button" class="btn btn-primary" ng-click="sendComment()"
-                        ng-disabled="!comment.comment">
-                    <i class="glyphicon glyphicon-share-alt"></i>
-                    Send
-                </button>
-              </div>
+<div ng-controller="CommentsCtrl">
+    <div class="page-header">
+        <h1 ng-if="comments.total === 0">
+          No comments yet
+        </h1>
+        <h1 ng-if="comments.total > 0">
+          Comments <small>({{ comments.total}} in total)</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="row" ng-if="authUser">
+                <div class="media">
+                  <div class="media-left">
+                    <a ui-sref="user({ id: authUser.id })">
+                      <img class="media-object avatar" ng-src="{{ authUser.avatar }}">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{ authUser.name }}</h4>
+                    <textarea rows="4" cols="50" ng-model="comment.comment" placeholder="insert your comment here...">
+                    </textarea>
+                    <button type="button" class="btn btn-primary" ng-click="sendComment()"
+                            ng-disabled="!comment.comment">
+                        <i class="glyphicon glyphicon-share-alt"></i>
+                        Send
+                    </button>
+                  </div>
+                </div>
             </div>
-        </div>
-        <div class="row comment" ng-repeat="comment in comments.data">
-            <div class="media">
-              <div class="media-left">
-                <a ui-sref="user({ id: comment.user.id })">
-                  <img class="media-object avatar" ng-src="{{ comment.user.avatar }}">
-                </a>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">{{ comment.user.name }} <small class="date">{{ comment.created_at }}</small></h4>
-                {{ comment.comment }}
-              </div>
+            <div class="row comment" ng-repeat="comment in comments.data">
+                <div class="media">
+                  <div class="media-left">
+                    <a ui-sref="user({ id: comment.user.id })">
+                      <img class="media-object avatar" ng-src="{{ comment.user.avatar }}">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{ comment.user.name }} <small class="date">{{ comment.created_at }}</small></h4>
+                    {{ comment.comment }}
+                  </div>
+                </div>
             </div>
-        </div>
-        <div class="row text-center comment" ng-if="comments.next_page_url">
-          <h1 class="clickeable" ng-click="moreComments()"><i class="glyphicon glyphicon-chevron-down"></i></h1>
+            <div class="row text-center comment" ng-if="comments.next_page_url">
+              <h1 class="clickeable" ng-click="moreComments()"><i class="glyphicon glyphicon-chevron-down"></i></h1>
+            </div>
         </div>
     </div>
 </div>

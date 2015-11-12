@@ -2,7 +2,9 @@
 
 angular.module('angularApp').controller('EventsPanelCtrl', function($scope, AuthService, Event) {
     
-    $scope.config.injectForTitle($scope);
+    if($scope.config.injectForTitle) {
+        $scope.config.injectForTitle($scope);
+    }
 
     $scope.refreshEvents = function() {
         $scope.events = $scope.config.getFrom($scope.config.getParams);
