@@ -6,7 +6,7 @@ angular.module('angularApp').factory('Event', function($resource) {
       url: '/events/byUser/:userId',
     },
     mostRecent: {
-      url: '/events/mostRecent',
+      url: '/events?privacy=public',
     },
     comments: {
       url: '/events/comments/:id',

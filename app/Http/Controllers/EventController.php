@@ -26,18 +26,11 @@ class EventController extends Controller {
     }
 
     // GET "/events" 
-    public function index() {
-        $events = Event::paginate(6);
-        return response($events, 200);
+    public function index(Request $request) {
+        return response(Event::search($request), 200);
     }
 
-    // GET "/events/mostRecent" 
-    public function mostRecent() {
-        $events = Event::mostRecent()->paginate(6);
-        return response($events, 200);
-    }
-    
-    // GET "/events/byUser" 
+    // GET "/events/byUser/{id}" 
     public function byUser($id) {
         $events = Event::byUser($id)->paginate(6);
         return response($events, 200);
@@ -61,7 +54,7 @@ class EventController extends Controller {
     }
 
     // GET "events/assist/{id}" 
-    public function assist($id, Request $request){
+    public function assist($id, Request $request) {
         $event = Event::find($id);
         $event->setAssistance($request->input('assistance'));
         $event->save();

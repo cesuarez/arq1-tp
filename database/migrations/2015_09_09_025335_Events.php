@@ -11,7 +11,7 @@ class Events extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->date('date');
+            $table->dateTime('date');
             $table->string('img');
             $table->enum('privacy', ['private', 'public']);
             

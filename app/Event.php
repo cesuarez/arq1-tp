@@ -6,6 +6,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\EventUser;
+use Carbon\Carbon;
 
 class Event extends Model {
 
@@ -14,6 +15,11 @@ class Event extends Model {
 
     // Cannot be accessed
     protected $hidden = ['created_at', 'updated_at'];
+    
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->toIso8601String();
+    }
     
     public function comments() {
         return $this->hasMany('App\Comment');
@@ -31,11 +37,11 @@ class Event extends Model {
             ->paginate(5);
     }
 
-    public function privateVisibleforUser($userId){
+    public function privateVisibleforUser($userId) {
         return EventUser::where('user_id', $userId)->count() > 0;
     }
 
-    public function setAssistance($assistance){
+    public function setAssistance($assistance) {
         /*
         if ($assistance) {
             $this
@@ -44,20 +50,33 @@ class Event extends Model {
         }
         */
     }
+    
+    public static function search($request) {
+        $q = Event::query();
 
-    public function scopeMostRecent($query) {
-        return $query->where('privacy', '=', 'public')->orderBy('created_at', 'desc');
+        if ($request->has('text')) {
+            $q->where(function ($query) {
+                 $query->orwhere('name', 'like', '%' . $request->text . '%');
+                 $query->orwhere('description', 'like', '%' . $request->text . '%');
+            });
+        }
+
+        if ($request->has('privacy')) {
+             $q->where('privacy', '=', $request->privacy);
+        }
+        
+        if($request->has('before')) {
+            $q->where('date', '<=', Carbon::parse($request->before));
+        }
+
+        if($request->has('after')) {
+            $q->where('date', '>=', Carbon::parse($request->after));
+        }
+        
+        return $q->orderBy('created_at', 'desc')->paginate(6);
     }
     
     public function scopeByUser($query, $id) {
-        //return $query->where('user_id', '=', $id)->orderBy('created_at', 'desc');
-        /*
-        return $query
-                ->with('users')
-                ->where('users.id', '=', $id)
-                ->orderBy('created_at', 'desc');
-
-        */
         return $query->with('users')->whereHas('users', function($q) use ($id){
              $q->where('users.id', $id);
         })->orderBy('created_at', 'desc');

@@ -1,62 +1,76 @@
-<div class="col-sm-6 col-md-4">
+<div class="col-md-12">
     <form name="form">
     <div class="thumbnail">
-        <div ng-controller="PhotoUploadCtrl">
-            <div id="direct_upload" 
-                ngf-drop="keepFile($file)"
-                ngf-pattern="'image/*'"
-                accept="image/*" ngf-max-size="10MB"
-                ngf-resize="{width: 300, height: 200}"
-                ngf-drag-over-class="dragOverClass($event)"
-                ng-model="file">
-                <div ngf-select="keepFile($file)" title="upload" resetOnClick="true"
-                     accept="image/*" ngf-max-size="10MB"
-                     ngf-resize="{width: 300, height: 200}">
-                    <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable" ngf-thumbnail="file">
-                    <img ng-if="file === undefined" class="thumbnail-img clickeable"
-                         src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
+        <div class="caption input-style-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 text-center">
+                    <div ng-controller="PhotoUploadCtrl">
+                        <div id="direct_upload" 
+                            ngf-drop="keepFile($file)"
+                            ngf-pattern="'image/*'"
+                            accept="image/*" ngf-max-size="10MB"
+                            ngf-resize="{width: 300, height: 200}"
+                            ngf-drag-over-class="dragOverClass($event)"
+                            ng-model="file">
+                            <div ngf-select="keepFile($file)" title="upload" resetOnClick="true"
+                                 accept="image/*" ngf-max-size="10MB"
+                                 ngf-resize="{width: 300, height: 200}">
+                                <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable" ngf-thumbnail="file">
+                                <img ng-if="file === undefined" class="thumbnail-img clickeable"
+                                     src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" ng-model="event.name" placeholder="title" ng-required="true">
+                    <input type="text" ng-model="event.description" placeholder="description" ng-required="true">
+                    <input style="display:none" type="text" ng-model="event.latitude" placeholder="location" ng-required="true">
+                    <input style="display:none" type="text" ng-model="event.longitude" placeholder="location" ng-required="true">
+    
+                    <div class="col-md-12" ng-controller="PickDateCtl">
+                       <div class="input-group col-md-offset-2 col-md-4" style="float: left !important; padding-top:34px">
+                           <input type="text" class="form-control" 
+                            ng-model="event.date"
+                            uib-datepicker-popup
+                            is-open="calendar.opened"
+                            min-date="calendar.minDate" 
+                            ng-required="true"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-no-border"
+                                        ng-click="open($event)">´
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col-md-offset-1 col-md-5">
+                            <uib-timepicker ng-model="event.date" show-meridian="false" ng-required="true">
+                            </uib-timepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h4>Mark Event Location:</h4>
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
+                        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                    <div class="row text-left" style="padding-top:20px; padding-left: 15px; color:aliceblue">
+                        <label>Privacy: </label>
+                        <div class="btn-group">
+                            <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'public'" uncheckable>Public</label>
+                            <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'private'" uncheckable>Private</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-       <div class="caption input-style-1">
-            <input type="text" ng-model="event.name" placeholder="title" ng-required="true">
-            <input type="text" ng-model="event.description" placeholder="description" ng-required="true">
-            <input style="display:none" type="text" ng-model="event.latitude" placeholder="location" ng-required="true">
-            <input style="display:none" type="text" ng-model="event.longitude" placeholder="location" ng-required="true">
-            <h4>Mark Event Location:</h4>
-            <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
-                <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
-                </ui-gmap-marker>
-            </ui-gmap-google-map>
-            <div class="col-md-12" style="padding: 0px">
-               <div class="input-group col-md-6" style="float: left !important; padding-top:34px">
-                   <input type="text" class="form-control" 
-                    uib-datepicker-popup="{{ format }}" ng-model="event.date" 
-                    is-open="status.opened"
-                    min-date="minDate" 
-                    ng-required="true"/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-no-border"
-                                ng-click="open($event)">´
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>
-                    </span>
-                </div>
-                <div class="off-col-md-1 col-md-5">
-                    <uib-timepicker ng-model="event.date" show-meridian="false" ng-required="true">
-                    </uib-timepicker>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">
+                        
+                        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="save()">Save</button>
+                        <button type="button" class="btn btn-danger"  ng-click="cancel()">Cancel</button>
+                    </p>
                 </div>
             </div>
-            <p>
-                <div class="btn-group">
-                    <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'public'" uncheckable>Public</label>
-                    <label class="btn btn-xs btn-info" ng-model="event.privacy" uib-btn-radio="'private'" uncheckable>Private</label>
-                </div>
-            </p>
-            <p class="text-right">
-                <button type="submit" class="btn btn btn-success" ng-disabled="form.$invalid" ng-click="save()">Save</button>
-                <button type="button" class="btn btn btn-danger"  ng-click="cancel()">Cancel</button>
-            </p>
        </div>
     </div> 
     </form>

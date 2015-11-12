@@ -78,6 +78,7 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService
     };
 
     $scope.save = function() {
+        $scope.event.date.setSeconds(0);
         $scope.$on('upload-finished', function(evt, data) {
             $scope.event.img = data.public_id;
             $scope.saveEvent();
@@ -92,16 +93,4 @@ angular.module('angularApp').controller('HomeCtrl', function($scope, AuthService
         $scope.event = undefined;
     };
 
-    $scope.minDate = new Date();
-    
-    $scope.open = function($event) {
-        $scope.status.opened = true;
-    };
-
-    $scope.format = 'dd-MM-yyyy';
-
-    $scope.status = {
-        opened: false
-    };
-    
 });
