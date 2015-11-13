@@ -78,6 +78,15 @@ class EventController extends Controller {
 
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                $event->assistance = null;
+            } else {
+                $event->addAssistance($user->id);
+            }
+        } catch (\Exception $e) {
+           $event->assistance = null;
+        }
         return response($event, 200);
     }
 
