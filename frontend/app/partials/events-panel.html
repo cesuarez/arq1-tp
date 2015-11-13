@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="page-header-links" ng-if="config.redirectTo && events.$resolved">
-      <a ui-sref="{{ config.redirectTo }}">View all the {{ events.total }} events</a>
+      <a ng-if="!config.search" ui-sref="{{ config.redirectTo }}">View all the {{ total }} events</a>
     </div>
     <h1>
       <span ng-bind-html="$eval(config.title)"></span>
@@ -8,11 +8,16 @@
               ng-if="config.create">
         <i class="glyphicon glyphicon-plus"></i>
       </button>
+      <button type="button" class="btn btn-primary" ng-click="openSearch()"
+              ng-if="config.search">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
     </h1>
 </div>
 <div class="row">
+  <events-search-form ng-if="config.search" default-params="config.getParams"></events-search-form>
   <events-fast-form ng-if="config.create"></events-fast-form>
-  <div ng-repeat="event in events.data">
+  <div ng-repeat="event in events.data" class="repeat-thumbnails">
       <event-thumbnail event="event"></event-thumbnail>
   </div>
 </div>

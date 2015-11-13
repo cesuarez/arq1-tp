@@ -51,7 +51,7 @@ angular.module('angularApp')
     .state('home', {
       url: '/',
       controller: 'HomeCtrl',
-      templateUrl: 'partials/main.html'
+      templateUrl: 'partials/home.html'
     })
     .state('login', {
       url: '/login/:jwt',
@@ -61,11 +61,6 @@ angular.module('angularApp')
       url: '/event/:id',
       controller: 'EventDetailsCtrl',
       templateUrl: 'partials/event-details.html'
-    })
-    .state('events', {
-      url: '/events',
-      controller: 'EventsPublicDashboardCtrl',
-      templateUrl: 'partials/events-public-dashboard.html',
     })
     .state('user', {
       url: '/user/:id',

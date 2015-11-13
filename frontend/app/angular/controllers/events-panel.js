@@ -6,18 +6,29 @@ angular.module('angularApp').controller('EventsPanelCtrl', function($scope, Auth
         $scope.config.injectForTitle($scope);
     }
 
-    $scope.refreshEvents = function() {
-        $scope.events = $scope.config.getFrom($scope.config.getParams);
+    $scope.refreshEvents = function(data) {
+        if(data) {
+            $scope.events = data;
+        } else {
+            $scope.events = $scope.config.getFrom($scope.config.getParams);
+            $scope.events.$promise.then(function(data) {
+                $scope.total = data.total;
+            });
+        }
     };
     
     $scope.refreshEvents();
     
-    $scope.$on('refresh-events', function() {
-        $scope.refreshEvents();
+    $scope.$on('refresh-events', function(ev, data) {
+        $scope.refreshEvents(data);
     });
     
     $scope.openCreateEvent = function() {
         $scope.$broadcast('open-create-event');
+    };
+    
+    $scope.openSearch = function() {
+        $scope.$broadcast('open-search-events');
     };
 
     $scope.showMore = function() {

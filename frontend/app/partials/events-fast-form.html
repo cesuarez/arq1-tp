@@ -1,4 +1,4 @@
-<div class="col-md-12 new-event" ng-if="event">
+<div ng-if="event" class="col-md-12 new-event">
     <form name="form">
     <div class="thumbnail">
         <div class="caption input-style-1">
@@ -36,7 +36,7 @@
                             ng-required="true"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default btn-no-border"
-                                        ng-click="open($event)">´
+                                        ng-click="open($event)">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </span>

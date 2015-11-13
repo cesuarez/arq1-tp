@@ -55,7 +55,7 @@ class Event extends Model {
         $q = Event::query();
 
         if ($request->has('text')) {
-            $q->where(function ($query) {
+            $q->where(function ($query) use ($request) {
                  $query->orwhere('name', 'like', '%' . $request->text . '%');
                  $query->orwhere('description', 'like', '%' . $request->text . '%');
             });
@@ -66,14 +66,24 @@ class Event extends Model {
         }
         
         if($request->has('before')) {
-            $q->where('date', '<=', Carbon::parse($request->before));
+            $q->where('date', '<=', Carbon::parse($request->before)->endOfDay());
         }
 
         if($request->has('after')) {
-            $q->where('date', '>=', Carbon::parse($request->after));
+            $q->where('date', '>=', Carbon::parse($request->after)->startOfDay());
         }
         
-        return $q->orderBy('created_at', 'desc')->paginate(6);
+        if($request->has('userId')) {
+            $q->byUser($request->userId);
+        }
+        
+        if($request->has('pageSize')) {
+            $pageSize = $request->pageSize;
+        } else {
+            $pageSize = 6;
+        }
+        
+        return $q->orderBy('created_at', 'desc')->paginate($pageSize);
     }
     
     public function scopeByUser($query, $id) {

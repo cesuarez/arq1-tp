@@ -67,6 +67,18 @@ p {
   animation: bounceOut 1s;
 }
 
+.search-panel.ng-enter {
+  animation: bounceIn 1s;
+}
+
+.search-panel.ng-leave {
+  animation: bounceOut 1s;
+}
+
+.repeat-thumbnails.ng-enter {
+  animation: fadeIn 1s;
+}
+
 .user-events-list.ng-leave {
   animation: bounceOutLeft 1s;
 }

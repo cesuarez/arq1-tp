@@ -30,12 +30,6 @@ class EventController extends Controller {
         return response(Event::search($request), 200);
     }
 
-    // GET "/events/byUser/{id}" 
-    public function byUser($id) {
-        $events = Event::byUser($id)->paginate(6);
-        return response($events, 200);
-    }
-
     // GET "/events/comments/{id}" 
     public function comments($id) {
         return response(Event::findComments($id), 200);
