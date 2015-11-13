@@ -14,7 +14,12 @@ Route::post('auth', 'AuthController@auth');
 Route::get('events/comments/{id}', 'EventController@comments');
 Route::post('events/comment', 'EventController@addComment');
 Route::get('events/weather/{id}', 'EventController@weather');
-Route::get('events/assist/{id}', 'EventController@assist');
+
+Route::group(['middleware' => 'jwt.auth'], function() {
+	// Secured Controllers
+	Route::get('events/assist/{id}', 'EventController@assist');
+});
+
 Route::resource('events', 'EventController');
 Route::model('events', 'App\Event');
 
