@@ -5,6 +5,7 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
     $scope.getEvent = function() {
         $scope.event = Event.get({ id: $stateParams.id });
         $scope.event.$promise.then(function(data) {
+            data.date = new Date(data.date);
             $scope.event = data;
             
             Event.owner({ id: data.id }, function(data) {
