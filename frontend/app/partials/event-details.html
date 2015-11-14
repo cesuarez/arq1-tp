@@ -1,9 +1,16 @@
 <div class="page-header text-center">
     <h1>
       {{ event.name }}
+      <button type="button" class="btn btn-primary" ng-click="openEdit()" 
+              ng-if="isOwner">
+        <i class="glyphicon glyphicon-pencil"></i>
+      </button>
     </h1>
 </div>
-<div class="row">
+<div ng-if="openedEdit" class="row">
+  <events-fast-form></events-fast-form>
+</div>
+<div ng-if="!openedEdit" class="row">
     <div class="col-md-6 text-center">
         <div class="img-detail" ng-if="event.img">
             <cl-image public-id="{{ event.img }}"></cl-image>
@@ -18,7 +25,7 @@
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
             <span>Date:</span>
-            <span>{{ event.date | date:'short' }}</span>
+            <span>{{ event.date | date:'d/MM/yyyy hh:mm a' }}</span>
         </h4>
         <h4 style="margin-bottom:0" ng-if="event.weather">
             <span>
@@ -39,8 +46,8 @@
     </div>
     <div class="col-md-6 text-right">
         <div class="col-md-offset-1 col-md-10">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-                <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id">
+            <ui-gmap-google-map center='detailsMap.center' zoom='detailsMap.zoom'>
+                <ui-gmap-marker ng-repeat="m in detailsMap.markers" coords="m.coords" idkey="m.id">
                 </ui-gmap-marker>
             </ui-gmap-google-map>
         </div>

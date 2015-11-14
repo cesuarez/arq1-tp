@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $rootScope, Event, uiGmapGoogleMapApi) {
-
+    
     $scope.newEvent = function() {
         $scope.event = new Event({ 
             date: new Date(),
@@ -13,13 +13,14 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $r
     $scope.$on('open-create-event', function() {
         $scope.newEvent();
     });
-
+    
     $scope.saveEvent = function() {
         var event = $scope.event;
         $scope.event = undefined;
         $scope.map.markers = [];
         event.$save(function(data) {
             $rootScope.$broadcast('refresh-events');
+            $rootScope.$broadcast('closed-events-form');
         }, function() {
             $scope.event = event;
         });
@@ -39,6 +40,7 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $r
 
     $scope.cancel = function() {
         $scope.event = undefined;
+        $rootScope.$broadcast('closed-events-form');
     };
 
     uiGmapGoogleMapApi.then(function(maps) {
@@ -48,7 +50,13 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $r
                 longitude: -58.48684
             },
             zoom: 5,
-            markers: [],
+            markers: $scope.event ? [{
+                        id: Date.now(),
+                        coords: {
+                            latitude: $scope.event.latitude,
+                            longitude: $scope.event.longitude
+                        }
+                    }] : [],
             events: {
                 click: function (map, eventName, originalEventArgs) {
                     var e = originalEventArgs[0];

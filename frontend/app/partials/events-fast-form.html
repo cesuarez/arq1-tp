@@ -33,7 +33,7 @@
                             uib-datepicker-popup
                             is-open="calendar.opened"
                             min-date="calendar.minDate" 
-                            ng-required="true"/>
+                            ng-required="!event.date"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default btn-no-border"
                                         ng-click="open($event)">

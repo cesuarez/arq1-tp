@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Event;
+use App\EventUser;
 use App\Comment;
 
 use JWTAuth;
@@ -55,18 +56,30 @@ class EventController extends Controller {
 
         return response()->json($event->participants, 200);
     }
+    
+    private function saveEvent($event) {
+        $forecastKey = \Config::get('services.forecast')['app_key'];
+        $forecast = new Forecast($forecastKey);
+        $event->weather = $forecast->get($event->latitude, $event->longitude)->currently->icon;
+        $event->save();
+    }
 
     // POST "/events"
     public function store(EventRequest $request) {
         $userId = $request->input('user_id');
         $event = new Event($request->except(['user_id']));
-
-        $forecastKey = \Config::get('services.forecast')['app_key'];
-        $forecast = new Forecast($forecastKey);
-        $event->weather = $forecast->get($event->latitude, $event->longitude)->currently->icon;
-        $event->save();
+        
+        $this->saveEvent($event);
 
         $event->users()->attach($userId, ['assistance' => true, 'owner' => true]);
+        return response($event, 200);
+    }
+
+    // POST "/events/:id"
+    public function update(EventRequest $request, $id) {
+        $event = Event::with('users')->find($id);
+        $event->fill($request->all());
+        $this->saveEvent($event);
         return response($event, 200);
     }
 
@@ -74,21 +87,20 @@ class EventController extends Controller {
     public function show(EventShowRequest $request, $event) {
         try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
-                $event->assistance = null;
+                // $event->assistance = null;
             } else {
                 $event->addAssistance($user->id);
             }
         } catch (\Exception $e) {
-           $event->assistance = null;
+           // $event->assistance = null;
         }
         return response($event, 200);
     }
 
-    // PUT "/events/:id"
-    public function update(EventRequest $request, $event) {
-        $event->fill($request->all());
-        $event->save();
-        return response($event, 200);
+    // GET "/events/owner/:id"
+    public function owner($id) {
+        $owner = EventUser::where('event_id', '=', $id)->where('owner', '=', true)->with('user')->first();
+        return response($owner->user, 200);
     }
 
     // DELETE "/events/:id"

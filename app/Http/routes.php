@@ -11,6 +11,7 @@ Route::get('user', 'AuthController@user');
 Route::post('auth', 'AuthController@auth');
 
 // /events API
+Route::get('events/owner/{id}', 'EventController@owner');
 Route::get('events/comments/{id}', 'EventController@comments');
 Route::post('events/comment', 'EventController@addComment');
 Route::get('events/weather/{id}', 'EventController@weather');
@@ -20,7 +21,8 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 	Route::get('events/assist/{id}', 'EventController@assist');
 });
 
-Route::resource('events', 'EventController');
+Route::resource('events', 'EventController', ['except' => ['update']]);
+Route::post('/events/{id}', 'EventController@update');
 Route::model('events', 'App\Event');
 
 // /users API
