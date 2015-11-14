@@ -16,7 +16,7 @@
             <cl-image public-id="{{ event.img }}"></cl-image>
         </div>
         <div class="img-detail" ng-if="!event.img">
-            <img src="http://www.thejetcoaster.com/wp-content/uploads/2015/05/insert-pretty-picture-here.jpg">
+            <img src="assets/no-image.jpg">
         </div>
         <h4 ng-if="authUser">
             <button ng-if="!event.assistance" class="btn btn-success" ng-click="assist(true)">Asistir</button>
