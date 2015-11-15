@@ -18,6 +18,10 @@ class Event extends Model {
     
     protected $fillable = ['name', 'description', 'date', 'img', 'privacy', 'latitude', 'longitude', 'weather'];
     
+    public function supplies() {
+        return $this->hasMany('App\Supply');
+    }
+    
     public function checkAssistance($user) {
         if ($user){
             $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
@@ -25,6 +29,20 @@ class Event extends Model {
                 $this->assistance = $eventUserRelation->assistance;
             }
         }
+    }
+    
+    public function attachSupplies($user) {
+        if ($user){
+            $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
+            if ($eventUserRelation !== null && $eventUserRelation->assistance) {
+                $this->supplies = self::supplies()->with('contributions')->get();
+            }
+        }
+    }
+    
+    public function attachOwner($user) {
+        $this->owner = EventUser::findOwnerByEvent($this->id);
+        $this->isOwner = $user->id === $this->owner->id;
     }
     
     public function getDateAttribute($value)

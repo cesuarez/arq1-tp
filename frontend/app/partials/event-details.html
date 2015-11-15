@@ -3,10 +3,10 @@
     <h1>
       {{ event.name }}
       <div class="pull-right">
-          <button ng-if="isOwner" type="button" class="btn btn-primary" ng-click="openEdit()">
+          <button ng-if="event.isOwner" type="button" class="btn btn-primary" ng-click="openEdit()">
             <i class="glyphicon glyphicon-pencil"></i>
           </button>
-          <button ng-if="isOwner" type="button" class="btn btn-danger" 
+          <button ng-if="event.isOwner" type="button" class="btn btn-danger" 
                   confirm-button msg="'Warning! You are going to remove this event!'" action="remove()">
             <i class="glyphicon glyphicon-remove"></i>
           </button>

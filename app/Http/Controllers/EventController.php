@@ -84,13 +84,9 @@ class EventController extends Controller {
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
         $event->checkAssistance($request->user);
+        $event->attachSupplies($request->user);
+        $event->attachOwner($request->user);
         return response($event, 200);
-    }
-
-    // GET "/events/owner/:id"
-    public function owner($id) {
-        $owner = EventUser::where('event_id', $id)->where('owner', true)->with('user')->first();
-        return response($owner->user, 200);
     }
 
     // DELETE "/events/:id"
@@ -98,4 +94,5 @@ class EventController extends Controller {
         $event->delete();
         return response([ 'msg' => 'deleted'], 200);
     }
+    
 }
