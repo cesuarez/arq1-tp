@@ -14,7 +14,8 @@ angular.module('angularApp').factory('Event', function($resource) {
     },
     changeAssistance: {
       method: 'POST',
-      url: '/events/assist/:id'
+      url: '/events/assist/:id',
+      isArray: true
     }
   });
 });

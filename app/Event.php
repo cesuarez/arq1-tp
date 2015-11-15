@@ -27,17 +27,6 @@ class Event extends Model {
         }
     }
     
-    public function changeAssistance($assistance, $userId){
-        if ($user){
-            $eventUserRelation = EventUser::findByUserAndEvent($userId, $this->id);
-            if ($eventUserRelation !== null) {
-                $eventUserRelation->assistance = assistance;
-            } else {
-               $this->addUserRelation($userId, assistance, false); 
-            }
-        }
-    }
-
     public function getDateAttribute($value)
     {
         return Carbon::parse($value)->toIso8601String();
@@ -56,7 +45,7 @@ class Event extends Model {
     }
 
     public static function findComments($eventId) {
-        return self::find($eventId)
+        return self::findOrFail($eventId)
             ->comments()
             ->orderBy('created_at', 'desc')
             ->with('user')
@@ -67,17 +56,14 @@ class Event extends Model {
         return EventUser::where('user_id', $userId)->count() > 0;
     }
 
-    public function addAssistance($userId, $assistance) {
-        if ($this->privacy == 'private'){
-            $this->users->updateExistingPivot($userId, ['assistance' => $assistance]);
-        } else if ($assistance == true){
+    public function changeAssistance($assistance, $user) {
+        if ($user){
             try {
-                $this->users->findOrFail($userId);
-                $this->users->updateExistingPivot($userId, ['assistance' => $assistance]);
+                $this->users()->findOrFail($user->id);
+                $this->users()->updateExistingPivot($user->id, ['assistance' => $assistance]);
             } catch (ModelNotFoundException $e) {
-                $this->users()->attach($userId, ['assistance' => $assistance, 'owner' => false]);
+                $this->users()->attach($user->id, ['assistance' => $assistance, 'owner' => false]);
             }
-
         }
     }
     

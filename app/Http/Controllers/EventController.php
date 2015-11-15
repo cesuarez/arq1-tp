@@ -52,8 +52,7 @@ class EventController extends Controller {
         $event = Event::find($id);
         $event->changeAssistance($request->input('assistance'), $request->user);
         $event->save();
-
-        return response()->json($event->participants, 200);
+        return response()->json($event->users()->select('id', 'name', 'avatar')->where('assistance', true)->get(), 200);
     }
     
     private function saveEvent($event) {
