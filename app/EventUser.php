@@ -18,5 +18,12 @@ class EventUser extends Model {
     public static function findByUserAndEvent($userId, $eventId){
         return self::where('user_id', $userId)->where('event_id', $eventId)->first();
     }
+    
+    public static function findOwnerByEvent($id) {
+        return self::where('event_id', $id)->where('owner', true)->with(['user' => function($query) {
+            return $query->select('id', 'name', 'avatar');
+        }])->first()->user;
+    }
+    
 
 }

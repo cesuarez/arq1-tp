@@ -5,11 +5,6 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
     $scope.loadEventDetails = function(data) {
         data.date = new Date(data.date);
         $scope.event = data;
-        
-        Event.owner({ id: data.id }, function(data) {
-            $scope.eventOwner = data;
-            $scope.isOwner = $scope.authUser ? data.id === $scope.authUser.id : false;
-        });
 
         // WEATHER ICON
         var eventWeather =  $scope.event.weather.replace(/-/g ,' ');
