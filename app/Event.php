@@ -15,18 +15,36 @@ class Event extends Model {
 
     // Cannot be accessed
     protected $hidden = ['created_at', 'updated_at'];
-
-    public function setAssistance($userId) {
-        try {
-            $this->assistance = $this->users->findOrFail($userId)->pivot->assistance;
-        } catch (ModelNotFoundException $e) {
-            $this->assistance = null;
+    
+    protected $fillable = ['name', 'description', 'date', 'img', 'privacy', 'latitude', 'longitude', 'weather'];
+    
+    public function checkAssistance($user) {
+        if ($user){
+            $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
+            if ($eventUserRelation !== null) {
+                $this->assistance = $eventUserRelation->assistance;
+            }
+        }
+    }
+    
+    public function changeAssistance($assistance, $userId){
+        if ($user){
+            $eventUserRelation = EventUser::findByUserAndEvent($userId, $this->id);
+            if ($eventUserRelation !== null) {
+                $eventUserRelation->assistance = assistance;
+            } else {
+               $this->addUserRelation($userId, assistance, false); 
+            }
         }
     }
 
     public function getDateAttribute($value)
     {
         return Carbon::parse($value)->toIso8601String();
+    }
+    
+    public function addUserRelation($userId, $assistance, $owner) {
+        $this->users()->attach($userId, ['assistance' => $assistance, 'owner' => $owner]);
     }
     
     public function comments() {
@@ -74,7 +92,7 @@ class Event extends Model {
         }
 
         if ($request->has('privacy')) {
-             $q->where('privacy', '=', $request->privacy);
+             $q->where('privacy', $request->privacy);
         }
         
         if($request->has('before')) {

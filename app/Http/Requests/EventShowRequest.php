@@ -1,29 +1,27 @@
 <?php namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+//use App\Http\Requests\Request;
+use App\Http\Requests\AuthRequest;
 
-class EventShowRequest extends Request {
+class EventShowRequest extends AuthRequest {
 
 	public function authorize() {
         $event = $this->route('events');
-
-		try {
-        	if($event->privacy == "private") {
-	            if ($user = \JWTAuth::parseToken()->authenticate()) {
-	            	return $event->privateVisibleforUser($user->id);
+        
+		if ($this->user){
+			if($event->privacy === "private") {
+	            if ($this->user) {
+	            	return $event->privateVisibleforUser($this->user->id);
 	            } else {
-        			return false;
+	    			return false;
 	            }
-    	   	}
-        } catch (\Exception $e) {
-            return false;
-        }
-
-		return true;
-	}
-
-	public function rules() {
-		return [];
+		   	} else {
+				return true;
+		   	}
+		} else {
+			return $event->privacy !== "private";
+		}
+		
 	}
 
 }

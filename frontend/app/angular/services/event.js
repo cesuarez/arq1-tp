@@ -11,6 +11,10 @@ angular.module('angularApp').factory('Event', function($resource) {
     comment: {
       method: 'POST',
       url: '/events/comment'
+    },
+    changeAssistance: {
+      method: 'POST',
+      url: '/events/assist/:id'
     }
   });
 });

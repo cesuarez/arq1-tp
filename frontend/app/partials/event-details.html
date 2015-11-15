@@ -25,8 +25,8 @@
             <img src="assets/no-image.jpg">
         </div>
         <h4 ng-if="authUser">
-            <button ng-if="!event.assistance" class="btn btn-success" ng-click="assist(true)">Asistir</button>
-            <button ng-if="event.assistance" class="btn btn-danger" ng-click="assist(false)">Dejar de Asistir</button>
+            <button ng-if="!event.assistance" class="btn btn-success" ng-click="changeAssistance(true)">Asistir</button>
+            <button ng-if="event.assistance" class="btn btn-danger" ng-click="changeAssistance(false)">Dejar de Asistir</button>
         </h4>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>

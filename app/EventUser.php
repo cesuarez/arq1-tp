@@ -14,5 +14,9 @@ class EventUser extends Model {
     public function user() {
         return $this->belongsTo('App\User');
     }
+    
+    public static function findByUserAndEvent($userId, $eventId){
+        return self::where('user_id', $userId)->where('event_id', $eventId)->first();
+    }
 
 }

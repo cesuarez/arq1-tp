@@ -47,6 +47,13 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         });
     };
     
+    $scope.changeAssistance = function(bool) {
+        console.log("A VER");
+        Event.changeAssistance({ id: $scope.event.id}, { assist: bool }).$promise.then(function(response){
+            console.log(response);
+        });
+    };
+    
     $scope.openEdit = function() {
         $scope.openedEdit = true;
     };
