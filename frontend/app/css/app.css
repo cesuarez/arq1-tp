@@ -36,6 +36,11 @@ p {
   border-color: #8C8C8C;
 }
 
+.modal-header, .modal-body, .modal-footer {
+  background-color: rgba(27, 7, 7, 0.8);
+  border-color: #8C8C8C;
+}
+
 .navbar-inverse .navbar-brand {
     color: azure;
 }

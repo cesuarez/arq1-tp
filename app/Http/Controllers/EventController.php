@@ -106,6 +106,6 @@ class EventController extends Controller {
     // DELETE "/events/:id"
     public function destroy($event) {
         $event->delete();
-        return response(Event::all(), 200);
+        return response([ 'msg' => 'deleted'], 200);
     }
 }

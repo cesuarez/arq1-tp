@@ -1,10 +1,16 @@
+<div ng-if="event && event.$resolved">
 <div class="page-header text-center">
     <h1>
       {{ event.name }}
-      <button type="button" class="btn btn-primary" ng-click="openEdit()" 
-              ng-if="isOwner">
-        <i class="glyphicon glyphicon-pencil"></i>
-      </button>
+      <div class="pull-right">
+          <button ng-if="isOwner" type="button" class="btn btn-primary" ng-click="openEdit()">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </button>
+          <button ng-if="isOwner" type="button" class="btn btn-danger" 
+                  confirm-button msg="'Warning! You are going to remove this event!'" action="remove()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+      </div>
     </h1>
 </div>
 <div ng-if="openedEdit" class="row">
@@ -102,4 +108,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

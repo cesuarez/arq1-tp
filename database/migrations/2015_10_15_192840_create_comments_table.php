@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration {
 			$table->softDeletes();
 			$table->timestamps();
 			
-			$table->foreign('event_id')->references('id')->on('events');
+			$table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 			$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
