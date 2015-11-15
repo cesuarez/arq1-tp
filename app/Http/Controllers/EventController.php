@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\EventShowRequest;
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,15 +15,13 @@ use App\Event;
 use App\EventUser;
 use App\Comment;
 
-use JWTAuth;
-
 use Forecast\Forecast;
 
 class EventController extends Controller {
 
 	public function __construct() {
         $this->middleware('jwt.auth', ['only' => 
-            ['addComment', 'store', 'destroy']
+            ['addComment', 'store', 'destroy', 'assist']
         ]);
     }
 
@@ -48,10 +47,10 @@ class EventController extends Controller {
         return response()->json($event->weather, 200);
     }
 
-    // GET "events/assist/{id}" 
-    public function assist($id, Request $request) {
+    // POST "events/assist/{id}" 
+    public function assist($id, AuthRequest $request) {
         $event = Event::find($id);
-        $event->setAssistance($request->input('assistance'));
+        $event->changeAssistance($request->input('assistance'), $request->user);
         $event->save();
 
         return response()->json($event->participants, 200);
@@ -71,7 +70,7 @@ class EventController extends Controller {
         
         $this->saveEvent($event);
 
-        $event->users()->attach($userId, ['assistance' => true, 'owner' => true]);
+        $event->addUserRelation($userId, true, true);
         return response($event, 200);
     }
 
@@ -85,21 +84,13 @@ class EventController extends Controller {
 
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
-        try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                // $event->assistance = null;
-            } else {
-                $event->addAssistance($user->id);
-            }
-        } catch (\Exception $e) {
-           // $event->assistance = null;
-        }
+        $event->checkAssistance($request->user);
         return response($event, 200);
     }
 
     // GET "/events/owner/:id"
     public function owner($id) {
-        $owner = EventUser::where('event_id', '=', $id)->where('owner', '=', true)->with('user')->first();
+        $owner = EventUser::where('event_id', $id)->where('owner', true)->with('user')->first();
         return response($owner->user, 200);
     }
 

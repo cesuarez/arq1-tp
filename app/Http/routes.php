@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 Route::get('/', function () {
     return File::get(public_path().'/app.html');
 });
@@ -15,15 +17,13 @@ Route::get('events/owner/{id}', 'EventController@owner');
 Route::get('events/comments/{id}', 'EventController@comments');
 Route::post('events/comment', 'EventController@addComment');
 Route::get('events/weather/{id}', 'EventController@weather');
-
-Route::group(['middleware' => 'jwt.auth'], function() {
-	// Secured Controllers
-	Route::get('events/assist/{id}', 'EventController@assist');
-});
+Route::post('events/assist/{id}', 'EventController@assist');
 
 Route::resource('events', 'EventController', ['except' => ['update']]);
 Route::post('/events/{id}', 'EventController@update');
-Route::model('events', 'App\Event');
+Route::model('events', 'App\Event', function(){
+	throw new ModelNotFoundException;
+});
 
 // /users API
 Route::resource('users', 'UserController');
