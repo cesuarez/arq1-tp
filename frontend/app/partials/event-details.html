@@ -25,8 +25,8 @@
             <img src="assets/no-image.jpg">
         </div>
         <h4 ng-if="authUser">
-            <button ng-if="!event.assistance" class="btn btn-success" ng-click="changeAssistance(true)">Asistir</button>
-            <button ng-if="event.assistance" class="btn btn-danger" ng-click="changeAssistance(false)">Dejar de Asistir</button>
+            <button ng-disabled="assistanceDisabled" ng-if="!event.assistance" class="btn btn-success" ng-click="changeAssistance(true)">Asistir</button>
+            <button ng-disabled="assistanceDisabled" ng-if="event.assistance" class="btn btn-danger" ng-click="changeAssistance(false)">Dejar de Asistir</button>
         </h4>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
@@ -83,7 +83,7 @@
                     <textarea rows="4" cols="50" ng-model="comment.comment" placeholder="insert your comment here...">
                     </textarea>
                     <button type="button" class="btn btn-primary" ng-click="sendComment()"
-                            ng-disabled="!comment.comment">
+                            ng-disabled="sendDisabled || !comment.comment">
                         <i class="glyphicon glyphicon-share-alt"></i>
                         Send
                     </button>

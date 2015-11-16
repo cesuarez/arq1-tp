@@ -43,9 +43,13 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
     };
     
     $scope.changeAssistance = function(bool) {
-        console.log("A VER");
-        Event.changeAssistance({ id: $scope.event.id}, { assist: bool }).$promise.then(function(response){
+        $scope.assistanceDisabled = true;
+        Event.changeAssistance({ id: $scope.event.id}, { assistance: bool }, function(response){
+            $scope.event.assistance = bool;
+            $scope.assistanceDisabled = false;
             console.log(response);
+        }, function(){
+            $scope.assistanceDisabled = false;
         });
     };
     
@@ -58,7 +62,7 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
             $state.go('home');
         });
     };
-     
+    
     $scope.$on('closed-events-form', function() {
         $scope.openedEdit = false;
         $scope.getEvent();

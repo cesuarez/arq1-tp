@@ -17,9 +17,13 @@ angular.module('angularApp').controller('CommentsCtrl', function($scope, $stateP
     $scope.comments = Event.comments({ id: $stateParams.id });
     
     $scope.sendComment = function() {
+        $scope.sendDisabled = true;
         Event.comment($scope.comment, function(data) {
             $scope.comments = data;
             $scope.newComment();
+            $scope.sendDisabled = false;
+        }, function(){
+            $scope.sendDisabled = false;
         });
     };
     

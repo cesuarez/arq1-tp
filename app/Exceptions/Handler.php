@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler {
                 'message' => 'Resource not found',
             ], 404);
 	    }
-	
+	    
 	    return parent::render($request, $e);
 		
 	}
