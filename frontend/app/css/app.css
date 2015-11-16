@@ -172,8 +172,9 @@ input[type="text"]:focus {
 /*calendar*/
 .btn-no-border {
   border: 0px solid transparent !important;
-  margin-left: -46px !important;
-  background: rgba(240, 248, 255, 0);
+  margin-left: -41px !important;
+  margin-bottom: 2px;
+  position: relative;
 }
 
 #direct_upload { 
