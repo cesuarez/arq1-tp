@@ -52,7 +52,8 @@ class EventController extends Controller {
         $event = Event::find($id);
         $event->changeAssistance($request->input('assistance'), $request->user);
         $event->save();
-        return response()->json($event->users()->select('id', 'name', 'avatar')->where('assistance', true)->get(), 200);
+        $event->attachAssistingUsers();
+        return response()->json($event->getAssistingUsers(), 200);
     }
     
     private function saveEvent($event) {
@@ -83,9 +84,10 @@ class EventController extends Controller {
 
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
-        $event->checkAssistance($request->user);
+        $event->attachAssistance($request->user);
         $event->attachSupplies($request->user);
         $event->attachOwner($request->user);
+        $event->attachAssistingUsers();
         return response($event, 200);
     }
 

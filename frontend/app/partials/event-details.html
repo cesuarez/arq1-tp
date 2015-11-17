@@ -50,13 +50,32 @@
           <span class="label label-primary">{{ event.privacy }}</span>
         </h4>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-6 text-center">
         <div class="col-md-offset-1 col-md-10">
             <ui-gmap-google-map center='detailsMap.center' zoom='detailsMap.zoom'>
                 <ui-gmap-marker ng-repeat="m in detailsMap.markers" coords="m.coords" idkey="m.id">
                 </ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1> Assistance </h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6 text-center">
+        
+    </div>
+    <div class="col-md-6 text-left">
+        <h4 class="text-right">
+            Some Participants ({{ event.assistingUsers.total }} in Total)
+        </h4>
+        <div ng-repeat="user in event.assistingUsers.data">
+            <img style="margin: 0 0 7px 7px" width="65px" title="{{user.name}}" class="pull-left avatar clickeable" ng-click="goToUser(user.id)" ng-src="{{user.avatar}}">
+        </div>
+        
     </div>
 </div>
 

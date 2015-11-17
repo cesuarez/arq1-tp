@@ -22,7 +22,7 @@ class Event extends Model {
         return $this->hasMany('App\Supply');
     }
     
-    public function checkAssistance($user) {
+    public function attachAssistance($user) {
         if ($user){
             $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
             if ($eventUserRelation !== null) {
@@ -42,9 +42,21 @@ class Event extends Model {
     
     public function attachOwner($user) {
         $this->owner = EventUser::findOwnerByEvent($this->id);
-        $this->isOwner = $user->id === $this->owner->id;
+        if ($user){
+            $this->isOwner = $user->id === $this->owner->id;
+        } else {
+            $this->isOwner = false;
+        }
+    }
+
+    public function attachAssistingUsers(){
+        $this->assistingUsers = json_decode($this->getAssistingUsers()->toJson());
     }
     
+    public function getAssistingUsers(){
+        return $this->users()->select('id', 'name', 'avatar')->where('assistance', true)->paginate(20);
+    }
+
     public function getDateAttribute($value)
     {
         return Carbon::parse($value)->toIso8601String();

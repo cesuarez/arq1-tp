@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state) {
+angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location) {
 
     $scope.loadEventDetails = function(data) {
         data.date = new Date(data.date);
         $scope.event = data;
+        console.log($scope.event);
 
         // WEATHER ICON
         var eventWeather =  $scope.event.weather.replace(/-/g ,' ');
@@ -48,6 +49,7 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
             $scope.event.assistance = bool;
             $scope.assistanceDisabled = false;
             console.log(response);
+            $scope.event.assistingUsers = response;
         }, function(){
             $scope.assistanceDisabled = false;
         });
@@ -61,6 +63,10 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         $scope.event.$remove(function(data) {
             $state.go('home');
         });
+    };
+
+    $scope.goToUser = function(userId){
+        $location.path('user/' + userId);
     };
     
     $scope.$on('closed-events-form', function() {
