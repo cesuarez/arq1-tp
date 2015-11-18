@@ -40,6 +40,10 @@
                       action="removeSupply(s)">
                     <i class="glyphicon glyphicon-remove"></i>
                 </span>
+                <span class="clickeable" 
+                      ng-click="openContributions(s)">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </span>
                 <strong> | {{ s.amount - totalContributions(s) }} left</strong>
             </li>
         </ul>
@@ -56,6 +60,10 @@
                       confirm-button msg="'Warning! You are going to remove this supply and their contributions!'" 
                       action="removeSupply(s)">
                     <i class="glyphicon glyphicon-remove"></i>
+                </span>
+                <span class="clickeable" 
+                      ng-click="openContributions(s)">
+                    <i class="glyphicon glyphicon-eye-open"></i>
                 </span>
             </li>
         </ul>

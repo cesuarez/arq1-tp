@@ -17,8 +17,6 @@ angular.module('angularApp').service('ConfirmActionService', function($uibModal,
 		});
 		modalInstance.result.then(function () {
 			f();
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
 		});
 	};
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Supply) {
+angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Supply, $uibModal) {
     
     $scope.totalContributions = function(s) {
         return s.contributions.reduce(function(r, x) {
@@ -41,8 +41,22 @@ angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Su
         new Supply(item).$delete({ eventId: $scope.event.id}, $scope.refreshSupplies);
     };
     
-    $scope.openContributions = function() {
-        console.log('sarasa');
+    $scope.openContributions = function(s) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'partials/event-supplies-contributions.html',
+          controller: 'EventSuppliesContributionsCtrl',
+          size: 'lg',
+          resolve: {
+            supply: function () {
+              return s;
+            }
+          }
+        });
+        
+        modalInstance.result.then(function () {
+          
+        });
     };
     
     $scope.newSupply();
