@@ -15,9 +15,9 @@
                             <div ngf-select="keepFile($file)" title="upload" resetOnClick="true"
                                  accept="image/*" ngf-max-size="10MB"
                                  ngf-resize="{width: 300, height: 200}">
-                                <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable" ngf-thumbnail="file">
-                                <cl-image ng-if="file === undefined && event.img" public-id="{{ event.img }}" class="thumbnail-img clickeable"></cl-image>
-                                <img ng-if="file === undefined && !event.img" class="thumbnail-img clickeable"
+                                <img ng-if="file !== undefined" class="thumbnail-upload thumbnail-img clickeable img-rounded" ngf-thumbnail="file">
+                                <cl-image ng-if="file === undefined && event.img" public-id="{{ event.img }}" class="thumbnail-img clickeable img-rounded"></cl-image>
+                                <img ng-if="file === undefined && !event.img" class="thumbnail-img clickeable img-rounded"
                                      src="assets/insert-image.jpg">
                             </div>
                         </div>

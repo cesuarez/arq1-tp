@@ -4,10 +4,10 @@
             {{ event.name }}
         </h3>
         <div class="img-thumbnail-container" ng-if="event.img">
-            <cl-image public-id="{{ event.img }}"></cl-image>
+            <cl-image class="img-rounded" public-id="{{ event.img }}"></cl-image>
         </div>
         <div ng-if="!event.img">
-            <img class="thumbnail-img" src="assets/no-image.jpg">
+            <img class="thumbnail-img img-rounded" src="assets/no-image.jpg">
         </div>
         <div class="caption">
             <p>

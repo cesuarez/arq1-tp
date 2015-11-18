@@ -19,10 +19,10 @@
 <div ng-if="!openedEdit" class="row">
     <div class="col-md-6 text-center">
         <div class="img-detail" ng-if="event.img">
-            <cl-image public-id="{{ event.img }}"></cl-image>
+            <cl-image class="img-rounded" public-id="{{ event.img }}"></cl-image>
         </div>
         <div class="img-detail" ng-if="!event.img">
-            <img src="assets/no-image.jpg">
+            <img class="img-rounded" src="assets/no-image.jpg">
         </div>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
@@ -62,29 +62,40 @@
             <span ng-if="authUser" class="col-md-6">Supplies</span>
             <span class="col-md-6">
                 Attendance
-                <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">attend</button>
-                <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">drop out</button>
             </span>
         </h1>
     </div>
 </div>
 
 <div class="row">
-    <div ng-if="authUser" class="col-md-6 text-left">
-        <event-supplies></event-supplies>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <event-supplies ng-if="authUser"></event-supplies>
     </div>
     <div class="col-md-6 text-left">
-        <h4>
-            Some Participants ({{ event.assistingUsers.total }} in total)
-        </h4>
-        <div class="animate-participants" ng-repeat="user in event.assistingUsers.data track by user.id">
-            <img style="margin: 0 0 7px 7px" width="65px" 
-                 uib-tooltip="{{user.name}}"
-                 class="pull-left avatar clickeable" 
-                 ng-click="goToUser(user.id)" 
-                 ng-src="{{user.avatar}}">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <div class="pull-right">
+                        <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">attend</button>
+                        <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">drop out</button>
+                    </div>
+                    <span class="pull-left" style="line-height: 1.5;">Some Participants ({{ event.assistingUsers.total }} in total)</span>
+                    <div class="clearfix"></div>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div class="animate-participants" ng-repeat="user in event.assistingUsers.data track by user.id">
+                    <img style="margin: 0 0 7px 7px" width="65px" 
+                         uib-tooltip="{{user.name}}"
+                         class="pull-left avatar clickeable" 
+                         ng-click="goToUser(user.id)" 
+                         ng-src="{{user.avatar}}">
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
 
 <event-comments></event-comments>

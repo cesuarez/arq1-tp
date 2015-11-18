@@ -15,6 +15,11 @@ footer {
     border-top-style: double;
 }
 
+#loading-bar-spinner {
+  top: 70px;
+  left: 10px;
+}
+
 h1 small, h4 small, table td a, label {
   color: aliceblue !important;
 }
@@ -145,6 +150,17 @@ p {
   width:300px;
   height:200px;
   max-width: 100%;
+}
+
+.panel-default {
+    border-color: rgba(74, 66, 66, 0.38);
+    background-color: rgba(127, 109, 94, 0.33);
+}
+
+.panel-default > .panel-heading {
+    color: aliceblue;
+    background-color: rgba(72, 58, 58, 0.2);
+    border-color: #ddd;
 }
 
 .clickeable {
