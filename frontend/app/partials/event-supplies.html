@@ -17,6 +17,15 @@
         </div>
     </form>
 </div>
+
+<div ng-if="event.isOwner && !supply.required" class="row">
+    <div class="alert alert-warning" role="alert">
+      <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+      <strong class="sr-only">Warning: </strong>
+      Not required implies to fulfill the supply
+    </div>
+</div>
+
 <div class="row">
     <p><strong>Pending supplies: </strong></p>
     <ul>

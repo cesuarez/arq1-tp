@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularApp').controller('CommentsCtrl', function($scope, $stateParams, Event) {
+angular.module('angularApp').controller('EventCommentsCtrl', function($scope, $stateParams, Event) {
     
     $scope.newComment = function() {
         $scope.comment = {
