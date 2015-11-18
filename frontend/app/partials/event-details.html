@@ -1,7 +1,7 @@
 <div ng-if="event && event.$resolved">
-<div class="page-header text-center">
+<div class="page-header">
     <h1>
-      {{ event.name }}
+      Event: {{ event.name }}
       <div class="pull-right">
           <button ng-if="event.isOwner" type="button" class="btn btn-primary" ng-click="openEdit()">
             <i class="glyphicon glyphicon-pencil"></i>
@@ -24,10 +24,6 @@
         <div class="img-detail" ng-if="!event.img">
             <img src="assets/no-image.jpg">
         </div>
-        <h4 ng-if="authUser">
-            <button ng-disabled="assistanceDisabled" ng-if="!event.assistance" class="btn btn-success" ng-click="changeAssistance(true)">Asistir</button>
-            <button ng-disabled="assistanceDisabled" ng-if="event.assistance" class="btn btn-danger" ng-click="changeAssistance(false)">Dejar de Asistir</button>
-        </h4>
         <h4>
             <i class="glyphicon glyphicon-calendar"></i>
             <span>Date:</span>
@@ -47,7 +43,7 @@
             <span>{{ event.description }}</span>
         </h4>
         <h4>
-          <span class="label label-primary">{{ event.privacy }}</span>
+          <span class="label label-info">{{ event.privacy }}</span>
         </h4>
     </div>
     <div class="col-md-6 text-center">
@@ -60,22 +56,34 @@
     </div>
 </div>
 
-<div class="page-header text-center">
-    <h1> Assistance </h1>
+<div class="page-header">
+    <div class="row">
+        <h1> 
+            <span ng-if="authUser" class="col-md-6">Supplies</span>
+            <span class="col-md-6">
+                Attendance
+                <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">attend</button>
+                <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">drop out</button>
+            </span>
+        </h1>
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-6 text-center">
-        
+    <div ng-if="authUser" class="col-md-6 text-left">
+        <event-supplies></event-supplies>
     </div>
     <div class="col-md-6 text-left">
-        <h4 class="text-right">
-            Some Participants ({{ event.assistingUsers.total }} in Total)
+        <h4>
+            Some Participants ({{ event.assistingUsers.total }} in total)
         </h4>
-        <div ng-repeat="user in event.assistingUsers.data">
-            <img style="margin: 0 0 7px 7px" width="65px" title="{{user.name}}" class="pull-left avatar clickeable" ng-click="goToUser(user.id)" ng-src="{{user.avatar}}">
+        <div class="animate-participants" ng-repeat="user in event.assistingUsers.data track by user.id">
+            <img style="margin: 0 0 7px 7px" width="65px" 
+                 uib-tooltip="{{user.name}}"
+                 class="pull-left avatar clickeable" 
+                 ng-click="goToUser(user.id)" 
+                 ng-src="{{user.avatar}}">
         </div>
-        
     </div>
 </div>
 

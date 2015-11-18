@@ -27,24 +27,24 @@ class EventController extends Controller {
 
     // GET "/events" 
     public function index(Request $request) {
-        return response(Event::search($request), 200);
+        return response()->json(Event::search($request));
     }
 
     // GET "/events/comments/{id}" 
     public function comments($id) {
-        return response(Event::findComments($id), 200);
+        return response()->json(Event::findComments($id));
     }
 
     // POST "/events/comment" 
     public function addComment(CommentRequest $request) {
         $comment = Comment::create($request->all());
-        return response(Event::findComments($comment->event_id), 200);
+        return response()->json(Event::findComments($comment->event_id));
     }
 
     // GET "events/weather/{id}" 
     public function weather($id) {
         $event = Event::find($id);
-        return response()->json($event->weather, 200);
+        return response()->json($event->weather);
     }
 
     // POST "events/assist/{id}" 
@@ -53,7 +53,7 @@ class EventController extends Controller {
         $event->changeAssistance($request->input('assistance'), $request->user);
         $event->save();
         $event->attachAssistingUsers();
-        return response()->json($event->getAssistingUsers(), 200);
+        return response()->json($event->getAssistingUsers());
     }
     
     private function saveEvent($event) {
@@ -71,7 +71,7 @@ class EventController extends Controller {
         $this->saveEvent($event);
 
         $event->addUserRelation($userId, true, true);
-        return response($event, 200);
+        return response()->json($event);
     }
 
     // POST "/events/:id"
@@ -79,7 +79,7 @@ class EventController extends Controller {
         $event = Event::with('users')->find($id);
         $event->fill($request->all());
         $this->saveEvent($event);
-        return response($event, 200);
+        return response()->json($event);
     }
 
     // GET "/events/:id"
@@ -88,13 +88,13 @@ class EventController extends Controller {
         $event->attachSupplies($request->user);
         $event->attachOwner($request->user);
         $event->attachAssistingUsers();
-        return response($event, 200);
+        return response()->json($event);
     }
 
     // DELETE "/events/:id"
     public function destroy($event) {
         $event->delete();
-        return response([ 'msg' => 'deleted'], 200);
+        return response()->json([ 'msg' => 'deleted']);
     }
     
 }

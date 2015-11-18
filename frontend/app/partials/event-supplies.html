@@ -1,0 +1,49 @@
+<div ng-if="event.isOwner" class="row input-style-1" style="color: black">
+    <form name="supplyForm" ng-submit="addSupply()">
+        <div class="col-md-3">
+            <input type="number" ng-model="supply.amount" min="1" placeholder="amount" name="amount" ng-required="true">
+        </div>
+        <div class="col-md-4">
+            <input type="text" ng-model="supply.name" placeholder="name" name="name" ng-required="true">
+        </div>
+        <div ng-if="event.isOwner" class="col-md-2">
+            <input type="checkbox" ng-change=changeRequired() ng-model="supply.required">
+            <label>required</label>
+        </div>
+        <div class="col-md-1">
+            <button ng-disabled="supplyForm.$invalid || !supply.required && !supply.fulfilled" type="submit" class="btn btn-primary" style="height:44px">
+                <i class="glyphicon glyphicon-plus"></i> supply
+            </button>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <p><strong>Pending supplies: </strong></p>
+    <ul>
+        <li class="animate-supplies" ng-repeat="s in event.supplies | filter:notFulfilled track by s.id">
+            <strong>{{ s.amount }} {{ s.name }}</strong>
+            <span ng-if="event.isOwner" class="clickeable" 
+                  confirm-button msg="'Warning! You are going to remove this supply and their contributions!'" 
+                  action="removeSupply(s)">
+                <i class="glyphicon glyphicon-remove"></i>
+            </span>
+            <strong> | {{ s.amount - totalContributions(s) }} left</strong>
+        </li>
+    </ul>
+    <p><strong>Event supplies: </strong></p>
+    <ul>
+        <li class="animate-supplies" ng-repeat="s in event.supplies | filter:fulfilled track by s.id">
+            <strong>
+                {{ totalContributions(s) }} {{ s.name }} 
+                <small ng-show="s.required && s.amount < totalContributions(s)">
+                    ({{ s.amount }} {{ s.amount === 1 ? 'was' : 'were' }} required)
+                </small>
+            </strong>
+            <span ng-if="event.isOwner" class="clickeable" 
+                  confirm-button msg="'Warning! You are going to remove this supply and their contributions!'" 
+                  action="removeSupply(s)">
+                <i class="glyphicon glyphicon-remove"></i>
+            </span>
+        </li>
+    </ul>
+</div>

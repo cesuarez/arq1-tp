@@ -12,8 +12,17 @@ class Supply extends Model {
     
     protected $fillable = ['amount', 'event_id', 'name', 'required'];
     
+    protected $casts = [
+        'required' => 'boolean',
+        'amount' => 'integer'
+    ];
+
     public function event() {
         return $this->belongsTo('App\Event');
+    }
+
+    public function contributions() {
+        return $this->hasMany('App\Contribution');
     }
 
     public static function findByEvent($id) {

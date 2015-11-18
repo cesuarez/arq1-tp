@@ -15,7 +15,7 @@ footer {
     border-top-style: double;
 }
 
-h1 small, h4 small, table td a {
+h1 small, h4 small, table td a, label {
   color: aliceblue !important;
 }
 
@@ -111,6 +111,22 @@ p {
   animation: bounceOutLeft 1s;
 }
 
+.animate-supplies.ng-enter {
+  animation: fadeIn 1s;
+}
+
+.animate-supplies.ng-leave {
+  animation: bounceOutLeft 1s;
+}
+
+.animate-participants.ng-enter {
+  animation: bounceIn 1s;
+}
+
+.animate-participants.ng-leave {
+  animation: flipOutX 1s;
+}
+
 .event-thumbnail-repeat.ng-enter {
   animation: bounceInUp 1s;
 }
@@ -141,7 +157,7 @@ p {
   white-space: nowrap;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
   display: block;
   margin: 0;
   margin-bottom: 10px;
@@ -153,11 +169,11 @@ input[type="text"] {
   border-radius: none;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="number"]:focus  {
   outline: none;
 }
 
-.input-style-1 input[type="text"] {
+.input-style-1 input[type="text"], .input-style-1 input[type="number"] {
   padding: 10px;
   border: none;
   border-bottom: solid 2px #c9c9c9;
@@ -165,7 +181,9 @@ input[type="text"]:focus {
 }
 
 .input-style-1 input[type="text"]:focus,
-.input-style-1 input[type="text"].focus {
+.input-style-1 input[type="text"].focus,
+.input-style-1 input[type="number"]:focus,
+.input-style-1 input[type="number"].focus {
   border-bottom: solid 2px #969696;
 }
 

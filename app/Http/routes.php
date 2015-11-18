@@ -20,7 +20,13 @@ Route::post('events/assist/{id}', 'EventController@assist');
 
 Route::resource('events', 'EventController', ['except' => ['update']]);
 Route::post('/events/{id}', 'EventController@update');
-Route::model('events', 'App\Event', function(){
+Route::model('events', 'App\Event', function() {
+	throw new ModelNotFoundException;
+});
+
+// /events supplies API
+Route::resource('events.supplies', 'EventSuppliesController', ['except' => ['show']]);
+Route::model('supplies', 'App\Supply', function() {
 	throw new ModelNotFoundException;
 });
 

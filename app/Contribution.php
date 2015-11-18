@@ -12,6 +12,10 @@ class Contribution extends Model {
     
     protected $fillable = ['amount', 'user_id', 'supply_id'];
 
+    protected $casts = [
+        'amount' => 'integer'
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
