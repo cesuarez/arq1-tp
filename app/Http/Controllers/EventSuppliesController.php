@@ -19,8 +19,13 @@ class EventSuppliesController extends Controller {
 //        ]);
     }
     
-    private function returnAllSupplies() {
-    	return response()->json(['supplies' => Supply::with('contributions')->get()]);
+    private function returnAllSupplies($event_id) {
+    	return response()->json([
+    	    'supplies' => 
+    	        Supply::with('contributions')
+    	                ->where('event_id', $event_id)
+    	                ->get()
+    	]);
     }
 
     public function index(Request $request, $event) {
@@ -28,7 +33,10 @@ class EventSuppliesController extends Controller {
     }
 
     public function store(SupplyStoreRequest $request, $event) {
-    	$supply = Supply::where('name', 'like', $request->name)->first();
+    	$supply = 
+    	    Supply::where('name', 'like', $request->name)
+    	        ->where('event_id', $event->id)
+    	        ->first();
     	
     	if($supply) {
         	$supply->fill($request->all());
@@ -60,12 +68,12 @@ class EventSuppliesController extends Controller {
     public function update(SupplyStoreRequest $request, $event, $supply) {
     	$supply->fill($request->all());
    		$supply->save();
-        return $this->returnAllSupplies();
+        return $this->returnAllSupplies($event->id);
     }
 
     public function destroy($event, $supply) {
     	$supply->delete();
-        return $this->returnAllSupplies();
+        return $this->returnAllSupplies($event->id);
     }
 
 }

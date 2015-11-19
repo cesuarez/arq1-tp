@@ -48,9 +48,12 @@ angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Su
           controller: 'EventSuppliesContributionsCtrl',
           size: 'lg',
           resolve: {
-            supply: function () {
+            supply: function() {
               return s;
-            }
+            },
+            totalContributions: function() {
+              return $scope.totalContributions(s);  
+            },
           }
         });
         

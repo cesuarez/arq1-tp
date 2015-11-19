@@ -30,6 +30,15 @@ Route::model('supplies', 'App\Supply', function() {
 	throw new ModelNotFoundException;
 });
 
+// /events supplies contributions API
+Route::resource('events.supplies.contributions', 
+	'EventSuppliesContributionsController', 
+	['except' => ['show', 'update', 'index']]
+);
+Route::model('contributions', 'App\Contribution', function() {
+	throw new ModelNotFoundException;
+});
+
 // /users API
 Route::resource('users', 'UserController');
 Route::model('users', 'App\User');

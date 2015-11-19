@@ -36,9 +36,7 @@ class Event extends Model {
             $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
             if ($eventUserRelation !== null && $eventUserRelation->assistance) {
                 $this->supplies = self::supplies()
-                    ->with(['contributions', 'contributions.user' => function($query) {
-                        return $query->select('name', 'avatar');
-                    }])
+                    ->with('contributions.user')
                     ->get();
             }
         }

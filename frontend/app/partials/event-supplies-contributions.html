@@ -1,12 +1,25 @@
 <div class="modal-header">
     <div class="row">
         <h4 class="modal-title text-center">
-            Contributions
+            <strong>Contributions: {{ supply.name }}<strong>
+            <span>Total: {{ totalContributions }}</span>
+            <span>Left: {{ supply.amount - totalContributions }}</span>
         </h4>
     </div>
 </div>
 <div class="modal-body">
-    {{ supply | json }}
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-repeat="c in supply.contributions" style="float:left !important; width:85px; height:85px">
+                <div>{{ c.amount }}</div>
+                <img width="65px" 
+                     uib-tooltip="{{c.user.name}}"
+                     class="avatar clickeable" 
+                     ng-click="goToUser(user.id)" 
+                     ng-src="{{c.user.avatar}}">
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="close()">Close</button>
