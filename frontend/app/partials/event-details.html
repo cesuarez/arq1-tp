@@ -77,8 +77,8 @@
             <div class="panel-heading">
                 <h4>
                     <div class="pull-right">
-                        <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">attend</button>
-                        <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">drop out</button>
+                        <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">Attend</button>
+                        <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">Drop out</button>
                     </div>
                     <span class="pull-left" style="line-height: 1.5;">Some Participants ({{ event.assistingUsers.total }} in total)</span>
                     <div class="clearfix"></div>
