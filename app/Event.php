@@ -86,7 +86,7 @@ class Event extends Model {
     }
 
     public function privateVisibleforUser($userId) {
-        return EventUser::where('user_id', $userId)->count() > 0;
+        return EventUser::where('user_id', $userId)->where('event_id', $this->id)->count() > 0;
     }
 
     public function changeAssistance($assistance, $user) {
@@ -142,6 +142,10 @@ class Event extends Model {
         
         if($request->has('userId')) {
             $q->byUser($request->userId);
+            if ($request->user and $request->user->id != $request->userId){
+                $loggedUserEventsIds = EventUser::where('user_id', $request->user->id)->lists('event_id');
+                $q->whereIn('id', $loggedUserEventsIds);
+            }
         }
         
         if($request->has('pageSize')) {

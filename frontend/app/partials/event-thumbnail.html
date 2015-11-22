@@ -18,6 +18,7 @@
             </p>
             <p>
                 <span class="label label-primary">{{ event.privacy }}</span>
+                <span ng-if="event.isOwner" class="label label-success">owner</span>
             </p>
         </div>
     </a> 
