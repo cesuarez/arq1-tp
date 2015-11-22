@@ -33,7 +33,7 @@ deploy:
   domain: pdstp
   skip_cleanup: true
   app:
-    master: eventss
+    master: events
 
 # Customize when the notification emails are sent.
 notifications:
