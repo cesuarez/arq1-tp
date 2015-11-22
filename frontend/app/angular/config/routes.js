@@ -23,7 +23,15 @@ angular.module('angularApp')
           responseError: function(response) {
               var $state = $injector.get('$state');
               var ngNotify = $injector.get('ngNotify');
-              if(response.status === 400) {
+              if(response.status === 500) {
+                  $state.transitionTo('home');
+                  ngNotify.set('The service has an internal error', 'error');
+              }
+              if(response.status === 503) {
+                  $state.transitionTo('home');
+                  ngNotify.set('Service not available, please retry later', 'error');
+              }
+              if(response.status === 400 || response.status === 422) {
                   $state.transitionTo('home');
                   ngNotify.set('Cannot perform that request', 'error');
               }
