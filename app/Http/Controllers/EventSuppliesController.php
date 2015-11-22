@@ -14,15 +14,15 @@ use App\Contribution;
 class EventSuppliesController extends Controller {
 
 	public function __construct() {
-//        $this->middleware('jwt.auth', ['only' => 
-//            ['store', 'update', 'destroy']
-//        ]);
+        $this->middleware('jwt.auth', ['only' => 
+            ['store', 'update', 'destroy']
+        ]);
     }
     
     private function returnAllSupplies($event_id) {
     	return response()->json([
     	    'supplies' => 
-    	        Supply::with('contributions')
+    	        Supply::with('contributions.user')
     	                ->where('event_id', $event_id)
     	                ->get()
     	]);
@@ -62,7 +62,7 @@ class EventSuppliesController extends Controller {
     	    $supply->contributions()->save($contribution);
     	}
     	
-        return $this->returnAllSupplies();
+        return $this->returnAllSupplies($event->id);
     }
 
     public function update(SupplyStoreRequest $request, $event, $supply) {

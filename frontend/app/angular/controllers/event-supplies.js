@@ -19,7 +19,6 @@ angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Su
     $scope.newSupply = function() {
         $scope.supply = new Supply({
             required: $scope.event.isOwner,
-            fulfilled: !$scope.event.isOwner,
             amount: 1,
         });
     };
@@ -52,14 +51,22 @@ angular.module('angularApp').controller('EventSuppliesCtrl', function($scope, Su
               return s;
             },
             totalContributions: function() {
-              return $scope.totalContributions(s);  
+              return $scope.totalContributions;  
             },
           }
         });
         
         modalInstance.result.then(function () {
-          
+            $scope.checkSupplyDeletion(s);
+        }, function() {
+            $scope.checkSupplyDeletion(s);
         });
+    };
+    
+    $scope.checkSupplyDeletion = function(s) {
+        if(s.contributions.length === 0 && !s.required) {
+            $scope.removeSupply(s);
+        }
     };
     
     $scope.newSupply();
