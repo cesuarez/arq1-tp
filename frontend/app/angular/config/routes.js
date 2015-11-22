@@ -25,15 +25,18 @@ angular.module('angularApp')
               var ngNotify = $injector.get('ngNotify');
               if(response.status === 500) {
                   $state.transitionTo('home');
-                  ngNotify.set('The service has an internal error', 'error');
+                  ngNotify.set('The service has an internal error. We are working on it!', 'error');
               }
               if(response.status === 503) {
                   $state.transitionTo('home');
                   ngNotify.set('Service not available, please retry later', 'error');
               }
-              if(response.status === 400 || response.status === 422) {
+              if(response.status === 400) {
                   $state.transitionTo('home');
                   ngNotify.set('Cannot perform that request', 'error');
+              }
+              if(response.status === 422) {
+                  ngNotify.set('Your request has errors', 'error');
               }
               if(response.status === 403 || response.status === 404) {
                   $state.transitionTo('home');
