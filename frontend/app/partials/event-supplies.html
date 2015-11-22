@@ -9,11 +9,11 @@
                     <input type="text" ng-model="supply.name" placeholder="name" name="name" ng-required="true">
                 </div>
                 <div ng-if="event.isOwner" class="col-md-2">
-                    <input type="checkbox" ng-change=changeRequired() ng-model="supply.required">
+                    <input type="checkbox" ng-model="supply.required">
                     <label>required</label>
                 </div>
                 <div class="col-md-1">
-                    <button ng-disabled="supplyForm.$invalid || !supply.required && !supply.fulfilled" type="submit" class="btn btn-primary" style="height:44px">
+                    <button ng-disabled="supplyForm.$invalid" type="submit" class="btn btn-primary" style="height:44px">
                         <i class="glyphicon glyphicon-plus"></i> supply
                     </button>
                 </div>

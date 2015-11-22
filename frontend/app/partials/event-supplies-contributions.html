@@ -2,16 +2,40 @@
     <div class="row">
         <h4 class="modal-title text-center">
             <strong>Contributions: {{ supply.name }}<strong>
-            <span>Total: {{ totalContributions }}</span>
-            <span>Left: {{ supply.amount - totalContributions }}</span>
+            <span>Total: {{ totalContributions(supply) }}</span>
+            <span ng-if="supply.amount - totalContributions(supply) >= 0">
+                Left: {{ supply.amount - totalContributions(supply) }}
+            </span>
+            <span ng-if="supply.amount - totalContributions(supply) < 0">
+                Surplus: {{ totalContributions(supply) - supply.amount }}
+            </span>
         </h4>
     </div>
 </div>
 <div class="modal-body">
+    <div class="row input-style-1" style="color: black">
+        <form name="contributionForm" ng-submit="addContribution()">
+            <div class="col-md-2">
+                <input type="number" ng-model="contribution.amount" min="1" placeholder="amount" name="amount" ng-required="true">
+            </div>
+            <div class="col-md-1">
+                <button ng-disabled="contributionForm.$invalid" type="submit" class="btn btn-primary" style="height:44px">
+                    <i class="glyphicon glyphicon-plus"></i> contribution
+                </button>
+            </div>
+        </form>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div ng-repeat="c in supply.contributions" style="float:left !important; width:85px; height:85px">
-                <div>{{ c.amount }}</div>
+                <div>
+                    {{ c.amount }}
+                    <button ng-if="authUser.id === c.user_id" 
+                        class="btn btn-xs btn-danger" 
+                        ng-click="removeContribution(c)">
+                        X
+                    </button>
+                </div>
                 <img width="65px" 
                      uib-tooltip="{{c.user.name}}"
                      class="avatar clickeable" 

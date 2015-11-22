@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\SupplyStoreRequest;
+use App\Http\Requests\ContributionStoreRequest;
 
 use App\Event;
 use App\Supply;
@@ -14,9 +14,9 @@ use App\Contribution;
 class EventSuppliesContributionsController extends Controller {
 
 	public function __construct() {
-//        $this->middleware('jwt.auth', ['only' => 
-//            ['store', 'destroy']
-//        ]);
+        $this->middleware('jwt.auth', ['only' => 
+            ['store', 'destroy']
+        ]);
     }
 
     private function returnAllContributions($supply_id) {
@@ -29,7 +29,11 @@ class EventSuppliesContributionsController extends Controller {
     }
     
     public function store(ContributionStoreRequest $request, $event, $supply) {
-    	$contribution = Contribution::where('user_id', $request->user)->first();
+        
+    	$contribution = Contribution::
+    	    where('user_id', $request->user->id)
+    	    ->where('supply_id', $supply->id)
+    	    ->first();
     	
     	if($contribution) {
         	$contribution->amount += $request->amount;

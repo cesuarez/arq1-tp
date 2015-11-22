@@ -9,12 +9,29 @@ angular.module('angularApp').controller('EventSuppliesContributionsCtrl', functi
       $scope.contribution = new Contribution({ amount: 1 });
     };
     
+    $scope.refreshContributions = function(data) {
+        $scope.supply.contributions = data.contributions;
+    };
+    
     $scope.addContribution = function() {
-        
+        Contribution.save(
+            {   
+                eventId: $scope.supply.event_id, 
+                supplyId: $scope.supply.id
+            },
+            $scope.contribution, 
+            $scope.refreshContributions
+        );
     };
 
-    $scope.removeContribution = function() {
-        
+    $scope.removeContribution = function(item) {
+        new Contribution(item).$delete(
+            {   
+                eventId: $scope.supply.event_id, 
+                supplyId: $scope.supply.id
+            },
+            $scope.refreshContributions
+        );
     };
     
     $scope.close = function() {
