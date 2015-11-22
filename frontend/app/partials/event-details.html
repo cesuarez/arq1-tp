@@ -75,12 +75,38 @@
     <div class="col-md-6 text-left">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <h4 ng-if="event.isOwner">
+                    <div class="pull-left">
+                        <ui-select ng-model="userInvitations.selectedUser" theme="bootstrap"
+                            reset-search-input="false" style="width: 400px;">
+
+                            <ui-select-match placeholder="Invite people...">
+                                <img width="22px" ng-src="{{$select.selected.avatar}}">
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+
+                            <ui-select-choices repeat="user in (userInvitations.uninvitedUsers | filter: $select.search) track by user.id"
+                                refresh="searchUninvitedUsers($select.search)"
+                                refresh-delay="200">
+                                <img width="35px" ng-src="{{user.avatar}}">
+                                <span ng-bind-html="user.name | highlight: $select.search"></span>
+                            </ui-select-choices>
+
+                        </ui-select>
+                    </div>
+
+                    <div class="pull-right">
+                        <button ng-disabled="!userInvitations.selectedUser || inviteDisabled" class="btn btn-primary" ng-click="sendInvitation()">Invite</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </h4>
                 <h4>
+                    <span class="pull-left" style="line-height: 2;">Some Participants ({{ event.assistingUsers.total }} in total)</span>
                     <div class="pull-right">
                         <button ng-if="authUser && !event.assistance" ng-disabled="assistanceDisabled" class="btn btn-success" ng-click="changeAssistance(true)">Attend</button>
                         <button ng-if="authUser && event.assistance" ng-disabled="assistanceDisabled" class="btn btn-danger" ng-click="changeAssistance(false)">Drop out</button>
                     </div>
-                    <span class="pull-left" style="line-height: 1.5;">Some Participants ({{ event.assistingUsers.total }} in total)</span>
                     <div class="clearfix"></div>
                 </h4>
             </div>

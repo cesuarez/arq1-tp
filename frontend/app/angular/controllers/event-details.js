@@ -47,13 +47,36 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         Event.changeAssistance({ id: $scope.event.id}, { assistance: bool }, function(response){
             $scope.event.assistance = bool;
             $scope.assistanceDisabled = false;
-            console.log(response);
             $scope.event.assistingUsers = response;
         }, function(){
             $scope.assistanceDisabled = false;
         });
     };
-    
+
+    $scope.userInvitations = {};
+    $scope.searchUninvitedUsers = function(user) {
+        if (!user){
+            user = '';
+        }
+        Event.uninvitedUsers({ id: $scope.event.id, name: user}, {}, function(response){
+            $scope.userInvitations.uninvitedUsers = response;
+            console.log($scope.userInvitations.selectedUser);
+        });
+    };
+
+    $scope.inviteDisabled = false;
+    $scope.sendInvitation = function(){
+        $scope.inviteDisabled = true;
+        if ($scope.userInvitations.selectedUser){
+            Event.invite({ id: $scope.event.id, userId: $scope.userInvitations.selectedUser.id}, {}, function(response){
+                $scope.selectedUser = null;
+                $scope.inviteDisabled = false;
+            }, function(){
+                $scope.inviteDisabled = false;
+            });  
+        }
+    };
+
     $scope.openEdit = function() {
         $scope.openedEdit = true;
     };

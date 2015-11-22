@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Model;
 
 use App\EventUser;
+use App\User;
 use Carbon\Carbon;
 
 class Event extends Model {
@@ -96,6 +97,24 @@ class Event extends Model {
             } catch (ModelNotFoundException $e) {
                 $this->users()->attach($user->id, ['assistance' => $assistance, 'owner' => false]);
             }
+        }
+    }
+
+    public function searchUninvitedUsers($name){
+        if ($this->privacy == 'public' || !$name){
+            return [];
+        }
+        $invitedIds = EventUser::where('event_id', $this->id)->lists('user_id');
+        return User::where('name', 'like', '%' . $name . '%')
+                   ->whereNotIn('id', $invitedIds)
+                   ->select('id', 'name', 'avatar')->take(5)->get();
+    }
+
+    public function invite($userId){
+        try {
+            $user = EventUser::where('user_id', $userId)->where('event_id', $this->id)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $this->users()->attach($userId, ['assistance' => false, 'owner' => false]);
         }
     }
     

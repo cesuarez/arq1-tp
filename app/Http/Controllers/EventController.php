@@ -21,7 +21,7 @@ class EventController extends Controller {
 
 	public function __construct() {
         $this->middleware('jwt.auth', ['only' => 
-            ['addComment', 'store', 'destroy', 'assist']
+            ['addComment', 'store', 'destroy', 'assist', 'invite']
         ]);
     }
 
@@ -54,6 +54,19 @@ class EventController extends Controller {
         $event->save();
         $event->attachAssistingUsers();
         return response()->json($event->getAssistingUsers());
+    }
+
+    // GET "events/{id}/uninvited-users/{name}" 
+    public function uninvitedUsers(Request $request, $id, $name = ''){
+        $event = Event::find($id);
+        return response()->json($event->searchUninvitedUsers($name));
+    }
+
+    // POST "events/invite/{id}"
+    public function invite(Request $request, $id){
+        $event = Event::find($id);
+        $event->invite($request->input('userId'));
+        return response()->json([ 'msg' => 'User invited']);
     }
     
     private function saveEvent($event) {

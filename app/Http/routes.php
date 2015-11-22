@@ -17,6 +17,8 @@ Route::get('events/comments/{id}', 'EventController@comments');
 Route::post('events/comment', 'EventController@addComment');
 Route::get('events/weather/{id}', 'EventController@weather');
 Route::post('events/assist/{id}', 'EventController@assist');
+Route::get('events/{id}/uninvited-users/{name?}', 'EventController@uninvitedUsers');
+Route::post('events/invite/{id}', 'EventController@invite');
 
 Route::resource('events', 'EventController', ['except' => ['update']]);
 Route::post('/events/{id}', 'EventController@update');
