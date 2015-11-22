@@ -26,8 +26,12 @@ class EventController extends Controller {
     }
 
     // GET "/events" 
-    public function index(Request $request) {
-        return response()->json(Event::search($request));
+    public function index(AuthRequest $request) {
+        $eventsPage = Event::search($request);
+        array_map(function($event) use ($request){
+            $event->attachOwner($request->user);
+        }, $eventsPage->items());
+        return response()->json($eventsPage);
     }
 
     // GET "/events/comments/{id}" 

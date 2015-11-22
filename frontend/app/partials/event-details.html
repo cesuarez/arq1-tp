@@ -1,7 +1,7 @@
 <div ng-if="event && event.$resolved">
 <div class="page-header">
     <h1>
-      Event: {{ event.name }}
+      {{ event.name }}
       <div class="pull-right">
           <button ng-if="event.isOwner" type="button" class="btn btn-primary" ng-click="openEdit()">
             <i class="glyphicon glyphicon-pencil"></i>
@@ -75,7 +75,7 @@
     <div class="col-md-6 text-left">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 ng-if="event.isOwner">
+                <h4 ng-if="event.isOwner && event.privacy === 'private'">
                     <div class="pull-left">
                         <ui-select ng-model="userInvitations.selectedUser" theme="bootstrap"
                             reset-search-input="false" style="width: 400px;">
