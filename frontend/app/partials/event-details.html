@@ -75,7 +75,7 @@
     <div class="col-md-6 text-left">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 ng-if="event.isOwner">
+                <h4 ng-if="event.isOwner && event.privacy === 'private'">
                     <div class="pull-left">
                         <ui-select ng-model="userInvitations.selectedUser" theme="bootstrap"
                             reset-search-input="false" style="width: 400px;">

@@ -68,8 +68,9 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         $scope.inviteDisabled = true;
         if ($scope.userInvitations.selectedUser){
             Event.invite({ id: $scope.event.id, userId: $scope.userInvitations.selectedUser.id}, {}, function(response){
-                $scope.selectedUser = null;
+                $scope.userInvitationsselectedUser = null;
                 $scope.inviteDisabled = false;
+                $scope.searchUninvitedUsers('');
             }, function(){
                 $scope.inviteDisabled = false;
             });  
