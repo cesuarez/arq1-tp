@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location) {
+angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location, ngNotify) {
     
     $scope.loadEventDetails = function(data) {
         data.date = new Date(data.date);
@@ -68,7 +68,8 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         $scope.inviteDisabled = true;
         if ($scope.userInvitations.selectedUser){
             Event.invite({ id: $scope.event.id, userId: $scope.userInvitations.selectedUser.id}, {}, function(response){
-                $scope.userInvitationsselectedUser = null;
+                ngNotify.set($scope.userInvitations.selectedUser.name + " was invited!", 'success');
+                $scope.userInvitations.selectedUser = null;
                 $scope.inviteDisabled = false;
                 $scope.searchUninvitedUsers('');
             }, function(){
