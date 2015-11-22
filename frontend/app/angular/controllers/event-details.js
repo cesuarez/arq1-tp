@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location) {
-
+    
     $scope.loadEventDetails = function(data) {
         data.date = new Date(data.date);
         $scope.event = data;
@@ -60,7 +60,6 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
         }
         Event.uninvitedUsers({ id: $scope.event.id, name: user}, {}, function(response){
             $scope.userInvitations.uninvitedUsers = response;
-            console.log($scope.userInvitations.selectedUser);
         });
     };
 

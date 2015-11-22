@@ -14,6 +14,7 @@ angular.module('angularApp', [
   'satellizer',
   'uiGmapgoogle-maps',
   'angular-skycons',
+  'ngNotify'
 ]);
 
 $.cloudinary.config().cloud_name = 'sawady';

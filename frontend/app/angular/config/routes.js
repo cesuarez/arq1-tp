@@ -22,13 +22,20 @@ angular.module('angularApp')
       return {
           responseError: function(response) {
               var $state = $injector.get('$state');
-              if(response.status === 403) {
+              var ngNotify = $injector.get('ngNotify');
+              if(response.status === 400) {
                   $state.transitionTo('home');
+                  ngNotify.set('Cannot perform that request', 'error');
+              }
+              if(response.status === 403 || response.status === 404) {
+                  $state.transitionTo('home');
+                  ngNotify.set('Not authorized', 'error');
               }
               if ( response.status === 401 || 
                   (response.status === 404 && response.data.error === 'user_not_found') ) {
                   $window.localStorage.clear();
-                  if ($state.current.name === 'home'){
+                  ngNotify.set('Please login or sign up...', 'error');
+                  if ($state.current.name === 'home') {
                       $window.location.reload();
                   } else {
                       $state.transitionTo('home');
