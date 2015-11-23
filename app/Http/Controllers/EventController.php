@@ -15,8 +15,6 @@ use App\Event;
 use App\EventUser;
 use App\Comment;
 
-use Forecast\Forecast;
-
 class EventController extends Controller {
 
 	public function __construct() {
@@ -48,7 +46,7 @@ class EventController extends Controller {
     // GET "events/weather/{id}" 
     public function weather($id) {
         $event = Event::find($id);
-        return response()->json($event->weather);
+        return response()->json($event->weatherCache());
     }
 
     // POST "events/assist/{id}" 
@@ -74,9 +72,6 @@ class EventController extends Controller {
     }
     
     private function saveEvent($event) {
-        $forecastKey = \Config::get('services.forecast')['app_key'];
-        $forecast = new Forecast($forecastKey);
-        $event->weather = $forecast->get($event->latitude, $event->longitude)->currently->icon;
         $event->save();
     }
 
@@ -101,6 +96,7 @@ class EventController extends Controller {
 
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
+        $event->weatherCache();
         $event->attachAssistance($request->user);
         $event->attachSupplies($request->user);
         $event->attachOwner($request->user);
