@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\EventUser;
 use App\User;
+use App\Weather;
 
-use Forecast\Forecast;
 use Carbon\Carbon;
-
-use DB;
 
 class Event extends Model {
 
@@ -161,39 +159,9 @@ class Event extends Model {
         return $q->orderBy('created_at', 'desc')->paginate($pageSize);
     }
     
-    public function dateUnix() {
-        return Carbon::parse($this->date)->timestamp;
-    }
-    
-    public function nearEvent() {
-        return self::select(DB::raw("*,
-                      ( 6371 * acos( cos( radians(?) ) *
-                        cos( radians( latitude ) )
-                        * cos( radians( longitude ) - radians(?)
-                        ) + sin( radians(?) ) *
-                        sin( radians( latitude ) ) )
-                      ) AS distance"))
-            ->havingRaw("distance < 800")
-            ->orderBy("distance")
-            ->setBindings([$this->latitude, $this->longitude, $this->latitude])
-            ->whereBetween('date',
-                [
-                    Carbon::parse($this->date)->startOfDay(),
-                    Carbon::parse($this->date)->endOfDay()
-                ])
-            ->first();
-    }
-    
-    public function weatherCache() {
-        $near_event = $this::nearEvent();
-        if($near_event) {
-            $this->weather = $near_event->weather;
-        } else {
-            $forecastKey = \Config::get('services.forecast')['app_key'];
-            $forecast = new Forecast($forecastKey);
-            $this->weather = $forecast->get($this->latitude, $this->longitude, $this->dateUnix())->currently->icon;
-            $this->save();
-        }
+    public function attachWeather() {
+        $cachedWeather = Weather::weather($this->latitude, $this->longitude, $this->date);
+        $this->weather = $cachedWeather;
         return $this->weather;
     }
     

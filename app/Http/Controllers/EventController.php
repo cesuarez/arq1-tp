@@ -46,7 +46,7 @@ class EventController extends Controller {
     // GET "events/weather/{id}" 
     public function weather($id) {
         $event = Event::find($id);
-        return response()->json($event->weatherCache());
+        return response()->json($event->attachWeather());
     }
 
     // POST "events/assist/{id}" 
@@ -71,17 +71,11 @@ class EventController extends Controller {
         return response()->json([ 'msg' => 'User invited']);
     }
     
-    private function saveEvent($event) {
-        $event->save();
-    }
-
     // POST "/events"
     public function store(EventRequest $request) {
         $userId = $request->input('user_id');
         $event = new Event($request->except(['user_id']));
-        
-        $this->saveEvent($event);
-
+        $event->save();
         $event->addUserRelation($userId, true, true);
         return response()->json($event);
     }
@@ -90,13 +84,13 @@ class EventController extends Controller {
     public function update(EventRequest $request, $id) {
         $event = Event::with('users')->find($id);
         $event->fill($request->all());
-        $this->saveEvent($event);
+        $event->save();
         return response()->json($event);
     }
 
     // GET "/events/:id"
     public function show(EventShowRequest $request, $event) {
-        $event->weatherCache();
+        $event->attachWeather();
         $event->attachAssistance($request->user);
         $event->attachSupplies($request->user);
         $event->attachOwner($request->user);
