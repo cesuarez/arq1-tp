@@ -31,7 +31,7 @@ deploy:
   app: arq1-events
   api_key: a1e85a46-0fe8-4829-9137-21f3adaabd4a
   run: 
-    - "php artisan migrate:refresh"
+    - "php artisan migrate:refresh --force"
   skip_cleanup: true
 
 # Customize when the notification emails are sent.
