@@ -54,11 +54,11 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => getenv('OPENSHIFT_MYSQL_DB_HOST') ?: getenv('DB_HOST'),
-			'port'      => getenv('OPENSHIFT_MYSQL_DB_PORT') ?: getenv('DB_PORT'),
-			'database'  => getenv('OPENSHIFT_APP_NAME') ?: getenv('DB_DATABASE'),
-			'username'  => getenv('OPENSHIFT_MYSQL_DB_USERNAME') ?: getenv('DB_USERNAME'),
-			'password'  => getenv('OPENSHIFT_MYSQL_DB_PASSWORD') ?: getenv('DB_PASSWORD'),
+			'host'      => getenv('DB_HOST') ?: parse_url(getenv("CLEARDB_DATABASE_URL"))["host"],
+			'database'  => getenv('DB_DATABASE') ?: substr(parse_url(getenv("CLEARDB_DATABASE_URL"))["path"], 1),
+			'username'  => getenv('DB_USERNAME') ?: parse_url(getenv("CLEARDB_DATABASE_URL"))["user"],
+			'password'  => getenv('DB_PASSWORD') ?: parse_url(getenv("CLEARDB_DATABASE_URL"))["pass"],
+
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

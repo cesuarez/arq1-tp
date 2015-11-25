@@ -24,16 +24,15 @@ after_success:
   - git config user.name "Cristian"
   - git add -f -A &> /dev/null
   - git checkout $TRAVIS_BRANCH &> /dev/null
-  - git commit -m "deploy openshift" &> /dev/null
+  - git commit -m "deploy heroku" &> /dev/null
 
 deploy:
-  provider: openshift
-  user: cris.eze.sua@gmail.com
-  password: unq/tps
-  domain: pdstp
+  provider: heroku
+  app: arq1-events
+  api_key: a1e85a46-0fe8-4829-9137-21f3adaabd4a
+  run: 
+    - "php artisan migrate:refresh --force"
   skip_cleanup: true
-  app:
-    master: events
 
 # Customize when the notification emails are sent.
 notifications:
