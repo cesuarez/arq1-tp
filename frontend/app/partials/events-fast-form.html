@@ -22,19 +22,39 @@
                             </div>
                         </div>
                     </div>
-                    <input type="text" ng-model="event.name" placeholder="title" ng-required="true">
-                    <input type="text" ng-model="event.description" placeholder="description" ng-required="true">
-                    <input style="display:none" type="text" ng-model="event.latitude" placeholder="location" ng-required="true">
-                    <input style="display:none" type="text" ng-model="event.longitude" placeholder="location" ng-required="true">
-    
+                    <div ng-class="{'has-error': form.name.$invalid && form.name.$dirty}">
+                        <input type="text" name="name"
+                               ng-model="event.name"
+                               placeholder="title" 
+                               class="form-control" ng-required="true"
+                               uib-tooltip="event title is required"
+                               tooltip-placement="top"
+                               tooltip-trigger="mouseenter"
+                               tooltip-enable="form.name.$invalid && form.name.$dirty">
+                    </div>
+                    <div ng-class="{'has-error': form.description.$invalid && form.description.$dirty}">
+                        <input type="text" name="description" 
+                               ng-model="event.description" 
+                               placeholder="description" 
+                               class="form-control" ng-required="true"
+                               uib-tooltip="description is required"
+                               tooltip-placement="top"
+                               tooltip-trigger="mouseenter"
+                               tooltip-enable="form.description.$invalid && form.description.$dirty">
+                    </div>
                     <div class="col-md-12" ng-controller="PickDateCtl">
-                       <div class="input-group col-md-offset-2 col-md-4" style="float: left !important; padding-top:34px">
-                           <input type="text" class="form-control" 
+                       <div ng-class="{'has-error': form.date.$invalid && form.date.$dirty}" class="input-group col-md-offset-2 col-md-4" style="float: left !important; padding-top:34px">
+                           <input type="text" class="form-control"
+                            name="date"
                             ng-model="event.date"
                             uib-datepicker-popup
                             is-open="calendar.opened"
                             min-date="calendar.minDate" 
-                            ng-required="!event.date"/>
+                            ng-required="!event.date"
+                            uib-tooltip="date is required with format yyyy/MM/dd"
+                            tooltip-placement="top"
+                            tooltip-trigger="mouseenter"
+                            tooltip-enable="form.date.$invalid"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default btn-no-border"
                                         ng-click="open($event)">
