@@ -69,7 +69,7 @@
 
 <div class="row">
 <div class="col-md-12">
-    <div ng-if="authUser" class="col-md-6">
+    <div ng-if="authUser && (event.isOwner || event.assistance)" class="col-md-6">
         <event-supplies></event-supplies>
     </div>
     <div class="col-md-6 text-left">

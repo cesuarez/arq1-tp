@@ -8,7 +8,7 @@
 </div>
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
-        <div class="row" ng-if="authUser">
+        <div class="row" ng-if="authUser && (event.isOwner || event.assistance)">
             <div class="media">
               <div class="media-left">
                 <a ui-sref="user({ id: authUser.id })">
