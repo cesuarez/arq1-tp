@@ -13,14 +13,14 @@
             <p>
                 {{ event.description }}
             </p>
-            <p>
+
+            <p ng-if="dateAfter(event.date)">
                 <span am-time-ago="event.date"></span>
             </p>
-            <!--
             <p ng-if="!dateAfter(event.date)">
                 <span class="label label-danger">finished</span>
             </p>
-            -->
+
             <p>
                 <span class="label label-primary">{{ event.privacy }}</span>
                 <span ng-if="event.isOwner" class="label label-success">owner</span>
