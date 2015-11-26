@@ -29,7 +29,7 @@ class EventSuppliesController extends Controller {
     }
 
     public function index(Request $request, $event) {
-        return response()->json(['supplies' => $event->supplies()->with('contributions')->get()]);
+        return $this->returnAllSupplies($event->id);
     }
 
     public function store(SupplyStoreRequest $request, $event) {

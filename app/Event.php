@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\EventUser;
 use App\User;
 use App\Weather;
+use App\Contribution;
 
 use Carbon\Carbon;
 
@@ -37,7 +38,7 @@ class Event extends Model {
     public function attachSupplies($user) {
         if ($user){
             $eventUserRelation = EventUser::findByUserAndEvent($user->id, $this->id);
-            if ($eventUserRelation !== null && $eventUserRelation->assistance) {
+            if ($eventUserRelation !== null && ($eventUserRelation->assistance || $eventUserRelation->owner)) {
                 $this->supplies = self::supplies()
                     ->with('contributions.user')
                     ->get();
@@ -92,12 +93,16 @@ class Event extends Model {
     }
 
     public function changeAssistance($assistance, $user) {
-        if ($user){
+        if ($user) {
             try {
                 $this->users()->findOrFail($user->id);
                 $this->users()->updateExistingPivot($user->id, ['assistance' => $assistance]);
             } catch (ModelNotFoundException $e) {
                 $this->users()->attach($user->id, ['assistance' => $assistance, 'owner' => false]);
+            }
+            
+            if(!$assistance) {
+                Contribution::where('user_id', $user->id)->delete();
             }
         }
     }

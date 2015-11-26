@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location, ngNotify) {
+angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $stateParams, Event, uiGmapGoogleMapApi, $state, $location, ngNotify, Supply) {
     
     $scope.loadEventDetails = function(data) {
         data.date = new Date(data.date);
@@ -48,6 +48,9 @@ angular.module('angularApp').controller('EventDetailsCtrl', function($scope, $st
             $scope.event.assistance = bool;
             $scope.assistanceDisabled = false;
             $scope.event.assistingUsers = response;
+            Supply.get({ eventId: $scope.event.id }, function(data) {
+                $scope.event.supplies = data.supplies;
+            });
         }, function(){
             $scope.assistanceDisabled = false;
         });
