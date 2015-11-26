@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('angularApp').controller('EventsPanelCtrl', function($scope, AuthService, Event) {
+
+    $scope.today = Date();
     
     if($scope.config.injectForTitle) {
         $scope.config.injectForTitle($scope);
@@ -44,5 +46,5 @@ angular.module('angularApp').controller('EventsPanelCtrl', function($scope, Auth
             });
         }
     };
-    
+
 });

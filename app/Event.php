@@ -44,7 +44,7 @@ class Event extends Model {
             }
         }
     }
-    
+
     public function attachOwner($user) {
         $this->owner = EventUser::findOwnerByEvent($this->id);
         if ($user){

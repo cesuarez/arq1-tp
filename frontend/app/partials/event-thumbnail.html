@@ -18,7 +18,7 @@
                 <i class="glyphicon glyphicon-calendar"></i> {{ event.date | date:'d/MM/yyyy hh:mm a' }}
             </p>
             -->
-            <p>
+            <p ng-if="dateAfter(event.date)">
                 <span am-time-ago="event.date"></span>
             </p>
             <p>
