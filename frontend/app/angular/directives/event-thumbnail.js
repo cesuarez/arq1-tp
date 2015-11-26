@@ -9,7 +9,6 @@ angular.module('angularApp').directive('eventThumbnail', function() {
 	    controller: function($scope){
 	    	$scope.today = Date();
 	    	$scope.dateAfter = function(dateString){
-	    		console.log(Date(dateString));
 	        	return $scope.today < Date(dateString);
 	        };
 	    },
