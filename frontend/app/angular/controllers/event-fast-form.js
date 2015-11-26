@@ -73,7 +73,7 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $r
         } else {
             ngNotify.set('<i>Please correct the next fields</i>: ' + collect_errors(form), {
                 type: 'error',
-                duration: 2000,
+                duration: 5000,
                 html: true
             });
         }
