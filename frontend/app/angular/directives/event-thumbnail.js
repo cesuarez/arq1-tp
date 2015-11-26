@@ -8,8 +8,7 @@ angular.module('angularApp').directive('eventThumbnail', function() {
 	    },
 	    controller: function($scope){
 	    	$scope.today = Date();
-	    	$scope.dateAfter = function(dateString){
-	    		console.log(Date(dateString));
+	    	$scope.dateAfter = function(dateString) {
 	        	return $scope.today < Date(dateString);
 	        };
 	    },

@@ -71,7 +71,6 @@ angular.module('angularApp').controller('EventFastFormCtrl', function($scope, $r
             });
             $scope.$broadcast('upload-file');
         } else {
-            console.log(form);
             ngNotify.set('<i>Please correct the next fields</i>: ' + collect_errors(form), {
                 type: 'error',
                 duration: 2000,
