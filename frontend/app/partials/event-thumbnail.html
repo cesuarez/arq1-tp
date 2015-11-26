@@ -13,8 +13,13 @@
             <p>
                 {{ event.description }}
             </p>
+            <!--
             <p>
                 <i class="glyphicon glyphicon-calendar"></i> {{ event.date | date:'d/MM/yyyy hh:mm a' }}
+            </p>
+            -->
+            <p>
+                <span am-time-ago="event.date"></span>
             </p>
             <p>
                 <span class="label label-primary">{{ event.privacy }}</span>
